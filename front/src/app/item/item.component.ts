@@ -12,26 +12,36 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class ItemComponent implements OnInit {
 
+  availableItems: Item[] = [];
+  itemBucket: Item[] = [];
   itemList: Item[] = [];
+  itemToAdd: Item;
+
   idItem: number;
-  availableItems: Item[] =[];
-  editedItem: Item;
 
   constructor(private itemService: ItemService,
-              private typeItemService: TypeItemService,
               private route: ActivatedRoute,
               private router: Router) { }
 
   ngOnInit() {
+    // Permet d'afficher la liste des Items
+    this.itemService.getAllItem().subscribe(items => this.itemList = items);
+    console.log('this.itemList ' + this.itemList);
+
     this.availableItems = this.itemService.availableItems;
+    console.log('this.availableItems ' + this.availableItems);
 
     this.idItem = +this.route.snapshot.params.idItem;
+    console.log('this.idItem ' + this.idItem);
 
-    console.log('typeItems ' + this.itemList);
-
-    this.itemService.getAllItem().subscribe(items => this.itemList = items);
-
-    this.itemService.findItem(this.idItem).subscribe(item => {this.editedItem = item;})
+    this.itemService.findItem(this.idItem).subscribe(item => {
+      this.itemToAdd = item;
+      this.itemBucket = item.itemList.slice();
+      this.itemToAdd = this.itemBucket.pop();
+    })
   }
 
+  onAdd(){
+
+  }
 }

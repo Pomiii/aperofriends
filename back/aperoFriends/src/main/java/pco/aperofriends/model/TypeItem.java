@@ -9,7 +9,6 @@ import javax.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-
 /**
  * The persistent class for the TYPEITEM database table.
  * 

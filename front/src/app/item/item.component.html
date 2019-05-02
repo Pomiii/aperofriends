@@ -1,57 +1,40 @@
-<div class="container-fluid text-center " >
+<div class="container-fluid text-center" >
+  <h2>Articles</h2>
   <div class="row">
-    <div class="col-sm" *ngFor="let item of itemList" >
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="{{ item.picItem }}" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">{{ item.nameItem }}</h5>
-          <p class="card-text">{{ item.typeItem }}</p>
-          <a href="#" class="btn btn-primary">{{ item.priceItem }} €</a>
+    <div class="col-sm-2">
+      <div class="list-group" id="list-tab" role="tablist">
+        <a class="list-group-item list-group-item-action active" id="list-all-list" data-toggle="list" href="#list-all" role="tab" aria-controls="all">Tout</a>
+        <a class="list-group-item list-group-item-action" id="list-Alcool-list" data-toggle="list" href="#list-Alcool" role="tab" aria-controls="Alcool">Alcool</a>
+        <a class="list-group-item list-group-item-action" id="list-Soft-list" data-toggle="list" href="#list-Soft" role="tab" aria-controls="Soft">Soft</a>
+        <a class="list-group-item list-group-item-action" id="list-Aperitif-list" data-toggle="list" href="#list-Aperitif" role="tab" aria-controls="Aperitif">Apéritif</a>
+        <a class="list-group-item list-group-item-action" id="list-Charcuterie-list" data-toggle="list" href="#list-Charcuterie" role="tab" aria-controls="Charcuterie">Charcuterie</a>
+      </div>
+      <h6>Mes Achats</h6>
+      <app-bucket></app-bucket>
+    </div>
+
+    <div class="col">
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="list-all" role="tabpanel" aria-labelledby="list-all-list">
+          <div class="row">
+            <div class="col-sm" *ngFor="let item of itemList" >
+              <div class="card" style="width: 12rem;">
+                <img class="card-img-top" src="{{ item.picItem }}" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">{{ item.nameItem }}</h5>
+                  <p class="card-text">{{ item.typeItem }}</p>
+                  <a href="#" class="btn btn-primary">{{ item.priceItem }} €</a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+        <div class="tab-pane fade" id="list-Alcool" role="tabpanel" aria-labelledby="list-Alcool-list">...</div>
+        <div class="tab-pane fade" id="list-Soft" role="tabpanel" aria-labelledby="list-Soft-list">...</div>
+        <div class="tab-pane fade" id="list-Aperitif" role="tabpanel" aria-labelledby="list-Aperitif-list">...</div>
+        <div class="tab-pane fade" id="list-Charcuterie" role="tabpanel" aria-labelledby="list-Charcuterie-list">...</div>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-sm">
-      <h3>Item</h3>
-
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>ID Item</th>
-            <th>Nom Item</th>
-            <th>Image Item</th>
-            <th>Type Item</th>
-            <th>Prix Item</th>
-            <th>Editer</th>
-            <th>Supprimer</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr *ngFor="let item of itemList">
-            <td>{{ item.idItem }}</td>
-            <td>{{ item.nameItem }}</td>
-            <td><img src="{{ item.picItem }}" alt="{{ item.picItem }}"></td>
-            <td>{{ item.typeItem }}</td>
-            <td>{{ item.priceItem }}</td>
-            <td>
-              <a routerLink="/item/{{item.idItem}}">Modifier</a> <!-- routerLink="/auteur/{{auteur.idAuteur}}" -->
-            </td>
-            <td>
-              <a routerLink="/item/{{item.idItem}}">Supprimer</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <button type="submit" class="btn btn-primary">Ajouter</button>
-    </div>
-
-    <div class="col-sm">
-      <app-item-detail></app-item-detail>
-    </div>
-  </div>
-
 </div>
 

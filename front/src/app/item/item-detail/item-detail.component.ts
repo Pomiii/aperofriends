@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ItemService} from 'src/app/service/item.service';
 import {Item} from 'src/app/model/item';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-item-detail',
@@ -10,32 +10,35 @@ import {Router} from '@angular/router';
 })
 export class ItemDetailComponent implements OnInit {
 
-  itemList: Item[] = [];
-  idItem: number;
-  availableItems: Item[] =[];
+  id: number;
   editedItem: Item;
+  itemList: Item[] = [];
+
 
   constructor(private itemService: ItemService,
+              private route: ActivatedRoute,
               private router: Router) { }
 
   ngOnInit() {
-    this.availableItems = this.itemService.availableItems;
+    this.itemService.getAllItem().subscribe(items => this.itemList = items);
 
-    console.log('ItemList' + this.itemList);
+    this.id = +this.route.snapshot.params.id;
 
-    this.itemService.findItem(this.idItem).subscribe(item => {
+    console.log('editedItem ' + this.editedItem);
+
+    this.itemService.findItem(this.id).subscribe(item => {
       this.editedItem = item;
     })
   }
 
   // Vérifier si on est en édition ou en création
   onSave() {
-    if (!this.idItem) {
+    if (!this.id) {
       this.itemService.createItem(this.editedItem);
     } else {
       this.itemService.updateItem(this.editedItem);
     }
-    this.router.navigate(['/item']);
+    this.router.navigate(['/item-detail']);
   }
 
 }

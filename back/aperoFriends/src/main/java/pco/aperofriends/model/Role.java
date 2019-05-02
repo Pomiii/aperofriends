@@ -15,49 +15,49 @@ public class Role implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idrole;
+	private int idRole;
 
-	private int iduser;
+	private int idUser;
 
-	private String nomrole;
+	private String nomRole;
 
-	public int getIdrole() {
-		return this.idrole;
+	public int getIdRole() {
+		return this.idRole;
 	}
 
-	public void setIdrole(int idrole) {
-		this.idrole = idrole;
+	public void setIdRole(int idRole) {
+		this.idRole = idRole;
 	}
 
-	public int getIduser() {
-		return this.iduser;
+	public int getidUser() {
+		return this.idUser;
 	}
 
-	public void setIduser(int iduser) {
-		this.iduser = iduser;
+	public void setidUser(int idUser) {
+		this.idUser = idUser;
 	}
 
-	public String getNomrole() {
-		return this.nomrole;
+	public String getnomRole() {
+		return this.nomRole;
 	}
 
-	public void setNomrole(String nomrole) {
-		this.nomrole = nomrole;
+	public void setnomRole(String nomRole) {
+		this.nomRole = nomRole;
 	}
 
 	@Override
 	public String toString() {
-		return "Role [idrole=" + idrole + ", iduser=" + iduser + ", nomrole=" + nomrole + "]";
+		return "Role [idRole=" + idRole + ", idUser=" + idUser + ", nomRole=" + nomRole + "]";
 	}
 	
 	public Role() {
 	}
 	
-	public Role(int idrole, int iduser, String nomrole) {
+	public Role(int idRole, int idUser, String nomRole) {
 		super();
-		this.idrole = idrole;
-		this.iduser = iduser;
-		this.nomrole = nomrole;
+		this.idRole = idRole;
+		this.idUser = idUser;
+		this.nomRole = nomRole;
 	}
 	
 }

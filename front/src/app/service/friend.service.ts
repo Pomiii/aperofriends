@@ -22,7 +22,8 @@ export class FriendService {
   /**
    * La fonction getAllFriend() est privée car elle n'a besoin d'être appellée que dans le service.
    */
-  private getAllFriend(): Observable<Friend[]> {
+  public getAllFriend(): Observable<Friend[]> {
+    console.log('getAllItems' + this.availableFriends)
     return this.httpClient.get<Friend[]>('http://localhost:8080/aperofriends/friends');
   }
 

@@ -24,7 +24,7 @@ export class ItemService {
    * La fonction getAllItem() est privée car elle n'a besoin d'être appellée que dans le service.
    */
   public getAllItem(): Observable<Item[]> {
-    console.log('getAllItems' + this.availableItems)
+    console.log('getAllItems' + this.availableItems$)
     return this.httpClient.get<Item[]>('http://localhost:8080/aperofriends/items');
   }
 

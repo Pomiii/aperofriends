@@ -2,6 +2,8 @@ import {Bucket} from './bucket';
 
 export class Friend {
 
+  bucketList: Bucket[] = [];
+
   constructor(public idFriend: number,
               public firstnameFriend: string,
               public lastnameFriend: string,

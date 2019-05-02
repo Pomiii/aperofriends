@@ -29,6 +29,8 @@ public class AccountFriend implements Serializable {
 	private String nameAccount;
 	
 	private String addressAccount;
+	
+	private String phoneAccount;
 
 	@JsonIgnore
 	@ManyToMany
@@ -69,18 +71,28 @@ public class AccountFriend implements Serializable {
 	public AccountFriend() {
 	}
 
-	public AccountFriend(int idAF, String nameAccount, String addressAccount, List<Bucket> buckets) {
+	public AccountFriend(int idAF, String nameAccount, String addressAccount, String phoneAccount,List<Bucket> buckets) {
 		super();
 		this.idAF = idAF;
 		this.nameAccount = nameAccount;
 		this.addressAccount = addressAccount;
+		this.phoneAccount = phoneAccount;
 		this.buckets = buckets;
+		
 	}
 
 	@Override
 	public String toString() {
 		return "AccountFriend [idAF=" + idAF + ", nameAccount=" + nameAccount + ", addressAccount=" + addressAccount
-				+ ", buckets=" + buckets + "]";
+				+ ", phoneAccount=" + phoneAccount + ", buckets=" + buckets + "]";
+	}
+
+	public String getPhoneAccount() {
+		return phoneAccount;
+	}
+
+	public void setPhoneAccount(String phoneAccount) {
+		this.phoneAccount = phoneAccount;
 	}
 	
 }

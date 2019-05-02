@@ -3,7 +3,8 @@ import {Friend} from './friend';
 
 export class Bucket {
 
-  constructor(public idBucket: number,
-              public buyer: Friend,
-              public items: Item) {}
+  buyerList: Friend[] = [];
+  itemList: Item[] = []
+
+  constructor(public idBucket: number) {}
 }

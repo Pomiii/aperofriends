@@ -26,6 +26,10 @@ import { LoginComponent } from './login/login.component';
 import {HttpClientModule} from '@angular/common/http';
 import { FriendComponent } from './friend/friend.component';
 import { ItemDetailComponent } from './item/item-detail/item-detail.component';
+import { BucketComponent } from './bucket/bucket.component';
+import { BucketAccountComponent } from './bucket/bucket-account/bucket-account.component';
+import { AccountFriendsComponent } from './account-friends/account-friends.component';
+import { NavComponent } from './nav/nav.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +39,11 @@ import { ItemDetailComponent } from './item/item-detail/item-detail.component';
     ItemComponent,
     LoginComponent,
     FriendComponent,
-    ItemDetailComponent
+    ItemDetailComponent,
+    BucketComponent,
+    BucketAccountComponent,
+    AccountFriendsComponent,
+    NavComponent
   ],
   imports: [
     HttpClientModule,
