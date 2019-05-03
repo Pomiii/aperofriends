@@ -43,6 +43,8 @@ public class Friend implements Serializable {
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JsonIgnoreProperties("buyer")
 	private List<Bucket> buckets;
+	
+	private int idAF;
 
 	public int getIdFriend() {
 		return idFriend;
@@ -105,7 +107,7 @@ public class Friend implements Serializable {
 	}
 
 	public Friend(int idFriend, String firstnameFriend, String lastnameFriend, String mailFriend, String passFriend,
-			String phonefriend, List<Bucket> buckets) {
+			String phonefriend, List<Bucket> buckets, int idAF) {
 		super();
 		this.idFriend = idFriend;
 		this.firstnameFriend = firstnameFriend;
@@ -114,12 +116,21 @@ public class Friend implements Serializable {
 		this.passFriend = passFriend;
 		this.phonefriend = phonefriend;
 		this.buckets = buckets;
+		this.idAF = idAF;
 	}
 
 	@Override
 	public String toString() {
 		return "Friend [idFriend=" + idFriend + ", firstnameFriend=" + firstnameFriend + ", lastnameFriend="
 				+ lastnameFriend + ", mailFriend=" + mailFriend + ", passFriend=" + passFriend + ", phonefriend="
-				+ phonefriend + ", buckets=" + buckets + "]";
+				+ phonefriend + ", buckets=" + buckets + ", idAF=" + idAF +"]";
+	}
+
+	public int getIdAF() {
+		return idAF;
+	}
+
+	public void setIdAF(int idAF) {
+		this.idAF = idAF;
 	}	
 }

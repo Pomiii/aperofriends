@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -35,6 +36,10 @@ public class AccountFriend implements Serializable {
 	@JsonIgnore
 	@ManyToMany
 	private List<Bucket> buckets;
+	
+	@JsonIgnore
+	@OneToMany
+	private List<Friend> friends;
 
 	public int getIdAF() {
 		return idAF;
@@ -67,6 +72,14 @@ public class AccountFriend implements Serializable {
 	public void setBuckets(List<Bucket> buckets) {
 		this.buckets = buckets;
 	}
+	
+	public String getPhoneAccount() {
+		return phoneAccount;
+	}
+
+	public void setPhoneAccount(String phoneAccount) {
+		this.phoneAccount = phoneAccount;
+	}
 
 	public AccountFriend() {
 	}
@@ -78,7 +91,6 @@ public class AccountFriend implements Serializable {
 		this.addressAccount = addressAccount;
 		this.phoneAccount = phoneAccount;
 		this.buckets = buckets;
-		
 	}
 
 	@Override
@@ -87,12 +99,12 @@ public class AccountFriend implements Serializable {
 				+ ", phoneAccount=" + phoneAccount + ", buckets=" + buckets + "]";
 	}
 
-	public String getPhoneAccount() {
-		return phoneAccount;
+	public List<Friend> getFriends() {
+		return friends;
 	}
 
-	public void setPhoneAccount(String phoneAccount) {
-		this.phoneAccount = phoneAccount;
+	public void setFriends(List<Friend> friends) {
+		this.friends = friends;
 	}
 	
 }

@@ -30,6 +30,7 @@ import { BucketComponent } from './bucket/bucket.component';
 import { BucketAccountComponent } from './bucket/bucket-account/bucket-account.component';
 import { AccountFriendsComponent } from './account-friends/account-friends.component';
 import { NavComponent } from './nav/nav.component';
+import { ItemFormComponent } from './item/item-form/item-form.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { NavComponent } from './nav/nav.component';
     BucketComponent,
     BucketAccountComponent,
     AccountFriendsComponent,
-    NavComponent
+    NavComponent,
+    ItemFormComponent
   ],
   imports: [
     HttpClientModule,

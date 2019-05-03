@@ -5,6 +5,7 @@
 .card {
   padding-top: 0.5rem;
   margin-bottom: 1rem;
+  border: 0.1rem solid;
 }
 
 h2 {
@@ -13,6 +14,11 @@ h2 {
 
 .col-sm-2 {
   font-size: 0.7rem;
+}
+
+.list-group {
+  border: 0.1rem solid;
+  border-radius: 10px;
 }
 
 h6 {

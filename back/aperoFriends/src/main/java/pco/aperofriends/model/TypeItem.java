@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -21,7 +22,8 @@ public class TypeItem implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idTypeItem;
-
+	
+	@Size(max = 50)
 	private String nameTypeItem;
 	
 	@OneToMany(mappedBy="typeItem")

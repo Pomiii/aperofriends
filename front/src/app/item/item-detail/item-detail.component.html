@@ -18,17 +18,17 @@
         </thead>
 
         <tbody>
-        <tr *ngFor="let item of itemList">
+        <tr *ngFor="let item of itemList | async">
           <td>{{ item.idItem }}</td>
           <td>{{ item.nameItem }}</td>
           <td><img src="{{ item.picItem }}" alt="{{ item.picItem }}"></td>
           <td>{{ item.typeItem }}</td>
           <td>{{ item.priceItem }} €</td>
           <td>
-            <a routerLink="/item/{{item.idItem}}">Modifier</a>
+            <a routerLink="/item-form/{{item.idItem}}">Modifier</a>
           </td>
           <td>
-            <a routerLink="/item/{{item.idItem}}">Supprimer</a>
+            <a routerLink="/item-form/{{item.idItem}}">Supprimer</a>
           </td>
         </tr>
         </tbody>
@@ -38,28 +38,7 @@
     </div>
 
     <div class="col">
-      <h3 id="newItem"  >Ajout d'un nouvel Item:</h3>
-      <h3 id="editItem" >Modifier un Item :</h3>
-
-      <form>
-        <div class="form-group">
-          <label for="name">Name Item</label>
-          <input type="text" class="form-control" id="name" placeholder="" ><!-- [(ngModel)]="editedItem.nameItem" name="nameItem" required -->
-        </div>
-        <div class="form-group">
-          <label for="name">Image Item</label>
-          <input type="file" class="form-control" id="image" placeholder="" ><!-- [(ngModel)]="editedItem.picItem" name="picItem" required -->
-        </div>
-        <div class="form-group">
-          <label for="name">Type Item</label>
-          <input type="select" class="form-control" id="type" placeholder="" > <!-- [(ngModel)]="editedItem.typeItem" name="typeItem" required -->
-        </div>
-        <div class="form-group">
-          <label for="name">Price Item</label>
-          <input type="text" class="form-control" id="price" placeholder="" > <!-- [(ngModel)]="editedItem.priceItem" name="priceItem" required -->
-        </div>
-        <button type="submit" class="btn btn-primary" (click)="onSave()" >Sauver</button>
-      </form>
+      <app-item-form></app-item-form>
     </div>
 
   </div>

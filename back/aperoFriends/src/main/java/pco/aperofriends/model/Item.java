@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -28,11 +29,14 @@ public class Item implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idItem;
-
+	
+	@Size(max = 50)
 	private String nameItem;
-
+	
+	@Size(max = 50)
 	private int priceItem;
 	
+	@Size(max = 50)
 	private String picItem;
 	
 	@OneToOne(cascade=CascadeType.REFRESH)

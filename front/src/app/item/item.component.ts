@@ -31,8 +31,6 @@ export class ItemComponent implements OnInit {
     this.availableItems = this.itemService.availableItems;
     console.log('this.availableItems ' + this.availableItems);
 
-    this.idItem = +this.route.snapshot.params.idItem;
-    console.log('this.idItem ' + this.idItem);
 
     this.itemService.findItem(this.idItem).subscribe(item => {
       this.itemToAdd = item;

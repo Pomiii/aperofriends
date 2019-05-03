@@ -2,6 +2,7 @@ package pco.aperofriends.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 
 /**
@@ -18,7 +19,8 @@ public class Role implements Serializable {
 	private int idRole;
 
 	private int idUser;
-
+	
+	@Size(max = 50)
 	private String nomRole;
 
 	public int getIdRole() {
