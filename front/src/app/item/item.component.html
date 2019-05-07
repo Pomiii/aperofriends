@@ -24,7 +24,8 @@
                 <div class="card-body">
                   <h5 class="card-title">{{ item.nameItem }}</h5>
                   <p class="card-text">{{ item.typeItem }}</p>
-                  <button class="btn btn-primary" (click)="onAdd()">{{ item.priceItem }} €</button>
+                  <p class="card-text">Prix : {{ item.priceItem }} €</p>
+                  <button class="btn btn-primary" (click)="onAdd()">Ajouter Article</button>
                 </div>
               </div>
             </div>

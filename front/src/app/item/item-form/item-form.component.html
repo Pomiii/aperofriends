@@ -4,19 +4,19 @@
 <form>
   <div class="form-control">
     <label for="nameItem">Name Item :</label>
-    <input type="text" id="nameItem" [(ngModel)]="editedItem.nameItem" name="nameItem" ><!--  -->
+    <input type="text" id="nameItem" ><!-- [(ngModel)]="editedItem.nameItem" name="nameItem"  -->
   </div>
   <div class="form-control">
     <label for="picItem">Image Item :</label>
-    <input type="file" id="picItem" [(ngModel)]="editedItem.picItem" name="picItem" ><!--  -->
+    <input type="file" id="picItem"  ><!-- [(ngModel)]="editedItem.picItem" name="picItem" -->
   </div>
   <div class="form-control">
     <label for="typeItem">Type Item :</label>
-    <input type="select"  id="typeItem" [(ngModel)]="editedItem.typeItem" name="typeItem" > <!-- -->
+    <input type="select"  id="typeItem"  > <!-- [(ngModel)]="editedItem.typeItem" name="typeItem" -->
   </div>
   <div class="form-control">
     <label for="priceItem">Price Item :</label>
-    <input type="text"  id="priceItem" [(ngModel)]="editedItem.priceItem" name="priceItem" > <!--  -->
+    <input type="text"  id="priceItem"  > <!-- [(ngModel)]="editedItem.priceItem" name="priceItem" -->
   </div>
   <button type="submit" class="btn btn-primary" (click)="onSave()" >Sauver</button>
 </form>

@@ -50,7 +50,7 @@ export class FriendService {
       }
       return of(this.availableFriends.find(friend => friend.idFriend === idFriend));
     } else {
-      return of(new Friend(0, '', '', '', '', ''));
+      return of(new Friend(0, '', '', ''));
     }
   }
 

@@ -26,7 +26,7 @@ public class TypeItem implements Serializable {
 	@Size(max = 50)
 	private String nameTypeItem;
 	
-	@OneToMany(mappedBy="typeItem")
+	@ManyToMany(mappedBy="typeItem")
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Set<Item> items = new HashSet<Item>();
 

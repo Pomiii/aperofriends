@@ -3,14 +3,18 @@ package pco.aperofriends.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 /**
@@ -25,7 +29,7 @@ public class AccountFriend implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idAF;
+	private int idAf;
 	
 	private String nameAccount;
 	
@@ -34,19 +38,21 @@ public class AccountFriend implements Serializable {
 	private String phoneAccount;
 
 	@JsonIgnore
-	@ManyToMany
-	private List<Bucket> buckets;
+	@ManyToMany(mappedBy = "bucket", cascade = CascadeType.REMOVE)
+	@JoinTable(name = "bucket", joinColumns = {
+            @JoinColumn(name = "idBucket") }, inverseJoinColumns = { @JoinColumn(name = "idAF") })
+	private List<Bucket> buckets;	
 	
-	@JsonIgnore
-	@OneToMany
-	private List<Friend> friends;
-
-	public int getIdAF() {
-		return idAF;
+	/*@OneToMany(mappedBy="friend")
+	* @JsonIgnoreProperties("friend")
+	* private List<Friend> friends;
+	*/
+	public int getIdAf() {
+		return idAf;
 	}
 
-	public void setIdAF(int idAF) {
-		this.idAF = idAF;
+	public void setIdAF(int idAf) {
+		this.idAf = idAf;
 	}
 
 	public String getNameAccount() {
@@ -84,9 +90,9 @@ public class AccountFriend implements Serializable {
 	public AccountFriend() {
 	}
 
-	public AccountFriend(int idAF, String nameAccount, String addressAccount, String phoneAccount,List<Bucket> buckets) {
+	public AccountFriend(int idAf, String nameAccount, String addressAccount, String phoneAccount,List<Bucket> buckets) {
 		super();
-		this.idAF = idAF;
+		this.idAf = idAf;
 		this.nameAccount = nameAccount;
 		this.addressAccount = addressAccount;
 		this.phoneAccount = phoneAccount;
@@ -95,16 +101,16 @@ public class AccountFriend implements Serializable {
 
 	@Override
 	public String toString() {
-		return "AccountFriend [idAF=" + idAF + ", nameAccount=" + nameAccount + ", addressAccount=" + addressAccount
+		return "AccountFriend [idAf=" + idAf + ", nameAccount=" + nameAccount + ", addressAccount=" + addressAccount
 				+ ", phoneAccount=" + phoneAccount + ", buckets=" + buckets + "]";
 	}
 
-	public List<Friend> getFriends() {
-		return friends;
-	}
+	//public List<Friend> getFriends() {
+	//	return friends;
+	//}
 
-	public void setFriends(List<Friend> friends) {
-		this.friends = friends;
-	}
+	//public void setFriends(List<Friend> friends) {
+	//	this.friends = friends;
+	//}
 	
 }

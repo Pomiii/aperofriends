@@ -3,7 +3,11 @@ package pco.aperofriends.model;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.OnDelete;
@@ -34,17 +38,15 @@ public class Friend implements Serializable {
 	@Size(max = 50)
 	private String mailFriend;
 
-	private String passFriend;
-	
 	@Size(max = 50)
-	private String phonefriend;
+	private String passFriend;
 	
 	@OneToMany(mappedBy="buyer")
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JsonIgnoreProperties("buyer")
 	private List<Bucket> buckets;
 	
-	private int idAF;
+	private int idAf;
 
 	public int getIdFriend() {
 		return idFriend;
@@ -86,14 +88,6 @@ public class Friend implements Serializable {
 		this.passFriend = passFriend;
 	}
 
-	public String getPhonefriend() {
-		return phonefriend;
-	}
-
-	public void setPhonefriend(String phonefriend) {
-		this.phonefriend = phonefriend;
-	}
-	
 	public List<Bucket> getBuckets() {
 		return buckets;
 	}
@@ -101,36 +95,36 @@ public class Friend implements Serializable {
 	public void setBuckets(List<Bucket> buckets) {
 		this.buckets = buckets;
 	}
+	
+	public int getIdAf() {
+		return idAf;
+	}
+
+	public void setIdAf(int idAf) {
+		this.idAf = idAf;
+	}	
 
 	public Friend() {
 		
 	}
 
 	public Friend(int idFriend, String firstnameFriend, String lastnameFriend, String mailFriend, String passFriend,
-			String phonefriend, List<Bucket> buckets, int idAF) {
+			 List<Bucket> buckets, int idAf) {
 		super();
 		this.idFriend = idFriend;
 		this.firstnameFriend = firstnameFriend;
 		this.lastnameFriend = lastnameFriend;
 		this.mailFriend = mailFriend;
 		this.passFriend = passFriend;
-		this.phonefriend = phonefriend;
 		this.buckets = buckets;
-		this.idAF = idAF;
+		this.idAf = idAf;
 	}
 
 	@Override
 	public String toString() {
 		return "Friend [idFriend=" + idFriend + ", firstnameFriend=" + firstnameFriend + ", lastnameFriend="
-				+ lastnameFriend + ", mailFriend=" + mailFriend + ", passFriend=" + passFriend + ", phonefriend="
-				+ phonefriend + ", buckets=" + buckets + ", idAF=" + idAF +"]";
+				+ lastnameFriend + ", mailFriend=" + mailFriend + ", passFriend=" + passFriend  
+				+ ", buckets=" + buckets + ", idAf=" + idAf +"]";
 	}
 
-	public int getIdAF() {
-		return idAF;
-	}
-
-	public void setIdAF(int idAF) {
-		this.idAF = idAF;
-	}	
 }
