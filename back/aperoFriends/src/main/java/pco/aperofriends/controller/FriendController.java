@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import pco.aperofriends.model.Friend;
-import pco.aperofriends.model.Item;
 import pco.aperofriends.repository.FriendRepository;
 import pco.aperofriends.service.FriendService;
 
