@@ -3,9 +3,12 @@ package pco.aperofriends.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import pco.aperofriends.model.AccountFriend;
 import pco.aperofriends.repository.AccountFriendRepository;
 
+@Service
 public class AccountFriendServiceImpl implements AccountFriendService {
 	
 	private AccountFriendRepository accountFriendRepository;
@@ -30,8 +33,11 @@ public class AccountFriendServiceImpl implements AccountFriendService {
     }
 	
 	@Override
-    public AccountFriend saveAccountFriend(AccountFriend accountFriend) {
-        return accountFriendRepository.save(accountFriend);
-    }
+    public AccountFriend saveAccountFriend(String addressAccount,
+			String nameAccount,
+			String phoneAccount) {
+		AccountFriend accountFriend = new AccountFriend(addressAccount, nameAccount, phoneAccount);
+		return this.accountFriendRepository.save(accountFriend);    
+	}
 
 }

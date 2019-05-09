@@ -1,37 +1,48 @@
 package pco.aperofriends.model;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
-import javax.persistence.*;
-import javax.validation.constraints.Size;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 /**
- * The persistent class for the TYPEITEM database table.
+ * The persistent class for the TypeItem database table.
  * 
  */
 @Entity
-//@NamedQuery(name="Typeitem.findAll", query="SELECT t FROM Typeitem t")
+@NamedQuery(name="TypeItem.findAll", query="SELECT t FROM TypeItem t")
 public class TypeItem implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idTypeItem;
-	
-	@Size(max = 50)
+
 	private String nameTypeItem;
-	
-	@ManyToMany(mappedBy="typeItem")
-	@OnDelete(action = OnDeleteAction.CASCADE)
-	private Set<Item> items = new HashSet<Item>();
+
+	//bi-directional many-to-one association to Item
+	@JsonBackReference
+	@OneToMany(mappedBy="typeItem")
+	private List<Item> items;
+
+	public TypeItem() {
+	}
+
+	public TypeItem(String nameTypeItem) {
+		super();
+		this.nameTypeItem = nameTypeItem;
+	}
 
 	public int getIdTypeItem() {
-		return idTypeItem;
+		return this.idTypeItem;
 	}
 
 	public void setIdTypeItem(int idTypeItem) {
@@ -39,34 +50,33 @@ public class TypeItem implements Serializable {
 	}
 
 	public String getNameTypeItem() {
-		return nameTypeItem;
+		return this.nameTypeItem;
 	}
 
 	public void setNameTypeItem(String nameTypeItem) {
 		this.nameTypeItem = nameTypeItem;
 	}
 
-	public Set<Item> getItems() {
-		return items;
+	public List<Item> getItems() {
+		return this.items;
 	}
 
-	public void setItems(Set<Item> items) {
+	public void setItems(List<Item> items) {
 		this.items = items;
 	}
 
-	public TypeItem() {
+	public Item addItem(Item item) {
+		getItems().add(item);
+		item.setTypeItem(this);
+
+		return item;
 	}
 
-	public TypeItem(int idTypeItem, String nameTypeItem, Set<Item> items) {
-		super();
-		this.idTypeItem = idTypeItem;
-		this.nameTypeItem = nameTypeItem;
-		this.items = items;
+	public Item removeItem(Item item) {
+		getItems().remove(item);
+		item.setTypeItem(null);
+
+		return item;
 	}
 
-	@Override
-	public String toString() {
-		return "TypeItem [idTypeItem=" + idTypeItem + ", nameTypeItem=" + nameTypeItem + ", items=" + items + "]";
-	}
-	
 }

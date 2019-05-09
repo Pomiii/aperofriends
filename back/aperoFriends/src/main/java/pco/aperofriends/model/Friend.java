@@ -1,55 +1,60 @@
 package pco.aperofriends.model;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.util.List;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.validation.constraints.Size;
-
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 /**
- * The persistent class for the FRIEND database table.
+ * The persistent class for the Friend database table.
  * 
  */
 @Entity
-//@NamedQuery(name="Friend.findAll", query="SELECT f FROM Friend f")
+@NamedQuery(name="Friend.findAll", query="SELECT f FROM Friend f")
 public class Friend implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id	
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idFriend;
-	
-	@Size(max = 50)
+
 	private String firstnameFriend;
 
-	@Size(max = 50)
 	private String lastnameFriend;
 
-	@Size(max = 50)
 	private String mailFriend;
 
-	@Size(max = 50)
 	private String passFriend;
-	
-	@OneToMany(mappedBy="buyer")
-	@OnDelete(action = OnDeleteAction.CASCADE)
-	@JsonIgnoreProperties("buyer")
-	private List<Bucket> buckets;
-	
-	private int idAf;
+
+	//bi-directional many-to-many association to AccountFriend
+	@ManyToMany
+	@JoinTable(
+		name="FriendList"
+		, joinColumns={
+			@JoinColumn(name="idFriend")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="idAF")
+			}
+		)
+	private List<AccountFriend> accountFriends;
+
+	//bi-directional many-to-many association to Role
+	@ManyToMany(mappedBy="friends")
+	private List<Role> roles;
+
+	public Friend() {
+	}
+
+	public Friend(String firstnameFriend, String lastnameFriend, String mailFriend, String passFriend) {
+		this.firstnameFriend = firstnameFriend;
+		this.lastnameFriend = lastnameFriend;
+		this.mailFriend = mailFriend;
+		this.passFriend = passFriend;
+	}
 
 	public int getIdFriend() {
-		return idFriend;
+		return this.idFriend;
 	}
 
 	public void setIdFriend(int idFriend) {
@@ -57,7 +62,7 @@ public class Friend implements Serializable {
 	}
 
 	public String getFirstnameFriend() {
-		return firstnameFriend;
+		return this.firstnameFriend;
 	}
 
 	public void setFirstnameFriend(String firstnameFriend) {
@@ -65,7 +70,7 @@ public class Friend implements Serializable {
 	}
 
 	public String getLastnameFriend() {
-		return lastnameFriend;
+		return this.lastnameFriend;
 	}
 
 	public void setLastnameFriend(String lastnameFriend) {
@@ -73,7 +78,7 @@ public class Friend implements Serializable {
 	}
 
 	public String getMailFriend() {
-		return mailFriend;
+		return this.mailFriend;
 	}
 
 	public void setMailFriend(String mailFriend) {
@@ -81,50 +86,27 @@ public class Friend implements Serializable {
 	}
 
 	public String getPassFriend() {
-		return passFriend;
+		return this.passFriend;
 	}
 
 	public void setPassFriend(String passFriend) {
 		this.passFriend = passFriend;
 	}
 
-	public List<Bucket> getBuckets() {
-		return buckets;
+	public List<AccountFriend> getAccountFriends() {
+		return this.accountFriends;
 	}
 
-	public void setBuckets(List<Bucket> buckets) {
-		this.buckets = buckets;
-	}
-	
-	public int getIdAf() {
-		return idAf;
+	public void setAccountFriends(List<AccountFriend> accountFriends) {
+		this.accountFriends = accountFriends;
 	}
 
-	public void setIdAf(int idAf) {
-		this.idAf = idAf;
-	}	
-
-	public Friend() {
-		
+	public List<Role> getRoles() {
+		return this.roles;
 	}
 
-	public Friend(int idFriend, String firstnameFriend, String lastnameFriend, String mailFriend, String passFriend,
-			 List<Bucket> buckets, int idAf) {
-		super();
-		this.idFriend = idFriend;
-		this.firstnameFriend = firstnameFriend;
-		this.lastnameFriend = lastnameFriend;
-		this.mailFriend = mailFriend;
-		this.passFriend = passFriend;
-		this.buckets = buckets;
-		this.idAf = idAf;
-	}
-
-	@Override
-	public String toString() {
-		return "Friend [idFriend=" + idFriend + ", firstnameFriend=" + firstnameFriend + ", lastnameFriend="
-				+ lastnameFriend + ", mailFriend=" + mailFriend + ", passFriend=" + passFriend  
-				+ ", buckets=" + buckets + ", idAf=" + idAf +"]";
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
 
 }

@@ -7,14 +7,19 @@ import org.springframework.stereotype.Service;
 
 import pco.aperofriends.model.Item;
 import pco.aperofriends.repository.ItemRepository;
+import pco.aperofriends.repository.TypeItemRepository;
 
 @Service
 public class ItemServiceImpl implements ItemService {
 
 	private ItemRepository itemRepository;
 	
-	public ItemServiceImpl(ItemRepository itemRepository) {
+	private TypeItemRepository typeItemRepository;
+	
+	public ItemServiceImpl(ItemRepository itemRepository,
+							TypeItemRepository typeItemRepository) {
 		this.itemRepository = itemRepository;
+		this.typeItemRepository = typeItemRepository;
 	}
 	
 	@Override
@@ -33,7 +38,15 @@ public class ItemServiceImpl implements ItemService {
     }
 	
 	@Override
-    public Item saveItem(Item item) {
-        return itemRepository.save(item);
+    public Item saveItem(String nameItem,
+			int priceItem,
+			String picItem,
+			String typeItem) {
+		String itemType = this.typeItemRepository.findByType(typeItem).getNameTypeItem();
+		if (itemType != null) {
+		Item item = new Item(nameItem, priceItem, picItem, this.typeItemRepository.findByType(typeItem));
+		return this.itemRepository.save(item);
+		} else return null;
+		
     }
 }

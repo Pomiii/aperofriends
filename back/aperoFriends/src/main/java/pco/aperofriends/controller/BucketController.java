@@ -26,7 +26,7 @@ public class BucketController {
 	@GetMapping("/buckets")
 	//@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<?> getBucketByFriend(@RequestParam(name="id_friend" ,required=true)  Integer id_friend){
-		List<Bucket> buckets = bucketRepository.findByBuyerIdFriend(id_friend);
+		List<Bucket> buckets = bucketRepository.findByIdFriend(id_friend);
 		
 		return ResponseEntity.status(HttpStatus.OK).body(buckets);
 	}
@@ -38,7 +38,7 @@ public class BucketController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(createBucket); 
 	}
 	
-	@PostMapping("/addItemBucket")
+/*	@PostMapping("/addItemBucket")
 	//@PreAuthorize("hasRole('USER')")
 	public void addItemBucket(@RequestParam(name="idBucket") Integer idBucket, @RequestParam(name="idItem") Integer idItem){
 		bucketRepository.addItem(idBucket, idItem);
@@ -55,7 +55,7 @@ public class BucketController {
 	public void finalBucket(@RequestParam(name="idBucket") Integer idBucket){
 		bucketRepository.finalBucket(idBucket);
 	}
-	
+*/	
 	@DeleteMapping("/delete")
 	//@PreAuthorize("hasRole('USER')")
 	public void deleteItem(@RequestParam(name="idItem", required=true) Integer idItem) {

@@ -7,12 +7,14 @@ import pco.aperofriends.model.AccountFriend;
 
 public interface AccountFriendService {
 	
-List<AccountFriend> findAllAccountFriends();
+	List<AccountFriend> findAllAccountFriends();
 	
 	Optional<AccountFriend> findFriendByIdAccountFriend(Integer idAccountFriend);
 	
 	AccountFriend createAccountFriend(AccountFriend newAccountFriend);
 	
-	AccountFriend saveAccountFriend(AccountFriend accountFriend);
+	AccountFriend saveAccountFriend(String addressAccount,
+			String nameAccount,
+			String phoneAccount);
 
 }

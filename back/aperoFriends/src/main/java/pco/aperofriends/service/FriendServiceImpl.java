@@ -33,8 +33,12 @@ public class FriendServiceImpl implements FriendService {
     }
 	
 	@Override
-    public Friend saveFriend(Friend friend) {
-        return friendRepository.save(friend);
+    public Friend saveFriend(String firstnameFriend,
+    		String lastnameFriend,
+			String mailFriend,
+			String passFriend) {
+		Friend friend = new Friend(firstnameFriend, lastnameFriend, mailFriend, passFriend);
+		return this.friendRepository.save(friend);
     }
 	
 }

@@ -3,6 +3,8 @@ package pco.aperofriends.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,10 +22,12 @@ import pco.aperofriends.model.Item;
 import pco.aperofriends.repository.BucketRepository;
 import pco.aperofriends.repository.ItemRepository;
 import pco.aperofriends.repository.TypeItemRepository;
+import pco.aperofriends.service.ItemService;
 
 @RestController
 @CrossOrigin("http://localhost:4200")
 public class ItemController {
+	
 		
 	@Autowired
 	ItemRepository itemRepository;
@@ -33,6 +37,12 @@ public class ItemController {
 	
 	@Autowired
 	BucketRepository bucketrepository;
+
+	private ItemService itemService;
+	
+	public ItemController( ItemService itemService) {
+		this.itemService = itemService;
+	}
 
 	/**
 	 * Methode qui renvois l'ensemble des éléments de la table item
@@ -59,9 +69,18 @@ public class ItemController {
 	 */
 	@PostMapping("/createItem")
 	// @PreAuthorize("hasRole('ADMIN') OR hasRole('GESTIONNAIRE')")
-	public ResponseEntity<?> createItem(@RequestBody Item newItem) {
-		Item createItem = itemRepository.save(newItem);
-		return ResponseEntity.status(HttpStatus.CREATED).body(createItem);
+	public ResponseEntity<?> createItem(@Valid String nameItem,
+			@Valid int priceItem,
+			@Valid String picItem,
+			@Valid String typeItem
+			) {
+		try {
+			return ResponseEntity.status(HttpStatus.OK)
+                .body(this.itemService.saveItem(nameItem, priceItem, picItem, typeItem));
+		} catch (Exception e) {
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+	    }
+		
 	}
 	
 	/**
@@ -77,8 +96,9 @@ public class ItemController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(updateItem);
 	}
 
-	@DeleteMapping("/item/delete")
-	public void deleteItem(@RequestParam(name="idItem", required=true) Integer idItem) {
+	@DeleteMapping("/deleteItem")
+	public List<Item> deleteItem(@RequestParam Integer idItem) {
 		itemRepository.deleteById(idItem);
+		return this.itemRepository.findAll();
 	}
 }

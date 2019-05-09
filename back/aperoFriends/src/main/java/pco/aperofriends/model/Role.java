@@ -2,26 +2,39 @@ package pco.aperofriends.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import javax.validation.constraints.Size;
+import java.util.List;
 
 
 /**
- * The persistent class for the ROLE database table.
+ * The persistent class for the Role database table.
  * 
  */
 @Entity
-//@NamedQuery(name="Role.findAll", query="SELECT r FROM Role r")
+@NamedQuery(name="Role.findAll", query="SELECT r FROM Role r")
 public class Role implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idRole;
 
-	private int idUser;
-	
-	@Size(max = 50)
 	private String nomRole;
+
+	//bi-directional many-to-many association to Friend
+	@ManyToMany
+	@JoinTable(
+		name="roleFriend"
+		, joinColumns={
+			@JoinColumn(name="idRole")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="idFriend")
+			}
+		)
+	private List<Friend> friends;
+
+	public Role() {
+	}
 
 	public int getIdRole() {
 		return this.idRole;
@@ -31,35 +44,20 @@ public class Role implements Serializable {
 		this.idRole = idRole;
 	}
 
-	public int getidUser() {
-		return this.idUser;
-	}
-
-	public void setidUser(int idUser) {
-		this.idUser = idUser;
-	}
-
-	public String getnomRole() {
+	public String getNomRole() {
 		return this.nomRole;
 	}
 
-	public void setnomRole(String nomRole) {
+	public void setNomRole(String nomRole) {
 		this.nomRole = nomRole;
 	}
 
-	@Override
-	public String toString() {
-		return "Role [idRole=" + idRole + ", idUser=" + idUser + ", nomRole=" + nomRole + "]";
+	public List<Friend> getFriends() {
+		return this.friends;
 	}
-	
-	public Role() {
+
+	public void setFriends(List<Friend> friends) {
+		this.friends = friends;
 	}
-	
-	public Role(int idRole, int idUser, String nomRole) {
-		super();
-		this.idRole = idRole;
-		this.idUser = idUser;
-		this.nomRole = nomRole;
-	}
-	
+
 }

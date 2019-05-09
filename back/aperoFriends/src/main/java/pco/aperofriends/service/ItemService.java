@@ -16,7 +16,8 @@ public interface ItemService {
 	
 	Item createItem(Item newItem);
 	
-	Item saveItem(Item item);
-
-
+	Item saveItem(String nameItem,
+			int priceItem,
+			String picItem,
+			String typeItem);
 }

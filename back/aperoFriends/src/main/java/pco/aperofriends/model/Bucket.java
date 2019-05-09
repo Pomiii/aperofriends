@@ -1,69 +1,89 @@
 package pco.aperofriends.model;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Date;
 
-import javax.persistence.CascadeType;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 /**
- * The persistent class for the BUCKET database table.
+ * The persistent class for the Bucket database table.
  * 
  */
 @Entity
-//@NamedQuery(name="Bucket.findAll", query="SELECT b FROM Bucket b")
+@NamedQuery(name="Bucket.findAll", query="SELECT b FROM Bucket b")
 public class Bucket implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idBucket;
+	@EmbeddedId
+	private BucketPK id;
 
-	@ManyToOne(cascade = CascadeType.REFRESH)
-	@JoinColumn(name = "idFriend")
-	private Friend buyer;
-	
-	@ManyToMany
-	@JoinTable(name = "bucket_items", joinColumns = @JoinColumn(name = "idBucket"), inverseJoinColumns = @JoinColumn(name="idItem"))
-	private Set<Item> items = new HashSet<Item>();
+	@Temporal(TemporalType.DATE)
+	private Date date;
 
-	public int getIdBucket() {
-		return idBucket;
+	private int total;
+
+	//bi-directional many-to-one association to AccountFriend
+	@ManyToOne
+	@JoinColumn(name="idAF", insertable=false, updatable=false)
+	private AccountFriend accountFriend;
+
+	//bi-directional many-to-one association to Item
+	@JsonManagedReference
+	@ManyToOne
+	@JoinColumn(name="idItem", insertable=false, updatable=false)
+	private Item item;
+
+	public Bucket() {
 	}
 
-	public void setIdBucket(int idBucket) {
-		this.idBucket = idBucket;
+	public BucketPK getId() {
+		return this.id;
 	}
 
-	public Friend getBuyer() {
-		return buyer;
+	public void setId(BucketPK id) {
+		this.id = id;
 	}
 
-	public void setBuyer(Friend buyer) {
-		this.buyer = buyer;
+	public Date getDate() {
+		return this.date;
 	}
 
-	public Set<Item> getItems() {
-		return items;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
-	public void setItems(Set<Item> items) {
-		this.items = items;
+	public int getTotal() {
+		return this.total;
 	}
 
-	@Override
-	public String toString() {
-		return "Bucket [idBucket=" + idBucket + ", buyer=" + buyer + ", items=" + items + "]";
+	public void setTotal(int total) {
+		this.total = total;
 	}
 
+	public AccountFriend getAccountFriend() {
+		return this.accountFriend;
+	}
+
+	public void setAccountFriend(AccountFriend accountFriend) {
+		this.accountFriend = accountFriend;
+	}
+
+	public Item getItem() {
+		return this.item;
+	}
+
+	public void setItem(Item item) {
+		this.item = item;
+	}
 
 }
