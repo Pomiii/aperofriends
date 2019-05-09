@@ -2,21 +2,26 @@
 <h3 id="editItem" >Modifier un Item :</h3>
 
 <form>
-  <div class="form-control">
-    <label for="nameItem">Name Item :</label>
+  <div class="form-group">
+    <label for="idItem">Id Item : </label>
+    <input type="text" id="idItem" ><!-- [(ngModel)]="editedItem.nameItem" name="nameItem"  -->
+  </div>
+  <div class="form-group">
+    <label for="nameItem">Name Item : </label>
     <input type="text" id="nameItem" ><!-- [(ngModel)]="editedItem.nameItem" name="nameItem"  -->
   </div>
-  <div class="form-control">
-    <label for="picItem">Image Item :</label>
+  <div class="form-group">
+    <label for="picItem">Image Item : </label>
     <input type="file" id="picItem"  ><!-- [(ngModel)]="editedItem.picItem" name="picItem" -->
   </div>
-  <div class="form-control">
-    <label for="typeItem">Type Item :</label>
+  <div class="form-group">
+    <label for="typeItem">Type Item : </label>
     <input type="select"  id="typeItem"  > <!-- [(ngModel)]="editedItem.typeItem" name="typeItem" -->
   </div>
-  <div class="form-control">
-    <label for="priceItem">Price Item :</label>
+  <div class="form-group">
+    <label for="priceItem">Price Item : </label>
     <input type="text"  id="priceItem"  > <!-- [(ngModel)]="editedItem.priceItem" name="priceItem" -->
   </div>
   <button type="submit" class="btn btn-primary" (click)="onSave()" >Sauver</button>
+  <button type="submit" class="btn btn-primary" (click)="onAdd()">Ajouter</button>
 </form>

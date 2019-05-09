@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {BucketService} from '../service/BucketService';
+import {BucketService} from '../service/bucketService';
 
 @Component({
   selector: 'app-bucket',

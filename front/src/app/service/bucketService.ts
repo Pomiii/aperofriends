@@ -63,7 +63,7 @@ export class BucketService {
         this.availableBuckets.push(newBucket);
         this.availableBuckets$.next(this.availableBuckets);
       }
-    )
+    );
   }
 
   /**

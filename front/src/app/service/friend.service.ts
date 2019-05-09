@@ -59,7 +59,7 @@ export class FriendService {
    */
   public createFriend(newFriend: Friend) {
     this.httpClient.post<Friend>('http://localhost:8080//aperofriends/createFriend', newFriend).subscribe(
-      newClient => {
+      newFriend => {
         this.availableFriends.push(newFriend);
         this.availableFriends$.next(this.availableFriends);
       }

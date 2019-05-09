@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {ItemService} from '../service/item.service';
+import {AccountFriendService} from '../service/accountFriendService';
+import {AccountFriend} from '../model/accountFriend';
+import {Item} from '../model/item';
 
 @Component({
   selector: 'app-account-friends',
@@ -7,9 +11,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountFriendsComponent implements OnInit {
 
-  constructor() { }
+
+  availableItems: Item[] = [];
+
+  accountFriendList: AccountFriend[] = [];
+
+  constructor(private accountFriendService: AccountFriendService) { }
 
   ngOnInit() {
+    this.accountFriendService.getAllAccountFriend().subscribe(accountFriends => this.accountFriendList = accountFriends);
+    console.log('this.itemList ' + this.accountFriendList);
   }
 
 }

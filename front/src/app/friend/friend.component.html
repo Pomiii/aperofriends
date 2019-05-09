@@ -10,7 +10,6 @@
           <th>Nom Friend</th>
           <th>Prénom Friend</th>
           <th>Mail Friend</th>
-          <th>Téléphone Friend</th>
           <th>Editer</th>
           <th>Supprimer</th>
         </tr>
@@ -22,12 +21,11 @@
           <td>{{ friend.firstnameFriend }}</td>
           <td>{{ friend.lastnameFriend }}</td>
           <td>{{ friend.mailFriend }}</td>
-          <td>{{ friend.phonefriend }}</td>
           <td>
-            <a routerLink="/friend/{{friend.idFriend}}">Modifier</a>
+            <a routerLink="/friend/updateFriend/{{friend.idFriend}}">Modifier</a>
           </td>
           <td>
-            <a routerLink="/friend/{{friend.idFriend}}">Supprimer</a>
+            <a routerLink="/friend/deleteFriend/{{friend.idFriend}}">Supprimer</a>
           </td>
         </tr>
         </tbody>

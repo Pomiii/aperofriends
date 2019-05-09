@@ -8,25 +8,24 @@
         <tr>
           <th>ID Account Friend</th>
           <th>Nom Account Friend</th>
-          <th>Téléphone Account Friend</th>
-          <th>Membre Account Friend </th>
+          <th>Adresse Account Friend</th>
+          <th>Téléphone Account Friend </th>
           <th>Editer</th>
           <th>Supprimer</th>
         </tr>
         </thead>
 
         <tbody>
-        <tr *ngFor="let friend of friendList">
-          <td>{{ friend.idFriend }}</td>
-          <td>{{ friend.firstnameFriend }}</td>
-          <td>{{ friend.lastnameFriend }}</td>
-          <td>{{ friend.mailFriend }}</td>
-          <td>{{ friend.phonefriend }}</td>
+        <tr *ngFor="let accountFriend of accountFriendList">
+          <td>{{ accountFriend.idAF }}</td>
+          <td>{{ accountFriend.nameAccount }}</td>
+          <td>{{ accountFriend.addressAccount }}</td>
+          <td>{{ accountFriend.phoneAccount }}</td>
           <td>
-            <a routerLink="/friend/{{friend.idFriend}}">Modifier</a>
+            <a routerLink="/accountFriend/{{accountFriend.idAF}}">Modifier</a>
           </td>
           <td>
-            <a routerLink="/friend/{{friend.idFriend}}">Supprimer</a>
+            <a routerLink="/accountFriend/{{accountFriend.idAF}}">Supprimer</a>
           </td>
         </tr>
         </tbody>
@@ -40,20 +39,20 @@
 
       <form>
         <div class="form-group">
-          <label for="name">Nom Friend</label>
+          <label for="name">id Account</label>
+          <input type="text" class="form-control" id="price" placeholder="" > <!-- [(ngModel)]="editedItem.priceItem" name="priceItem" required -->
+        </div>
+        <div class="form-group">
+          <label for="name">Nom Account</label>
           <input type="text" class="form-control" id="name" placeholder="" ><!-- [(ngModel)]="editedItem.nameItem" name="nameItem" required -->
         </div>
         <div class="form-group">
-          <label for="name">Prénom Friend</label>
+          <label for="name">Adresse Account</label>
           <input type="text" class="form-control" id="image" placeholder="" ><!-- [(ngModel)]="editedItem.picItem" name="picItem" required -->
         </div>
         <div class="form-group">
-          <label for="name">Mail Friend</label>
-          <input type="select" class="form-control" id="type" placeholder="" > <!-- [(ngModel)]="editedItem.typeItem" name="typeItem" required -->
-        </div>
-        <div class="form-group">
-          <label for="name">Télépphone Friend</label>
-          <input type="text" class="form-control" id="price" placeholder="" > <!-- [(ngModel)]="editedItem.priceItem" name="priceItem" required -->
+          <label for="name">Téléphone Account</label>
+          <input type="text" class="form-control" id="type" placeholder="" > <!-- [(ngModel)]="editedItem.typeItem" name="typeItem" required -->
         </div>
         <button type="submit" class="btn btn-primary" (click)="onSave()" >Sauver</button>
         <button type="submit" class="btn btn-primary">Ajouter</button>
@@ -63,6 +62,3 @@
 
 </div>
 
-<p>
-  account-friends works!
-</p>
