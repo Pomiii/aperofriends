@@ -1,26 +1,27 @@
-<table class="table table-striped">
-  <thead>
-  <tr>
-    <th>Article</th>
-    <th>Prix </th>
-    <th></th>
-  </tr>
-  </thead>
+     <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Article</th>
+          <th>Prix </th>
+          <th></th>
+        </tr>
+        </thead>
 
-  <tbody>
-  <tr *ngFor="let item of itemList">
-    <td>{{ item.nameItem }}</td>
-    <td>{{ item.priceItem }} €</td>
-    <td>
-      <a routerLink="/item/{{item.idItem}}">X</a>
-    </td>
-  </tr>
-  </tbody>
-  <tfoot>
-  <tr>
-    <th>Total :</th>
-    <th>Somme des Prix TODO</th>
-  </tr>
-  <button type="submit" class="btn btn-primary" (click)="onSave()" >payer</button>
-  </tfoot>
-</table>
+        <tbody>
+        <tr *ngFor="let item of itemList">
+          <td>{{ item.nameItem }}</td>
+          <td>{{ item.priceItem }} €</td>
+          <td>
+            <a routerLink="/item/{{item.idItem}}">X</a>
+          </td>
+        </tr>
+        </tbody>
+
+        <tfoot>
+        <tr>
+          <th>Total :</th>
+          <th>Somme des Prix TODO</th>
+        </tr>
+        </tfoot>
+      </table>
+     <button type="submit" class="btn btn-primary align-items-end" (click)="onPay()" >payer</button>

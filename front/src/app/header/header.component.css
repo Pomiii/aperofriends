@@ -1,12 +1,19 @@
 .head {
   border: 5px solid;
   background-image:url(/assets/images/nappe.jpg);
+  height: 12rem;
 }
 
 .btn {
-  font-size: 1vw;
+  font-size: 0.7rem;
 }
 
 input {
   width: 8rem;
 }
+
+.display-2 {
+  color: black;
+  padding-top: 0.5rem;
+}
+

@@ -7,7 +7,7 @@ INSERT INTO `aperofriends`.`item` (`id_item`, `name_item`, `pic_item`,`price_ite
 INSERT INTO `aperofriends`.`item` (`id_item`, `name_item`, `pic_item`,`price_item`, `id_type_item`) VALUES ('2', 'Bière', 'assets/images/biere.jpg','6', '1');
 INSERT INTO `aperofriends`.`item` (`id_item`, `name_item`, `pic_item`,`price_item`, `id_type_item`) VALUES ('3', 'Chips', 'assets/images/chips.jpg','2', '4');
 INSERT INTO `aperofriends`.`item` (`id_item`, `name_item`, `pic_item`,`price_item`, `id_type_item`) VALUES ('4', 'Olive', 'assets/images/olive.jpg','2', '4');
-INSERT INTO `aperofriends`.`item` (`id_item`, `name_item`, `pic_item`,`price_item`, `id_type_item`) VALUES ('5', 'Coca', 'assets/images/coca.jpg','2', '2');
+INSERT INTO `aperofriends`.`item` (`id_item`, `name_item`, `pic_item`,`price_item`, `id_type_item`) VALUES ('5', 'Coca-Cola', 'assets/images/coca.jpg','2', '2');
 INSERT INTO `aperofriends`.`item` (`id_item`, `name_item`, `pic_item`,`price_item`, `id_type_item`) VALUES ('6', 'Ice Tea', 'assets/images/icetea.jpg','2', '2');
 INSERT INTO `aperofriends`.`item` (`id_item`, `name_item`, `pic_item`,`price_item`, `id_type_item`) VALUES ('7', 'Saucisson', 'assets/images/saucisson.jpg','3', '3');
 INSERT INTO `aperofriends`.`item` (`id_item`, `name_item`, `pic_item`,`price_item`, `id_type_item`) VALUES ('8', 'Salami', 'assets/images/salami.jpg','2', '3');

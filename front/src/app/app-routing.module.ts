@@ -5,6 +5,7 @@ import {ItemDetailComponent} from './item/item-detail/item-detail.component';
 import {FriendComponent} from './friend/friend.component';
 import {BucketComponent} from './bucket/bucket.component';
 import {AccountFriendsComponent} from './account-friends/account-friends.component';
+import {LoginComponent} from './login/login.component';
 
 const routes: Routes = [
   {path: '', component: ItemComponent},
@@ -13,8 +14,8 @@ const routes: Routes = [
   {path: 'item/:id', component: ItemDetailComponent},
   {path: 'friend', component: FriendComponent},
   {path: 'bucket', component: BucketComponent},
-  {path: 'accountFriend', component: AccountFriendsComponent}
-
+  {path: 'accountFriend', component: AccountFriendsComponent},
+  {path: 'login', component: LoginComponent}
 ];
 
 @NgModule({

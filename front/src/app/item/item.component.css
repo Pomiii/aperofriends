@@ -1,5 +1,10 @@
+.container-fluid {
+  border-radius: 10px;
+}
+
 .btn {
-  font-size: 0.8vw;
+  font-size: 0.8rem;
+  background: linear-gradient(135deg,#264785 -10%,#1f3460 46%,#7db9e8);
 }
 
 .card {
@@ -24,4 +29,18 @@ h2 {
 
 h6 {
   padding-top: 1rem;
+}
+
+.my-items {
+  border: 0.1rem solid;
+  background-color: white;
+  border-radius: 10px;
+  height: 30rem;
+  padding: 1rem;
+  overflow: auto;
+;
+}
+
+.col-sm-2 .active {
+  background: linear-gradient(135deg,#264785 -10%,#1f3460 46%,#7db9e8);
 }

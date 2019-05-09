@@ -5,3 +5,12 @@
 .row {
   font-size: 0.8rem;
 }
+
+.col {
+  height: 35rem;
+  overflow: auto;
+}
+
+.table tbody tr td img{
+  width: 5rem;
+}
