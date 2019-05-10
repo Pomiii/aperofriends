@@ -1,5 +1,5 @@
 <div class="container-fluid text-center mb-3">
-  <h2>Articles</h2>
+  <h2 class="font-weight-bold">Articles</h2>
   <div class="row">
 
     <div class="col-sm-2">
@@ -11,12 +11,12 @@
         <a class="list-group-item list-group-item-action" id="list-Charcuterie-list" data-toggle="list" href="#list-Charcuterie" role="tab" aria-controls="Charcuterie">Charcuterie</a>
       </div>
       <div class="my-items">
-        <h6>Mes Achats <img src="/assets/images/panier.png" style="width: 2rem;"/></h6>
         <app-bucket></app-bucket>
       </div>
     </div>
 
     <div class="col">
+
       <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="list-all" role="tabpanel" aria-labelledby="list-all-list">
           <div class="row">
@@ -25,14 +25,15 @@
                 <img class="card-img-top" src="{{ item.picItem }}" alt="Card image cap">
                 <div class="card-body">
                   <h5 class="card-title font-weight-bold">{{ item.nameItem }}</h5>
-                  <p class="card-text">{{ item.typeItem }}</p>
-                  <p class="card-text">Prix : {{ item.priceItem }} €</p>
+                  <h5 class="card-text">{{ item.typeItem }}</h5>
+                  <h5 class="card-text">Prix : {{ item.priceItem }} €</h5>
                   <button class="btn btn-primary" (click)="onAdd()">Ajouter Article</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
         <div class="tab-pane fade" id="list-Alcool" role="tabpanel" aria-labelledby="list-Alcool-list">...</div>
         <div class="tab-pane fade" id="list-Soft" role="tabpanel" aria-labelledby="list-Soft-list">...</div>
         <div class="tab-pane fade" id="list-Aperitif" role="tabpanel" aria-labelledby="list-Aperitif-list">...</div>

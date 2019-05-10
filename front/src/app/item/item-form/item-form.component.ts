@@ -37,5 +37,8 @@ export class ItemFormComponent implements OnInit {
     this.router.navigate(['/item-detail']);
   }
 
+  onAdd() {
+
+  }
 
 }

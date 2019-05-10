@@ -13,6 +13,6 @@ INSERT INTO `aperofriends`.`item` (`id_item`, `name_item`, `pic_item`,`price_ite
 INSERT INTO `aperofriends`.`item` (`id_item`, `name_item`, `pic_item`,`price_item`, `id_type_item`) VALUES ('8', 'Salami', 'assets/images/salami.jpg','2', '3');
 
 INSERT INTO `aperofriends`.`friend` (`id_friend`, `firstname_friend`, `lastname_friend`, `mail_friend`, `pass_friend`) VALUES ('1', 'KHAM', 'Pom', 'pom@test.fr', '123456');
-INSERT INTO `aperofriends`.`friend` (`id_friend`, `firstname_friend`, `lastname_friend`, `mail_friend`) VALUES ('2', 'FRAP', 'Mel', 'lmf@test.com');
+INSERT INTO `aperofriends`.`friend` (`id_friend`, `firstname_friend`, `lastname_friend`, `mail_friend`, `pass_friend`) VALUES ('2', 'FRAP', 'Mel', 'lmf@test.com', 'azerty');
 
 INSERT INTO `aperofriends`.`account_friends` (`idaf`, `address_account`, `name_account`, `phone_account`) VALUES ('1', '102 rue du Casse Couille 93100 MONTREUIL', 'ANKULAR', '06 10 10 10 10 ');

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import pco.aperofriends.model.Item;
 import pco.aperofriends.model.TypeItem;
 import pco.aperofriends.repository.TypeItemRepository;
 
@@ -30,13 +31,13 @@ public class TypeItemController {
 		return ResponseEntity.status(HttpStatus.OK).body(typeItems);
 	}
 
-	@GetMapping("/typeItems/{id}")
-	public ResponseEntity<?> typeItem(@PathVariable Integer idTypeItem) {
-		Optional<TypeItem> typeItems = typeItemRepository.findById(idTypeItem);
-		return ResponseEntity.status(HttpStatus.OK).body(typeItems);
+	@GetMapping("/typeItem/{idTypeItem}")
+	public ResponseEntity<?> getOnetypeItem(@PathVariable Integer idTypeItem) {
+		Optional<TypeItem> typeItem = typeItemRepository.findById(idTypeItem);
+		return ResponseEntity.status(HttpStatus.OK).body(typeItem);
 	}
-
-	@PostMapping("/createTypeItem")
+	
+/*	@PostMapping("/createTypeItem")
 	// @PreAuthorize("hasRole('ADMIN') OR hasRole('GESTIONNAIRE')")
 	public ResponseEntity<?> createTypeItems(@RequestBody TypeItem typeItem) {
 		TypeItem createTypeItems = typeItemRepository.save(typeItem);
@@ -56,5 +57,5 @@ public class TypeItemController {
 		typeItemRepository.deleteById(idTypeItem);
 		return ResponseEntity.status(HttpStatus.OK).body(null);
 	}
-
+*/
 }

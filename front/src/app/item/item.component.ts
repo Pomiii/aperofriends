@@ -36,7 +36,7 @@ export class ItemComponent implements OnInit {
       this.itemToAdd = item;
       this.itemBucket = item.itemList.slice();
       this.itemToAdd = this.itemBucket.pop();
-    })
+    });
   }
 
   onAdd(){

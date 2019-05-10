@@ -80,7 +80,7 @@ public class FriendController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(updateFriend);
 	}
 
-	@DeleteMapping("/deleteFriend/{id}")
+	@DeleteMapping("/deleteFriend/{idFriend}")
 	// @PreAuthorize("hasRole('ADMIN') OR hasRole('GESTIONNAIRE')")
 	public ResponseEntity<?> deleteFriend(@PathVariable Integer idFriend) {
 		friendRepository.deleteById(idFriend);
@@ -88,15 +88,10 @@ public class FriendController {
 	}
 
 	// @PreAuthorize("hasRole('ADMIN')")
-	@GetMapping("/friend/{id}")
-	public ResponseEntity<?> friend(@PathVariable Integer idFriend) {
+	@GetMapping("/friend/{idFriend}")
+	public ResponseEntity<?> getOnefriend(@PathVariable Integer idFriend) {
 		Optional<Friend> friendId = friendRepository.findById(idFriend);
 		return ResponseEntity.status(HttpStatus.OK).body(friendId);
 	}
 	
-	@DeleteMapping("/deleteFriend")
-	public List<Friend> deleteItem(@RequestParam Integer idFriend) {
-		friendRepository.deleteById(idFriend);
-		return this.friendRepository.findAll();
-	}
 }

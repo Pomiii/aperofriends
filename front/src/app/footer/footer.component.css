@@ -1,6 +1,8 @@
 .foot {
   margin-bottom: 0px;
   border: 5px solid;
+  border-radius: 10px;
   height: 6rem;
   background-image:url(/assets/images/nappe.jpg);
+  box-shadow: -10px 10px 5px #333;
 }

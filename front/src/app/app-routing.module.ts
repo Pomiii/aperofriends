@@ -11,7 +11,6 @@ const routes: Routes = [
   {path: '', component: ItemComponent},
   {path: 'item', component: ItemComponent},
   {path: 'item-detail', component: ItemDetailComponent},
-  {path: 'item/:id', component: ItemDetailComponent},
   {path: 'friend', component: FriendComponent},
   {path: 'bucket', component: BucketComponent},
   {path: 'accountFriend', component: AccountFriendsComponent},
