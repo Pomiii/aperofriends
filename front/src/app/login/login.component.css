@@ -1,6 +1,6 @@
 .container {
   font-size: 0.8rem;
-  width: 16rem;
+  width: 14rem;
   height: auto;
   overflow: auto;
   border: 2px solid;
@@ -11,7 +11,7 @@
   box-shadow: -5px 5px 5px #333;
 }
 
-.form-control {
+.form-control-sm {
   font-size: 0.7rem;
   width: 10rem;
   height: 1.5rem;
@@ -21,9 +21,8 @@
 .btn {
   background: linear-gradient(135deg,#264785 -10%,#1f3460 46%,#7db9e8);
   font-size: 0.8rem;
-  width: 4rem;
   height: 1.5rem;
-  box-shadow: -5px 5px 5px black;
+  box-shadow: -5px 5px 5px #333;
 }
 
 .h4 {

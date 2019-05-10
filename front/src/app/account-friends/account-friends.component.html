@@ -1,7 +1,7 @@
 <div class="container-fluid text-center" >
   <div class="row">
     <div class="col-sm">
-      <h3>List Friend</h3>
+      <h3>Liste Compte des Amis</h3>
 
       <table class="table table-striped">
         <thead>
@@ -34,29 +34,29 @@
     </div>
 
     <div class="col-sm">
-      <h3 id="newItem"  >Ajout d'un nouveau Friend:</h3>
-      <h3 id="editItem" >Modifier un Friend :</h3>
+      <div class="container mb-3">
+      <h4 class="h4 mb-2 font-weight-bold text-white text-center">Ajouter/Modifier un compte des Amis :</h4>
+        <form>
+          <div class="form-group">
+            <label for="name">id Account</label>
+            <input type="text" class="form-control-sm" id="price" placeholder="" > <!-- [(ngModel)]="editedItem.priceItem" name="priceItem" required -->
+          </div>
+          <div class="form-group">
+            <label for="name">Nom Account</label>
+            <input type="text" class="form-control-sm" id="name" placeholder="" ><!-- [(ngModel)]="editedItem.nameItem" name="nameItem" required -->
+          </div>
+          <div class="form-group">
+            <label for="name">Adresse Account</label>
+            <input type="text" class="form-control-sm" id="image" placeholder="" ><!-- [(ngModel)]="editedItem.picItem" name="picItem" required -->
+          </div>
+          <div class="form-group">
+            <label for="name">Téléphone Account</label>
+            <input type="text" class="form-control-sm" id="type" placeholder="" > <!-- [(ngModel)]="editedItem.typeItem" name="typeItem" required -->
+          </div>
+        </form>
+      <button type="submit" class="btn btn-primary" (click)="onSave()" >Sauver</button>
+    </div>
 
-      <form>
-        <div class="form-group">
-          <label for="name">id Account</label>
-          <input type="text" class="form-control" id="price" placeholder="" > <!-- [(ngModel)]="editedItem.priceItem" name="priceItem" required -->
-        </div>
-        <div class="form-group">
-          <label for="name">Nom Account</label>
-          <input type="text" class="form-control" id="name" placeholder="" ><!-- [(ngModel)]="editedItem.nameItem" name="nameItem" required -->
-        </div>
-        <div class="form-group">
-          <label for="name">Adresse Account</label>
-          <input type="text" class="form-control" id="image" placeholder="" ><!-- [(ngModel)]="editedItem.picItem" name="picItem" required -->
-        </div>
-        <div class="form-group">
-          <label for="name">Téléphone Account</label>
-          <input type="text" class="form-control" id="type" placeholder="" > <!-- [(ngModel)]="editedItem.typeItem" name="typeItem" required -->
-        </div>
-        <button type="submit" class="btn btn-primary" (click)="onSave()" >Sauver</button>
-        <button type="submit" class="btn btn-primary">Ajouter</button>
-      </form>
     </div>
   </div>
 

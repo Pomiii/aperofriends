@@ -1,26 +1,29 @@
-<h3>Ajouter/Modifier d'un nouvel Item:</h3>
-
-<form>
-  <div class="form-group">
-    <label for="idItem">Id Item : </label>
-    <input type="text" id="idItem" ><!-- [(ngModel)]="editedItem.nameItem" name="nameItem"  -->
-  </div>
-  <div class="form-group">
-    <label for="nameItem">Name Item : </label>
-    <input type="text" id="nameItem" ><!-- [(ngModel)]="editedItem.nameItem" name="nameItem"  -->
-  </div>
-  <div class="form-group">
-    <label for="picItem">Image Item : </label>
-    <input type="file" id="picItem"  ><!-- [(ngModel)]="editedItem.picItem" name="picItem" -->
-  </div>
-  <div class="form-group">
-    <label for="typeItem">Type Item : </label>
-    <input type="select"  id="typeItem"  > <!-- [(ngModel)]="editedItem.typeItem" name="typeItem" -->
-  </div>
-  <div class="form-group">
-    <label for="priceItem">Price Item : </label>
-    <input type="text"  id="priceItem"  > <!-- [(ngModel)]="editedItem.priceItem" name="priceItem" -->
-  </div>
+<div class="container mb-3 text-center">
+  <h4 class="h4 mb-2 font-weight-bold text-white text-center">Ajouter/Modifier un Article :</h4>
+  <form>
+    <div class="form-group">
+      <label for="nameItem">Name Item : </label>
+      <input type="text" class="form-control-sm" id="nameItem" [(ngModel)]="editedItem.nameItem" name="nameItem" required>
+    </div>
+    <div class="form-group">
+      <label for="picItem">Image Item : </label>
+      <input type="file" class="form-control-sm" id="picItem" [(ngModel)]="editedItem.picItem" name="picItem" required>
+    </div>
+    <div class="form-group">
+      <label for="typeItem">Type Item : </label>
+      <select class="form-control-sm" id="typeItem" [(ngModel)]="editedItem.typeItem" name="typeItem" required>
+        <option>alcool</option>
+        <option>soft</option>
+        <option>apéritif</option>
+        <option>charcuterie</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="priceItem">Price Item : </label>
+      <input type="text" class="form-control-sm" id="priceItem" [(ngModel)]="editedItem.priceItem" name="priceItem" required>
+    </div>
+  </form>
   <button type="submit" class="btn btn-primary" (click)="onSave()" >Sauver</button>
-  <button type="submit" class="btn btn-primary" (click)="onAdd()">Ajouter</button>
-</form>
+</div>
+
+

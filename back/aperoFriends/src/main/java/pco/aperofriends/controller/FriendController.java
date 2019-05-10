@@ -3,8 +3,6 @@ package pco.aperofriends.controller;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import pco.aperofriends.model.Friend;
@@ -46,17 +43,26 @@ public class FriendController {
 		return ResponseEntity.status(HttpStatus.OK).body(friends);// retourne la page friends
 	}
 	
+
+	// @PreAuthorize("hasRole('ADMIN')")
+	@GetMapping("/friend/{idFriend}")
+	public ResponseEntity<?> getOnefriend(@PathVariable Integer idFriend) {
+		Optional<Friend> friendId = friendRepository.findById(idFriend);
+		return ResponseEntity.status(HttpStatus.OK).body(friendId);
+	}
+	
 	/**
 	 * Methode qui permet d'ajouter un friend dans la table friend
 	 * @param request
 	 * @return createfriend
 	 */
-	@PostMapping("/createFriend")
+	@PostMapping("/createFriend/{firstnameFriend}/{lastnameFriend}/{mailFriend}/{passFriend}")
 	// @PreAuthorize("hasRole('ADMIN') OR hasRole('GESTIONNAIRE')")
-	public ResponseEntity<?> createFriend(@Valid String firstnameFriend,
-			@Valid String lastnameFriend,
-			@Valid String mailFriend,
-			@Valid String passFriend
+	public ResponseEntity<?> createFriend(
+			@PathVariable String firstnameFriend,
+			@PathVariable String lastnameFriend,
+			@PathVariable String mailFriend,
+			@PathVariable String passFriend
 			) {
 		try {
 			return ResponseEntity.status(HttpStatus.OK)
@@ -64,11 +70,10 @@ public class FriendController {
 		} catch (Exception e) {
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 	    }
-		
 	}
 	
 	/**
-	 * Methode qui renvois l'ensemble des éléments de la table friend
+	 * Methode qui renvoie l'ensemble des éléments de la table friend
 	 * @param request
 	 * @param model
 	 * @return updateFriend
@@ -85,13 +90,6 @@ public class FriendController {
 	public ResponseEntity<?> deleteFriend(@PathVariable Integer idFriend) {
 		friendRepository.deleteById(idFriend);
 		return ResponseEntity.status(HttpStatus.OK).body(null);
-	}
-
-	// @PreAuthorize("hasRole('ADMIN')")
-	@GetMapping("/friend/{idFriend}")
-	public ResponseEntity<?> getOnefriend(@PathVariable Integer idFriend) {
-		Optional<Friend> friendId = friendRepository.findById(idFriend);
-		return ResponseEntity.status(HttpStatus.OK).body(friendId);
 	}
 	
 }

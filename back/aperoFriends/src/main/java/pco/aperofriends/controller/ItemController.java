@@ -69,10 +69,10 @@ public class ItemController {
 	 */
 	@PostMapping("/createItem")
 	// @PreAuthorize("hasRole('ADMIN') OR hasRole('GESTIONNAIRE')")
-	public ResponseEntity<?> createItem(@Valid String nameItem,
-			@Valid int priceItem,
-			@Valid String picItem,
-			@Valid String typeItem
+	public ResponseEntity<?> createItem(@PathVariable String nameItem,
+			@PathVariable int priceItem,
+			@PathVariable String picItem,
+			@PathVariable String typeItem
 			) {
 		try {
 			return ResponseEntity.status(HttpStatus.OK)
@@ -80,7 +80,6 @@ public class ItemController {
 		} catch (Exception e) {
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 	    }
-		
 	}
 	
 	/**

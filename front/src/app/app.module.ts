@@ -31,6 +31,8 @@ import { BucketAccountComponent } from './bucket/bucket-account/bucket-account.c
 import { AccountFriendsComponent } from './account-friends/account-friends.component';
 import { NavComponent } from './nav/nav.component';
 import { ItemFormComponent } from './item/item-form/item-form.component';
+import { FriendFormComponent } from './friend/friend-form/friend-form.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -45,10 +47,12 @@ import { ItemFormComponent } from './item/item-form/item-form.component';
     BucketAccountComponent,
     AccountFriendsComponent,
     NavComponent,
-    ItemFormComponent
+    ItemFormComponent,
+    FriendFormComponent
   ],
   imports: [
     HttpClientModule,
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     AlertModule.forRoot(),

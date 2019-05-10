@@ -6,3 +6,8 @@
   background-image:url(/assets/images/nappe.jpg);
   box-shadow: -10px 10px 5px #333;
 }
+
+.col {
+  font-weight: bold;
+  text-shadow: 2px 0 0 white, 0 2px 0 white, 0 -2px 0 white, -2px 0 0 white, 2px 2px 0 white, 2px -2px 0 white, -2px 2px 0 white, -2px -2px 0 white;
+}

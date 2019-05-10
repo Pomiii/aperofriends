@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import pco.aperofriends.model.Friend;
-import pco.aperofriends.model.TypeItem;
 
 @Repository
 public interface FriendRepository extends JpaRepository<Friend, Integer>{

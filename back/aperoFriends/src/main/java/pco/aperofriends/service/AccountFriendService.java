@@ -14,7 +14,7 @@ public interface AccountFriendService {
 	AccountFriend createAccountFriend(AccountFriend newAccountFriend);
 	
 	AccountFriend saveAccountFriend(String addressAccount,
-			String nameAccount,
-			String phoneAccount);
+									String nameAccount,
+									String phoneAccount);
 
 }

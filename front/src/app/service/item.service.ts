@@ -3,6 +3,7 @@ import {BehaviorSubject, Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
+import {TypeItem} from '../model/typeItem';
 
 @Injectable ({
   providedIn: 'root'
@@ -14,17 +15,27 @@ export class ItemService {
   availableItems: Item[];
 
   // la liste observable que l'on rend visible partout dans l'appli
-  availableItems$: BehaviorSubject<Item[]>= new BehaviorSubject(this.availableItems);
+  availableItems$: BehaviorSubject<Item[]> = new BehaviorSubject(this.availableItems);
 
   constructor(private httpClient: HttpClient) {
 
+  }
+
+  public itemListSubject: BehaviorSubject<Item[]> = new BehaviorSubject(null);
+
+  public setItemListSubject(value: Item[]) {
+    if (value) {
+      this.itemListSubject.next(value);
+    } else {
+      this.itemListSubject.next(null);
+    }
   }
 
   /**
    * La fonction getAllItem() est privée car elle n'a besoin d'être appellée que dans le service.
    */
   public getAllItem(): Observable<Item[]> {
-    console.log('getAllItems' + this.availableItems$)
+    console.log('getAllItems' + this.availableItems$);
     return this.httpClient.get<Item[]>('http://localhost:8080/aperofriends/items');
   }
 
@@ -37,6 +48,7 @@ export class ItemService {
       ItemList => {
         this.availableItems = ItemList;
         this.availableItems$.next(this.availableItems);
+        this.setItemListSubject(this.availableItems);
       });
   }
 
@@ -50,7 +62,7 @@ export class ItemService {
       }
       return of(this.availableItems.find(item => item.idItem === itemId));
     } else {
-      return of(new Item(0, '', '', 0));
+      return of(new Item(0, '', '', new TypeItem(0, '' ) , 0));
     }
   }
 
@@ -58,12 +70,13 @@ export class ItemService {
    * @param newItem
    */
   public createItem(newItem: Item) {
-    this.httpClient.post<Item>('http://localhost:8080/aperofriends/createItem', newItem).subscribe(
-      newItem => {
+    this.httpClient.post<Item>('http://localhost:8080//aperofriends/createItem/' + newItem.nameItem + '/'
+      + newItem.picItem + '/' + newItem.typeItem + '/' + newItem.priceItem, null).subscribe(newItem => {
+        console.log('newItem ---', newItem);
         this.availableItems.push(newItem);
         this.availableItems$.next(this.availableItems);
       }
-    )
+    );
   }
 
   /**

@@ -29,14 +29,15 @@ public class FriendServiceImpl implements FriendService {
 	
 	@Override
     public Friend createFriend(Friend newfriend) {
+		System.out.println("newFriend -- " + newfriend.getFirstnameFriend());
         return friendRepository.save(newfriend);
     }
 	
 	@Override
     public Friend saveFriend(String firstnameFriend,
-    		String lastnameFriend,
-			String mailFriend,
-			String passFriend) {
+    						 String lastnameFriend,
+    						 String mailFriend,
+    						 String passFriend) {
 		Friend friend = new Friend(firstnameFriend, lastnameFriend, mailFriend, passFriend);
 		return this.friendRepository.save(friend);
     }

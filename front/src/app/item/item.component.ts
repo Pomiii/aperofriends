@@ -13,9 +13,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class ItemComponent implements OnInit {
 
   availableItems: Item[] = [];
-  itemBucket: Item[] = [];
-  itemList: Item[] = [];
-  itemToAdd: Item;
+  editedItem = Item;
+  itemList: BehaviorSubject<Item[]>;
 
   idItem: number;
 
@@ -25,21 +24,21 @@ export class ItemComponent implements OnInit {
 
   ngOnInit() {
     // Permet d'afficher la liste des Items
-    this.itemService.getAllItem().subscribe(items => this.itemList = items);
-    console.log('this.itemList ' + this.itemList);
+    this.itemService.publishItems();
+
+    this.itemService.itemListSubject.subscribe(
+      (res) => {
+        this.availableItems = res;
+        if (res !== null) {
+          console.log('res ????' , res[2].typeItem);
+        }
+      }
+    );
+
+    this.itemList = this.itemService.availableItems$;
 
     this.availableItems = this.itemService.availableItems;
-    console.log('this.availableItems ' + this.availableItems);
 
-
-    this.itemService.findItem(this.idItem).subscribe(item => {
-      this.itemToAdd = item;
-      this.itemBucket = item.itemList.slice();
-      this.itemToAdd = this.itemBucket.pop();
-    });
-  }
-
-  onAdd(){
-
+    this.idItem = +this.route.snapshot.params.idItem;
   }
 }

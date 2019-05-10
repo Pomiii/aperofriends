@@ -39,9 +39,9 @@ public class ItemServiceImpl implements ItemService {
 	
 	@Override
     public Item saveItem(String nameItem,
-			int priceItem,
-			String picItem,
-			String typeItem) {
+						 int priceItem,
+						 String picItem,
+						 String typeItem) {
 		String itemType = this.typeItemRepository.findByType(typeItem).getNameTypeItem();
 		if (itemType != null) {
 		Item item = new Item(nameItem, priceItem, picItem, this.typeItemRepository.findByType(typeItem));

@@ -1,0 +1,25 @@
+<div class="container mb-3 text-center">
+  <h4 class="h4 mb-2 font-weight-bold text-white text-center" *ngIf="SignUp">Inscription</h4>
+  <h4 class="h4 mb-2 font-weight-bold text-white text-center">Ajouter/Modifier un compte</h4>
+  <form>
+    <div class="form-group">
+      <label for="firstnameFriend">Nom :</label>
+      <input type="text" class="form-control-sm" id="firstnameFriend" placeholder="" [(ngModel)]="editedFriend.firstnameFriend" name="firstnameFriend" required>
+      <span>{{editedFriend.firstnameFriend}}</span>
+    </div>
+    <div class="form-group">
+      <label for="lastnameFriend">Prénom :</label>
+      <input type="text" class="form-control-sm" id="lastnameFriend" placeholder="" [(ngModel)]="editedFriend.lastnameFriend" name="lastnameFriend" required>
+    </div>
+    <div class="form-group">
+      <label for="mailFriend">Mail :</label>
+      <input type="select" class="form-control-sm" id="mailFriend" placeholder="" [(ngModel)]="editedFriend.mailFriend" name="mailFriend" required>
+    </div>
+    <div class="form-group">
+      <label for="passFriend">Mot de Passe :</label>
+      <input type="select" class="form-control-sm" id="passFriend" placeholder="" [(ngModel)]="editedFriend.passFriend" name="passFriend" required>
+    </div>
+  </form>
+  <button type="submit" class="btn btn-primary" (click)="onSignuUp()" *ngIf="SignUp">Envoyer</button>
+  <button type="submit" class="btn btn-primary" (click)="onSave()">Sauver</button>
+</div>

@@ -14,7 +14,7 @@ export class TypeItemService {
   private availableTypeItems: TypeItem[];
 
   // la liste observable que l'on rend visible partout dans l'appli
-  availableTypeItems$: BehaviorSubject<TypeItem[]>= new BehaviorSubject(this.availableTypeItems);
+  availableTypeItems$: BehaviorSubject<TypeItem[]> = new BehaviorSubject(this.availableTypeItems);
 
   constructor(private httpClient: HttpClient) {
 

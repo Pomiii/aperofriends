@@ -6,12 +6,14 @@ import {FriendComponent} from './friend/friend.component';
 import {BucketComponent} from './bucket/bucket.component';
 import {AccountFriendsComponent} from './account-friends/account-friends.component';
 import {LoginComponent} from './login/login.component';
+import {FriendFormComponent} from './friend/friend-form/friend-form.component';
 
 const routes: Routes = [
   {path: '', component: ItemComponent},
   {path: 'item', component: ItemComponent},
   {path: 'item-detail', component: ItemDetailComponent},
   {path: 'friend', component: FriendComponent},
+  {path: 'friend-form', component: FriendFormComponent},
   {path: 'bucket', component: BucketComponent},
   {path: 'accountFriend', component: AccountFriendsComponent},
   {path: 'login', component: LoginComponent}

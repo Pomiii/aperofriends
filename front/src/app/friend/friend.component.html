@@ -16,7 +16,7 @@
         </thead>
 
         <tbody>
-        <tr *ngFor="let friend of friendList">
+        <tr *ngFor="let friend of availableFriends">
           <td>{{ friend.idFriend }}</td>
           <td>{{ friend.firstnameFriend }}</td>
           <td>{{ friend.lastnameFriend }}</td>
@@ -25,7 +25,7 @@
             <a routerLink="/friend/updateFriend/{{friend.idFriend}}">Modifier</a>
           </td>
           <td>
-            <a routerLink="/friend/deleteFriend/{{friend.idFriend}}">Supprimer</a>
+            <a routerLink="/friend/deleteFriend/{{friend.idFriend}}">X</a>
           </td>
         </tr>
         </tbody>
@@ -34,29 +34,7 @@
     </div>
 
     <div class="col-sm">
-      <h3 id="newItem"  >Ajout d'un nouveau Friend:</h3>
-      <h3 id="editItem" >Modifier un Friend :</h3>
-
-      <form>
-        <div class="form-group">
-          <label for="name">Nom Friend</label>
-          <input type="text" class="form-control" id="name" placeholder="" ><!-- [(ngModel)]="editedItem.nameItem" name="nameItem" required -->
-        </div>
-        <div class="form-group">
-          <label for="name">Prénom Friend</label>
-          <input type="text" class="form-control" id="image" placeholder="" ><!-- [(ngModel)]="editedItem.picItem" name="picItem" required -->
-        </div>
-        <div class="form-group">
-          <label for="name">Mail Friend</label>
-          <input type="select" class="form-control" id="type" placeholder="" > <!-- [(ngModel)]="editedItem.typeItem" name="typeItem" required -->
-        </div>
-        <div class="form-group">
-          <label for="name">Télépphone Friend</label>
-          <input type="text" class="form-control" id="price" placeholder="" > <!-- [(ngModel)]="editedItem.priceItem" name="priceItem" required -->
-        </div>
-        <button type="submit" class="btn btn-primary" (click)="onSave()" >Sauver</button>
-        <button type="submit" class="btn btn-primary">Ajouter</button>
-      </form>
+      <app-friend-form></app-friend-form>
     </div>
   </div>
 

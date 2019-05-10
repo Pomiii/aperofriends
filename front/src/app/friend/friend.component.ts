@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Friend} from '../model/friend';
 import {FriendService} from '../service/friend.service';
 import {Router, ActivatedRoute} from '@angular/router';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-friend',
@@ -10,25 +12,37 @@ import {Router, ActivatedRoute} from '@angular/router';
 })
 export class FriendComponent implements OnInit {
 
-  friendList: Friend[] = [];
-  idFriend: number;
-  availableFriends: Friend[] =[];
+  availableFriends: Friend[] = [];
   editedFriend: Friend;
+  friendList: BehaviorSubject<Friend[]>;
+
+  idFriend: number;
 
   constructor(private friendService: FriendService,
               private route: ActivatedRoute,
               private router: Router) { }
 
   ngOnInit() {
+    // Permet d'afficher la liste des Friends
+    this.friendService.publishFriends();
+
+    this.friendService.friendListSubject.subscribe(
+      (res) => {
+        this.availableFriends = res;
+        if (res !== null) {
+        }
+      }
+    );
+
+    this.friendList = this.friendService.availableFriends$;
+
     this.availableFriends = this.friendService.availableFriends;
 
     this.idFriend = +this.route.snapshot.params.idFriend;
 
-    console.log('friend ' + this.friendList);
+    console.log('friendList ' + this.friendList);
 
-    this.friendService.getAllFriend().subscribe(friends => this.friendList = friends);
-
-    this.friendService.findFriend(this.idFriend).subscribe(friend => {this.editedFriend = friend;})
+    this.friendService.findFriend(this.idFriend).subscribe(friend => {this.editedFriend = friend; });
   }
 
 }

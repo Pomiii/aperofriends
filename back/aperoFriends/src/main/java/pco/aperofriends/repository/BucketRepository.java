@@ -17,7 +17,7 @@ public interface BucketRepository extends JpaRepository<Bucket, Integer>{
 	@Query("SELECT b FROM Bucket b WHERE b.accountFriend LIKE ?1")	
 	public List<Bucket> findByIdFriend(Integer idFriend);
 
-/*	@Transactional
+	@Transactional
 	@Modifying
 	@Query(value="INSERT into bucket_items(id_bucket, id_item) VALUES(?1, ?2)", nativeQuery=true)
 	public void addItem(Integer idBucket, Integer idItem);
@@ -31,5 +31,5 @@ public interface BucketRepository extends JpaRepository<Bucket, Integer>{
 	@Modifying
 	@Query(value="UPDATE bucket SET statut='PANIER_FINALISE' WHERE id = ?1", nativeQuery=true)
 	public void finalBucket(Integer idBucket);
-*/
+
 }

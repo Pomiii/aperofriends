@@ -13,10 +13,20 @@ export class FriendService {
   availableFriends: Friend[];
 
   // la liste observable que l'on rend visible partout dans l'appli
-  availableFriends$: BehaviorSubject<Friend[]>= new BehaviorSubject(this.availableFriends);
+  availableFriends$: BehaviorSubject<Friend[]> = new BehaviorSubject(this.availableFriends);
 
   constructor(private httpClient: HttpClient) {
 
+  }
+
+  public friendListSubject: BehaviorSubject<Friend[]> = new BehaviorSubject(null);
+
+  public setFriendListSubject(value: Friend[]) {
+    if (value) {
+      this.friendListSubject.next(value);
+    } else {
+      this.friendListSubject.next(null);
+    }
   }
 
   /**
@@ -33,14 +43,14 @@ export class FriendService {
    */
   public publishFriends() {
     this.getAllFriend().subscribe(
-      FriendList => {
-        this.availableFriends = FriendList;
+      friendList => {
+        this.availableFriends = friendList;
         this.availableFriends$.next(this.availableFriends);
+        this.setFriendListSubject(this.availableFriends);
       });
   }
 
   /**
-
    * @param idFriend l'id qu'il faut rechercher dans la liste.
    */
   public findFriend(idFriend: number): Observable<Friend> {
@@ -50,20 +60,21 @@ export class FriendService {
       }
       return of(this.availableFriends.find(friend => friend.idFriend === idFriend));
     } else {
-      return of(new Friend(0, '', '', ''));
+      return of(new Friend(0, '', '', '', ''));
     }
   }
 
   /**
    * @param newFriend le nouveau friend à créer
    */
-  public createFriend(newFriend: Friend) {
-    this.httpClient.post<Friend>('http://localhost:8080//aperofriends/createFriend', newFriend).subscribe(
-      newFriend => {
-        this.availableFriends.push(newFriend);
+  public createFriend(newfriend: Friend) {
+    this.httpClient.post<Friend>('http://localhost:8080//aperofriends/createFriend/' + newfriend.firstnameFriend + '/'
+      + newfriend.lastnameFriend + '/' + newfriend.mailFriend + '/' + newfriend.passFriend, null).subscribe(newfriend => {
+        console.log('newfriend ---', newfriend);
+        this.availableFriends.push(newfriend);
         this.availableFriends$.next(this.availableFriends);
       }
-    )
+    );
   }
 
   /**

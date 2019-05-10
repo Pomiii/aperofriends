@@ -26,6 +26,7 @@ public class Friend implements Serializable {
 
 	private String passFriend;
 
+	
 	//bi-directional many-to-many association to AccountFriend
 	@ManyToMany
 	@JoinTable(

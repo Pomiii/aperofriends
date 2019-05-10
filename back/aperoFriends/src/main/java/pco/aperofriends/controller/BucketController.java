@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,7 +37,7 @@ public class BucketController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(createBucket); 
 	}
 	
-/*	@PostMapping("/addItemBucket")
+	@PostMapping("/addItemBucket")
 	//@PreAuthorize("hasRole('USER')")
 	public void addItemBucket(@RequestParam(name="idBucket") Integer idBucket, @RequestParam(name="idItem") Integer idItem){
 		bucketRepository.addItem(idBucket, idItem);
@@ -55,7 +54,7 @@ public class BucketController {
 	public void finalBucket(@RequestParam(name="idBucket") Integer idBucket){
 		bucketRepository.finalBucket(idBucket);
 	}
-*/	
+	
 	@DeleteMapping("/deleteBucket")
 	//@PreAuthorize("hasRole('USER')")
 	public void deleteItem(@RequestParam(name="bucketId", required=true) Integer bucketId) {
