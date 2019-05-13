@@ -36,7 +36,7 @@ public class AccountFriendServiceImpl implements AccountFriendService {
     public AccountFriend saveAccountFriend(String addressAccount,
 										   String nameAccount,
 										   String phoneAccount) {
-		AccountFriend accountFriend = new AccountFriend(addressAccount, nameAccount, phoneAccount);
+		AccountFriend accountFriend = new AccountFriend(nameAccount, addressAccount, phoneAccount);
 		return this.accountFriendRepository.save(accountFriend);    
 	}
 

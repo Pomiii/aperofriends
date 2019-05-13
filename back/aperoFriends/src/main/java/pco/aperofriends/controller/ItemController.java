@@ -3,8 +3,6 @@ package pco.aperofriends.controller;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import pco.aperofriends.model.Item;
@@ -95,9 +92,19 @@ public class ItemController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(updateItem);
 	}
 
-	@DeleteMapping("/deleteItem")
-	public List<Item> deleteItem(@RequestParam Integer idItem) {
-		itemRepository.deleteById(idItem);
-		return this.itemRepository.findAll();
+	/**
+	 * 
+	 * @param idItem
+	 * @return item
+	 */
+	@DeleteMapping("/deleteItem/{idItem}")
+	public ResponseEntity<?> deleteFriend(@PathVariable Integer idItem) {
+		try {
+			itemRepository.deleteById(idItem);
+			return ResponseEntity.status(HttpStatus.OK)
+	                .body(null);
+		} catch (Exception e) {
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
 	}
 }

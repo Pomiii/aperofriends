@@ -45,4 +45,11 @@ export class FriendComponent implements OnInit {
     this.friendService.findFriend(this.idFriend).subscribe(friend => {this.editedFriend = friend; });
   }
 
+  onDelete(idFriend: number) {
+    console.log('availableFriends ???? ' + this.availableFriends[0].idFriend)
+    this.availableFriends.splice(this.availableFriends.findIndex((FriId) => FriId.idFriend === idFriend), 1);
+    this.friendService.deleteFriend(idFriend);
+    this.router.navigate(['/friend']);
+  }
+
 }

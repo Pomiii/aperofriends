@@ -2,8 +2,6 @@ package pco.aperofriends.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import pco.aperofriends.model.AccountFriend;
@@ -41,7 +38,7 @@ public class AccountFriendController {
 	 * @return friend
 	 */
 	@GetMapping("/accountFriends")
-	public ResponseEntity<?> AccountFriends() {
+	public ResponseEntity<?> accountFriends() {
 		List<AccountFriend> accountFriends = accountFriendRepository.findAll();
 		return ResponseEntity.status(HttpStatus.OK).body(accountFriends);// retourne la page friends
 	}
@@ -51,15 +48,16 @@ public class AccountFriendController {
 	 * @param request
 	 * @return createfriend
 	 */
-	@PostMapping("/createAccountFriend")
+	@PostMapping("/createAccountFriend/{nameAccount}/{addressAccount}/{phoneAccount}")
 	// @PreAuthorize("hasRole('ADMIN') OR hasRole('GESTIONNAIRE')")
-		public ResponseEntity<?> createAccountFriend(@PathVariable String addressAccount,
+		public ResponseEntity<?> createAccountFriend(
+				@PathVariable String addressAccount,
 				@PathVariable String nameAccount,
 				@PathVariable String phoneAccount
 				) {
 			try {
 				return ResponseEntity.status(HttpStatus.OK)
-	                .body(this.accountFriendService.saveAccountFriend(addressAccount, nameAccount, phoneAccount));
+	                .body(this.accountFriendService.saveAccountFriend(nameAccount, addressAccount, phoneAccount));
 			} catch (Exception e) {
 		        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 		    }
@@ -80,10 +78,20 @@ public class AccountFriendController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(updateAccountFriend);
 	}
 
-	@DeleteMapping("/deleteAccountFriend")
-	public List<AccountFriend> deleteItem(@RequestParam Integer idAF) {
-		accountFriendRepository.deleteById(idAF);
-		return this.accountFriendRepository.findAll();
+	/**
+	 * 
+	 * @param idAF
+	 * @return accountFriend
+	 */
+	@DeleteMapping("/deleteAccountFriend/{idAF}")
+	public ResponseEntity<?> deleteAccountFriend(@PathVariable Integer idAF) {
+		try {
+			accountFriendRepository.deleteById(idAF);
+			return ResponseEntity.status(HttpStatus.OK)
+	                .body(null);
+		} catch (Exception e) {
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
 	}
-
+	
 }

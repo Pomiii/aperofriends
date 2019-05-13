@@ -11,7 +11,7 @@ import {Item} from '../model/item';
 
 export class TypeItemService {
   // la liste des TypeItems
-  private availableTypeItems: TypeItem[];
+  availableTypeItems: TypeItem[];
 
   // la liste observable que l'on rend visible partout dans l'appli
   availableTypeItems$: BehaviorSubject<TypeItem[]> = new BehaviorSubject(this.availableTypeItems);
@@ -19,12 +19,21 @@ export class TypeItemService {
   constructor(private httpClient: HttpClient) {
 
   }
+  public typeItemListSubject: BehaviorSubject<TypeItem[]> = new BehaviorSubject(null);
+
+  public setTypeItemListSubject(value: TypeItem[]) {
+    if (value) {
+      this.typeItemListSubject.next(value);
+    } else {
+      this.typeItemListSubject.next(null);
+    }
+  }
 
   /**
    * La fonction getAllTypeItem() est privée car elle n'a besoin d'être appellée que dans le service.
    */
   public getAllTypeItem(): Observable<TypeItem[]> {
-    return this.httpClient.get<TypeItem[]>('http://localhost:8080/aperofriends/typeItems');
+    return this.httpClient.get<TypeItem[]>('http://localhost:8080/aperofriends/typeItems/');
   }
 
   /**
@@ -36,6 +45,8 @@ export class TypeItemService {
       TypeItemList => {
         this.availableTypeItems = TypeItemList;
         this.availableTypeItems$.next(this.availableTypeItems);
+        this.setTypeItemListSubject(this.availableTypeItems);
+
       });
   }
 

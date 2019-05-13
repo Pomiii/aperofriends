@@ -34,8 +34,8 @@ public class Bucket implements Serializable {
 	//bi-directional many-to-one association to AccountFriend
 	@JsonManagedReference
 	@ManyToOne
-	@JoinColumn(name="idAF", insertable=false, updatable=false)
-	private AccountFriend accountFriend;
+	@JoinColumn(name="idFriend", insertable=false, updatable=false)
+	private Friend friend;
 
 	//bi-directional many-to-one association to Item
 	@JsonManagedReference
@@ -70,12 +70,12 @@ public class Bucket implements Serializable {
 		this.total = total;
 	}
 
-	public AccountFriend getAccountFriend() {
-		return this.accountFriend;
+	public Friend getFriend() {
+		return this.friend;
 	}
 
-	public void setAccountFriend(AccountFriend accountFriend) {
-		this.accountFriend = accountFriend;
+	public void setFriend(Friend friend) {
+		this.friend = friend;
 	}
 
 	public Item getItem() {

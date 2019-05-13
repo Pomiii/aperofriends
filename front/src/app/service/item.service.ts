@@ -70,8 +70,11 @@ export class ItemService {
    * @param newItem
    */
   public createItem(newItem: Item) {
-    this.httpClient.post<Item>('http://localhost:8080//aperofriends/createItem/' + newItem.nameItem + '/'
-      + newItem.picItem + '/' + newItem.typeItem + '/' + newItem.priceItem, null).subscribe(newItem => {
+    this.httpClient.post<Item>('http://localhost:8080//aperofriends/createItem/'
+      + newItem.nameItem + '/'
+      + newItem.picItem + '/'
+      + newItem.typeItem + '/'
+      + newItem.priceItem, null).subscribe(newItem => {
         console.log('newItem ---', newItem);
         this.availableItems.push(newItem);
         this.availableItems$.next(this.availableItems);
@@ -88,6 +91,15 @@ export class ItemService {
       updatedItem => {
         this.availableItems$.next(this.availableItems);
       }
+    );
+  }
+
+  /**
+   * Fonction de suppression
+   * @param friend
+   */
+  public deleteItem(idItem: number) {
+    this.httpClient.delete<Item>('http://localhost:8080/aperofriends/deleteItem/' + idItem).subscribe(
     );
   }
 }

@@ -21,11 +21,21 @@ export class AccountFriendService {
 
   }
 
+  public accountFriendListSubject: BehaviorSubject<AccountFriend[]> = new BehaviorSubject(null);
+
+  public setAccountFriendListSubject(value: AccountFriend[]) {
+    if (value) {
+      this.accountFriendListSubject.next(value);
+    } else {
+      this.accountFriendListSubject.next(null);
+    }
+  }
+
   /**
    * La fonction getAllFriend() est privée car elle n'a besoin d'être appellée que dans le service.
    */
   public getAllAccountFriend(): Observable<AccountFriend[]> {
-    console.log('getAllAccountFriends' + this.availableAccountFriends)
+    console.log('getAllAccountFriends' + this.availableAccountFriends);
     return this.httpClient.get<AccountFriend[]>('http://localhost:8080/aperofriends/accountFriends');
   }
 
@@ -38,11 +48,11 @@ export class AccountFriendService {
       accountFriendList => {
         this.availableAccountFriends = accountFriendList;
         this.availableAccountFriends$.next(this.availableAccountFriends);
+        this.setAccountFriendListSubject(this.availableAccountFriends);
       });
   }
 
   /**
-
    * @param idAF l'id qu'il faut rechercher dans la liste.
    */
   public findAccountFriend(AFid: number): Observable<AccountFriend> {
@@ -52,7 +62,7 @@ export class AccountFriendService {
       }
       return of(this.availableAccountFriends.find(accountFriend => accountFriend.idAF === AFid));
     } else {
-      return of(new AccountFriend(0, '', '', '', new Bucket(0)));
+      return of(new AccountFriend(0, '', '', ''));
     }
   }
 
@@ -60,8 +70,11 @@ export class AccountFriendService {
    * @param newAccountFriend le nouveau friend à créer
    */
   public createAccountFriend(newAccountFriend: AccountFriend) {
-    this.httpClient.post<AccountFriend>('http://localhost:8080//aperofriends/createAccountFriend', newAccountFriend).subscribe(
-      createAccountFriend => {
+    this.httpClient.post<AccountFriend>('http://localhost:8080//aperofriends/createAccountFriend/'
+      + newAccountFriend.nameAccount + '/'
+      + newAccountFriend.addressAccount + '/'
+      + newAccountFriend.phoneAccount, null).subscribe(
+      newAccountFriend => {
         this.availableAccountFriends.push(newAccountFriend);
         this.availableAccountFriends$.next(this.availableAccountFriends);
       }
@@ -69,14 +82,24 @@ export class AccountFriendService {
   }
 
   /**
-   * Fonction de mise à jour d'un Friend
+   * Fonction de mise à jour
    * @param accountFriend
    */
   public updateAccountFriend(accountFriend: AccountFriend) {
-    this.httpClient.put<AccountFriend>('http://localhost:8080//aperofriends/updateAccountFriend', accountFriend).subscribe(
+    this.httpClient.put<AccountFriend>('http://localhost:8080//aperofriends/updateAccountFriend/', accountFriend).subscribe(
       updatedAccountFriend => {
         this.availableAccountFriends$.next(this.availableAccountFriends);
       }
+    );
+  }
+
+  /**
+   * Fonction de suppression
+   * @param idAF
+   */
+  public deleteAccountFriend(idAF: number) {
+    this.httpClient.delete('http://localhost:8080/aperofriends/deleteAccountFriend/' + idAF).subscribe(
+
     );
   }
 }

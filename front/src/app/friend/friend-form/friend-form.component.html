@@ -3,20 +3,21 @@
   <h4 class="h4 mb-2 font-weight-bold text-white text-center">Ajouter/Modifier un compte</h4>
   <form>
     <div class="form-group">
-      <label for="firstnameFriend">Nom :</label>
-      <input type="text" class="form-control-sm" id="firstnameFriend" placeholder="" [(ngModel)]="editedFriend.firstnameFriend" name="firstnameFriend" required>
+      <label for="firstnameFriend">Nom : </label>
+      <input type="text" class="form-control-sm" id="firstnameFriend" placeholder="" [(ngModel)]="editedFriend.firstnameFriend" name="firstnameFriend"
+      >
       <span>{{editedFriend.firstnameFriend}}</span>
     </div>
     <div class="form-group">
-      <label for="lastnameFriend">Prénom :</label>
+      <label for="lastnameFriend">Prénom : </label>
       <input type="text" class="form-control-sm" id="lastnameFriend" placeholder="" [(ngModel)]="editedFriend.lastnameFriend" name="lastnameFriend" required>
     </div>
     <div class="form-group">
-      <label for="mailFriend">Mail :</label>
+      <label for="mailFriend">Mail : </label>
       <input type="select" class="form-control-sm" id="mailFriend" placeholder="" [(ngModel)]="editedFriend.mailFriend" name="mailFriend" required>
     </div>
     <div class="form-group">
-      <label for="passFriend">Mot de Passe :</label>
+      <label for="passFriend">Mot de Passe : </label>
       <input type="select" class="form-control-sm" id="passFriend" placeholder="" [(ngModel)]="editedFriend.passFriend" name="passFriend" required>
     </div>
   </form>

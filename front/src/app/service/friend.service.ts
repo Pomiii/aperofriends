@@ -68,8 +68,12 @@ export class FriendService {
    * @param newFriend le nouveau friend à créer
    */
   public createFriend(newfriend: Friend) {
-    this.httpClient.post<Friend>('http://localhost:8080//aperofriends/createFriend/' + newfriend.firstnameFriend + '/'
-      + newfriend.lastnameFriend + '/' + newfriend.mailFriend + '/' + newfriend.passFriend, null).subscribe(newfriend => {
+    this.httpClient.post<Friend>('http://localhost:8080//aperofriends/createFriend/'
+      + newfriend.firstnameFriend + '/'
+      + newfriend.lastnameFriend + '/'
+      + newfriend.mailFriend + '/'
+      + newfriend.passFriend, null).subscribe(
+        newfriend => {
         console.log('newfriend ---', newfriend);
         this.availableFriends.push(newfriend);
         this.availableFriends$.next(this.availableFriends);
@@ -82,10 +86,19 @@ export class FriendService {
    * @param friend
    */
   public updateFriend(friend: Friend) {
-    this.httpClient.put<Friend>('http://localhost:8080//aperofriends/updateFriend', friend).subscribe(
+    this.httpClient.put<Friend>('http://localhost:8080//aperofriends/updateFriend/', friend).subscribe(
       updatedFriend => {
         this.availableFriends$.next(this.availableFriends);
       }
+    );
+  }
+
+  /**
+   * Fonction de suppression
+   * @param friend
+   */
+  public deleteFriend(idFriend: number) {
+    this.httpClient.delete<Friend>('http://localhost:8080/aperofriends/deleteFriend/' + idFriend).subscribe(
     );
   }
 

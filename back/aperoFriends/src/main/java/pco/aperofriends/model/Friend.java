@@ -2,6 +2,9 @@ package pco.aperofriends.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.util.List;
 
 
@@ -26,6 +29,10 @@ public class Friend implements Serializable {
 
 	private String passFriend;
 
+	//bi-directional many-to-one association to Bucket
+	@JsonBackReference
+	@OneToMany(mappedBy="friend")
+	private List<Bucket> buckets;
 	
 	//bi-directional many-to-many association to AccountFriend
 	@ManyToMany
@@ -100,6 +107,28 @@ public class Friend implements Serializable {
 
 	public void setAccountFriends(List<AccountFriend> accountFriends) {
 		this.accountFriends = accountFriends;
+	}
+	
+	public List<Bucket> getBuckets() {
+		return this.buckets;
+	}
+
+	public void setBuckets(List<Bucket> buckets) {
+		this.buckets = buckets;
+	}
+
+	public Bucket addBucket(Bucket bucket) {
+		getBuckets().add(bucket);
+		bucket.setFriend(this);
+
+		return bucket;
+	}
+
+	public Bucket removeBucket(Bucket bucket) {
+		getBuckets().remove(bucket);
+		bucket.setFriend(null);
+
+		return bucket;
 	}
 
 	public List<Role> getRoles() {

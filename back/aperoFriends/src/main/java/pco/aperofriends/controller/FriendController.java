@@ -85,11 +85,20 @@ public class FriendController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(updateFriend);
 	}
 
+	/**
+	 * 
+	 * @param idFriend
+	 * @return friend
+	 */
 	@DeleteMapping("/deleteFriend/{idFriend}")
-	// @PreAuthorize("hasRole('ADMIN') OR hasRole('GESTIONNAIRE')")
 	public ResponseEntity<?> deleteFriend(@PathVariable Integer idFriend) {
-		friendRepository.deleteById(idFriend);
-		return ResponseEntity.status(HttpStatus.OK).body(null);
+		try {
+			friendRepository.deleteById(idFriend);
+			return ResponseEntity.status(HttpStatus.OK)
+	                .body(null);
+		} catch (Exception e) {
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
 	}
 	
 }

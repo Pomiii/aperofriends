@@ -30,7 +30,7 @@ export class ItemComponent implements OnInit {
       (res) => {
         this.availableItems = res;
         if (res !== null) {
-          console.log('res ????' , res[2].typeItem);
+          console.log('res ????' , res[2].typeItem.nameTypeItem);
         }
       }
     );
@@ -40,5 +40,12 @@ export class ItemComponent implements OnInit {
     this.availableItems = this.itemService.availableItems;
 
     this.idItem = +this.route.snapshot.params.idItem;
+
+
   }
+
+  onAdd() {
+
+  }
+
 }

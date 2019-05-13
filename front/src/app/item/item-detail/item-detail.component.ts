@@ -11,14 +11,41 @@ import {BehaviorSubject} from 'rxjs';
 })
 export class ItemDetailComponent implements OnInit {
 
-  itemList: Item[];
+  availableItems: Item[] = [];
+  editedItem: Item;
+  itemList: BehaviorSubject<Item[]>;
 
   idItem: number;
 
-  constructor(private itemService: ItemService) { }
+  constructor(private itemService: ItemService,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.itemService.getAllItem().subscribe(items => this.itemList = items);
+    // Permet d'afficher la liste des Friends
+    this.itemService.publishItems();
+
+    this.itemService.itemListSubject.subscribe(
+      (res) => {
+        this.availableItems = res;
+        if (res !== null) {
+        }
+      }
+    );
+
+    this.itemList = this.itemService.availableItems$;
+
+    this.idItem = +this.route.snapshot.params.idItem;
+
+    this.itemService.findItem(this.idItem).subscribe(item => {this.editedItem = item; });
+
+  }
+
+  onDelete(idItem: number) {
+    console.log('availableFriends ???? ' + this.availableItems[0].idItem)
+    this.availableItems.splice(this.availableItems.findIndex((ItId) => ItId.idItem === idItem), 1);
+    this.itemService.deleteItem(idItem);
+    this.router.navigate(['/item-detail']);
   }
 
 }

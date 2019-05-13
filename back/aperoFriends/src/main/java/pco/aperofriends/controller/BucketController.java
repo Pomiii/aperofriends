@@ -43,7 +43,7 @@ public class BucketController {
 		bucketRepository.addItem(idBucket, idItem);
 	}
 	
-	@DeleteMapping("/deleteItemeBucket")
+	@DeleteMapping("/deleteItemBucket")
 	//@PreAuthorize("hasRole('USER')")
 	public void deleteItemeBucket(@RequestParam(name="idBucket") Integer idBucket, @RequestParam(name="idItem") Integer idItem){
 		bucketRepository.deleteItem(idBucket, idItem);

@@ -18,7 +18,12 @@ export class ItemFormComponent implements OnInit {
   editItem: boolean;
   availableItems: Item[] = [];
   editedItem: Item;
+
+  typeItemList: BehaviorSubject<TypeItem[]>;
+  availableTypeItems: TypeItem[] = [];
+
   id: number;
+  nameTypeItem: string;
 
   constructor(private itemService: ItemService,
               private typeItemService: TypeItemService,
@@ -40,6 +45,20 @@ export class ItemFormComponent implements OnInit {
     // Permet d'afficher la liste des TypeItems
     this.typeItemService.publishTypeItems();
 
+    this.typeItemService.typeItemListSubject.subscribe(
+      (res) => {
+        this.availableTypeItems = res;
+        if (res !== null) {
+          console.log('res ????' , res[2].nameTypeItem);
+        }
+      }
+    );
+
+    this.typeItemList = this.typeItemService.availableTypeItems$;
+
+    this.availableTypeItems = this.typeItemService.availableTypeItems;
+    console.log('Item Form availableTypeItems ' + this.availableTypeItems);
+
     if (!this.id) {
       this.editItem = true;
       this.editedItem = new Item(this.id, '', '', new TypeItem(0, ''), 0);
@@ -51,13 +70,16 @@ export class ItemFormComponent implements OnInit {
   }
 
   // Vérifie si on est en édition ou en création
-  onSave() {
+  onSave(){
     if (!this.id) {
       this.itemService.createItem(this.editedItem);
+      console.log('this.editedFriend ' , this.editedItem.nameItem);
+
     } else {
       this.itemService.updateItem(this.editedItem);
     }
-    this.router.navigate(['/item-detail']);
+    // Pour laisser le temps de charger les données
+    setTimeout(() => this.router.navigate(['/item-detail']), 300);
   }
 
 }

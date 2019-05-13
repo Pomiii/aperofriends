@@ -14,7 +14,7 @@ import pco.aperofriends.model.Bucket;
 @Repository
 public interface BucketRepository extends JpaRepository<Bucket, Integer>{
 	
-	@Query("SELECT b FROM Bucket b WHERE b.accountFriend LIKE ?1")	
+	@Query("SELECT b FROM Bucket b WHERE b.friend LIKE ?1")	
 	public List<Bucket> findByIdFriend(Integer idFriend);
 
 	@Transactional

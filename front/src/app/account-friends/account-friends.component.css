@@ -1,3 +1,7 @@
+.container-fluid {
+  vertical-align: middle;
+}
+
 .col-sm {
   padding-bottom: 1rem;
 }

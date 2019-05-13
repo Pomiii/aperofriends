@@ -18,17 +18,17 @@
         </thead>
 
         <tbody>
-        <tr *ngFor="let item of itemList">
+        <tr *ngFor="let item of availableItems">
           <td>{{ item.idItem }}</td>
           <td>{{ item.nameItem }}</td>
           <td><img src="{{ item.picItem }}" alt="{{ item.picItem }}"></td>
-          <td>{{ item.typeItem }}</td>
+          <td>{{ item.typeItem.nameTypeItem }}</td>
           <td>{{ item.priceItem }} €</td>
           <td>
-            <a routerLink="/item-form/{{item.idItem}}">Modifier</a>
+            <button type="submit" class="btn btn-primary" (click)="onSave()" >éditer</button>
           </td>
           <td>
-            <a routerLink="/item-form/{{item.idItem}}">Supprimer</a>
+            <button type="submit" class="btn btn-primary" (click)="onDelete(item.idItem)" >supprimer</button>
           </td>
         </tr>
         </tbody>

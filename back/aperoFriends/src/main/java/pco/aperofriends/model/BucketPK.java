@@ -13,18 +13,18 @@ public class BucketPK implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(insertable=false, updatable=false)
-	private int idAF;
+	private int idFriend;
 
 	@Column(insertable=false, updatable=false)
 	private int idItem;
 
 	public BucketPK() {
 	}
-	public int getIdAF() {
-		return this.idAF;
+	public int getIdFriend() {
+		return this.idFriend;
 	}
-	public void setIdAF(int idAF) {
-		this.idAF = idAF;
+	public void setIdFriend(int idFriend) {
+		this.idFriend = idFriend;
 	}
 	public int getIdItem() {
 		return this.idItem;
@@ -42,14 +42,14 @@ public class BucketPK implements Serializable {
 		}
 		BucketPK castOther = (BucketPK)other;
 		return 
-			(this.idAF == castOther.idAF)
+			(this.idFriend == castOther.idFriend)
 			&& (this.idItem == castOther.idItem);
 	}
 
 	public int hashCode() {
 		final int prime = 31;
 		int hash = 17;
-		hash = hash * prime + this.idAF;
+		hash = hash * prime + this.idFriend;
 		hash = hash * prime + this.idItem;
 		
 		return hash;
