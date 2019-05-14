@@ -5,10 +5,24 @@
       <label for="nameItem">Name Item : </label>
       <input type="text" class="form-control-sm" id="nameItem" [(ngModel)]="editedItem.nameItem" name="nameItem" required>
     </div>
+
+    <div *ngIf="currentFileUpload" class="progress">
+      <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+           aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:progress.percentage+'%'}">
+        {{progress.percentage}}%</div>
+    </div>
+
     <div class="form-group">
       <label for="picItem">Image Item : </label>
-      <input type="text" class="form-control-sm" id="picItem" [(ngModel)]="editedItem.picItem" name="picItem" required>
+      <input type="file" (change)="selectFile($event)">
+      <button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">Upload</button>
     </div>
+
+    <div class="form-group">
+      <label for="picItem">Image Item : </label>
+      <input type="file" class="form-control-sm" id="picItem" (change)="selectFile($event)" [(ngModel)]="editedItem.picItem" name="picItem" required>
+    </div>
+
     <div class="form-group">
       <label for="typeItem">Type Item : </label>
       <select class="form-control-sm" id="typeItem" [(ngModel)]="editedItem.typeItem.nameTypeItem" name="typeItem" required>

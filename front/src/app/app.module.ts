@@ -32,7 +32,8 @@ import { AccountFriendsComponent } from './account-friends/account-friends.compo
 import { NavComponent } from './nav/nav.component';
 import { ItemFormComponent } from './item/item-form/item-form.component';
 import { FriendFormComponent } from './friend/friend-form/friend-form.component';
-import {FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [

@@ -6,6 +6,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Friend} from '../../model/friend';
 import {TypeItem} from '../../model/typeItem';
 import {TypeItemService} from '../../service/typeItem.service';
+import {UploadFileService} from '../../service/uploadFileService';
+import {HttpEventType, HttpResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-item-form',
@@ -22,11 +24,16 @@ export class ItemFormComponent implements OnInit {
   typeItemList: BehaviorSubject<TypeItem[]>;
   availableTypeItems: TypeItem[] = [];
 
+  selectedFiles: FileList;
+  currentFileUpload: File;
+  progress: { percentage: number } = { percentage: 0 };
+
   id: number;
   nameTypeItem: string;
 
   constructor(private itemService: ItemService,
               private typeItemService: TypeItemService,
+              private uploadService: UploadFileService,
               private route: ActivatedRoute,
               private router: Router) { }
 
@@ -80,6 +87,26 @@ export class ItemFormComponent implements OnInit {
     }
     // Pour laisser le temps de charger les données
     setTimeout(() => this.router.navigate(['/item-detail']), 300);
+  }
+
+  // Partie UploadFile
+  selectFile(event) {
+    this.selectedFiles = event.target.files;
+  }
+
+  upload() {
+    this.progress.percentage = 0;
+
+    this.currentFileUpload = this.selectedFiles.item(0);
+    this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(event => {
+      if (event.type === HttpEventType.UploadProgress) {
+        this.progress.percentage = Math.round(100 * event.loaded / event.total);
+      } else if (event instanceof HttpResponse) {
+        console.log('File is completely uploaded!');
+      }
+    });
+
+    this.selectedFiles = undefined;
   }
 
 }

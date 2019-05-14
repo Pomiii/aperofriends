@@ -16,6 +16,8 @@ export class ItemComponent implements OnInit {
   editedItem = Item;
   itemList: BehaviorSubject<Item[]>;
 
+  itemToAdd = Item;
+
   idItem: number;
 
   constructor(private itemService: ItemService,
@@ -30,7 +32,6 @@ export class ItemComponent implements OnInit {
       (res) => {
         this.availableItems = res;
         if (res !== null) {
-          console.log('res ????' , res[2].typeItem.nameTypeItem);
         }
       }
     );
@@ -41,11 +42,14 @@ export class ItemComponent implements OnInit {
 
     this.idItem = +this.route.snapshot.params.idItem;
 
-
+    // Partie d'ajout d'item dans un bucket
+    // this.itemService.findItem(this.idItem).subscribe(item => {this.itemToAdd = item;});
   }
 
   onAdd() {
 
+
+    this.router.navigate(['/item']);
   }
 
 }
