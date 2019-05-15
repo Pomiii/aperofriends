@@ -49,11 +49,12 @@ public class Friend implements Serializable {
 	public Friend() {
 	}
 
-	public Friend(String firstnameFriend, String lastnameFriend, String mailFriend, String passFriend) {
+	public Friend(String firstnameFriend, String lastnameFriend, String mailFriend, String passFriend, List<Role> rolelist) {
 		this.firstnameFriend = firstnameFriend;
 		this.lastnameFriend = lastnameFriend;
 		this.mailFriend = mailFriend;
 		this.passFriend = passFriend;
+		this.roleList = rolelist;
 	}
 	
 	public Friend(@NotNull String mailFriend, @NotNull String passFriend) {

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import pco.aperofriends.exception.ExistingMailFriendException;
 import pco.aperofriends.exception.InvalidCredentialsException;
 import pco.aperofriends.model.Friend;
+import pco.aperofriends.model.Role;
 
 @Service
 public interface FriendService {
@@ -21,7 +22,8 @@ public interface FriendService {
 	Friend saveFriend(String firstnameFriend,
 					  String lastnameFriend,
 					  String mailFriend,
-					  String passFriend);
+					  String passFriend,
+					  List<Role> roleList);
 	/**
      * Method that signs a user in the application.
      * @param mailFriend the user mailFriend.

@@ -99,15 +99,10 @@ public class FriendController {
 	 */
 	@PostMapping("/createFriend/{firstnameFriend}/{lastnameFriend}/{mailFriend}/{passFriend}")
 	@PreAuthorize("hasRole('ADMIN') OR hasRole('GESTIONNAIRE')")
-	public ResponseEntity<?> createFriend(
-			@PathVariable String firstnameFriend,
-			@PathVariable String lastnameFriend,
-			@PathVariable String mailFriend,
-			@PathVariable String passFriend
-			) {
+	public ResponseEntity<?> createFriend(@RequestBody Friend friend) {
 		try {
 			return ResponseEntity.status(HttpStatus.OK)
-                .body(this.friendService.saveFriend(firstnameFriend, lastnameFriend, mailFriend, passFriend));
+                .body(this.friendService.saveFriend(null, null, null, null, null));
 		} catch (Exception e) {
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 	    }

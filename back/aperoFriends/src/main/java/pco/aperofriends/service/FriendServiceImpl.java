@@ -50,22 +50,27 @@ public class FriendServiceImpl implements FriendService {
 	@Override
 	public String signUp(Friend friend) throws ExistingMailFriendException {
 	    if (!friendRepository.existsByMailFriend(friend.getMailFriend())) {
-	        Friend friendToSave = new Friend(friend.getMailFriend(), passwordEncoder.encode(friend.getPassFriend()), friend.getRoleList());
+	        Friend friendToSave = new Friend(friend.getFirstnameFriend(),
+	        								 friend.getLastnameFriend(),
+	        								 friend.getMailFriend(), 
+	        								 passwordEncoder.encode(friend.getPassFriend()),
+	        								 friend.getRoleList());
 	        friendRepository.save(friendToSave);
 	        return jwtTokenProvider.createToken(friend.getMailFriend(), friend.getRoleList());
 	    } else {
 	        throw new ExistingMailFriendException();
 	    }
 	}
-	
-	@Override
+
+/*	@Override
     public Friend saveFriend(String firstnameFriend,
     						 String lastnameFriend,
     						 String mailFriend,
-    						 String passFriend) {
-		Friend friend = new Friend(firstnameFriend, lastnameFriend, mailFriend, passFriend);
+    						 String passFriend,
+    						 List<Role> roleList) {
+		Friend friend = new Friend(firstnameFriend, lastnameFriend, mailFriend, passFriend, roleList);
 		return this.friendRepository.save(friend);
-    }
+   }*/
 
 	@Override
 	public String signIn(String mailFriend, String passFriend) throws InvalidCredentialsException {
