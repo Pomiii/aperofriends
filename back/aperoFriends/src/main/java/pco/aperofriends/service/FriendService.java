@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import pco.aperofriends.exception.ExistingMailFriendException;
+import pco.aperofriends.exception.InvalidCredentialsException;
 import pco.aperofriends.model.Friend;
 
 @Service
@@ -20,4 +22,27 @@ public interface FriendService {
 					  String lastnameFriend,
 					  String mailFriend,
 					  String passFriend);
+	/**
+     * Method that signs a user in the application.
+     * @param mailFriend the user mailFriend.
+     * @param passFriend the user password.
+     * @return the JWT if credentials are valid, throws InvalidCredentialsException otherwise.
+     * @throws InvalidCredentialsException
+     */
+    String signIn(String mailFriend, String passFriend) throws InvalidCredentialsException;
+
+    /**
+     * Method that signs up a new user in the application.
+     * @param friend the new user to create.
+     * @return the JWT if user mailFriend is not already existing.
+     * @throws ExistingUsernameException
+     */
+    String signUp(Friend friend) throws ExistingMailFriendException;
+    
+    /**
+     * Method that finds a user based on its userName.
+     * @param mailFriend the userName to look for.
+     * @return an Optional object containing user if found, empty otherwise.
+     */
+    Optional<Friend> findFriendByMailFriend(String mailFriend);
 }

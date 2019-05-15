@@ -94,7 +94,7 @@ export class ItemFormComponent implements OnInit {
     this.selectedFiles = event.target.files;
   }
 
-  upload() {
+  /*upload() {
     this.progress.percentage = 0;
 
     this.currentFileUpload = this.selectedFiles.item(0);
@@ -107,6 +107,6 @@ export class ItemFormComponent implements OnInit {
     });
 
     this.selectedFiles = undefined;
-  }
+  }*/
 
 }

@@ -16,7 +16,13 @@ export class ItemComponent implements OnInit {
   editedItem = Item;
   itemList: BehaviorSubject<Item[]>;
 
-  itemToAdd = Item;
+  itemToAdd: Item;
+  itemBucket: Item[] = [];
+  bucket: Item[] = [];
+
+  /*cardToFind: Card;
+  cardToFindList: Card[] = [];
+  cardFoundList: Card[] = [];*/
 
   idItem: number;
 
@@ -43,12 +49,15 @@ export class ItemComponent implements OnInit {
     this.idItem = +this.route.snapshot.params.idItem;
 
     // Partie d'ajout d'item dans un bucket
-    // this.itemService.findItem(this.idItem).subscribe(item => {this.itemToAdd = item;});
+    this.itemService.findItem(this.idItem).subscribe(item => {
+      this.itemToAdd = this.itemBucket.pop();
+      console.log('init this.itemToAdd ' , this.itemToAdd);
+    });
   }
 
   onAdd() {
-
-
+    this.bucket.push(this.itemToAdd);
+    console.log('this.itemToAdd ', this.itemToAdd)
     this.router.navigate(['/item']);
   }
 

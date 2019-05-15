@@ -2,8 +2,7 @@ package pco.aperofriends.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import javax.validation.constraints.NotNull;
 
 import java.util.List;
 
@@ -29,10 +28,6 @@ public class Friend implements Serializable {
 
 	private String passFriend;
 
-	//bi-directional many-to-one association to Bucket
-	@JsonBackReference
-	@OneToMany(mappedBy="friend")
-	private List<Bucket> buckets;
 	
 	//bi-directional many-to-many association to AccountFriend
 	@ManyToMany
@@ -47,9 +42,9 @@ public class Friend implements Serializable {
 		)
 	private List<AccountFriend> accountFriends;
 
-	//bi-directional many-to-many association to Role
-	@ManyToMany(mappedBy="friends")
-	private List<Role> roles;
+	@ElementCollection(fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING)
+    private List<Role> roleList;
 
 	public Friend() {
 	}
@@ -60,6 +55,17 @@ public class Friend implements Serializable {
 		this.mailFriend = mailFriend;
 		this.passFriend = passFriend;
 	}
+	
+	public Friend(@NotNull String mailFriend, @NotNull String passFriend) {
+        this.mailFriend = mailFriend;
+        this.passFriend = passFriend;
+    }
+	
+	public Friend(@NotNull String mailFriend,  @NotNull String passFriend, List<Role> roleList) {
+        this.mailFriend = mailFriend;
+        this.passFriend = passFriend;
+        this.roleList = roleList;
+    }
 
 	public int getIdFriend() {
 		return this.idFriend;
@@ -108,35 +114,13 @@ public class Friend implements Serializable {
 	public void setAccountFriends(List<AccountFriend> accountFriends) {
 		this.accountFriends = accountFriends;
 	}
-	
-	public List<Bucket> getBuckets() {
-		return this.buckets;
+
+	public List<Role> getRoleList() {
+		return this.roleList;
 	}
 
-	public void setBuckets(List<Bucket> buckets) {
-		this.buckets = buckets;
-	}
-
-	public Bucket addBucket(Bucket bucket) {
-		getBuckets().add(bucket);
-		bucket.setFriend(this);
-
-		return bucket;
-	}
-
-	public Bucket removeBucket(Bucket bucket) {
-		getBuckets().remove(bucket);
-		bucket.setFriend(null);
-
-		return bucket;
-	}
-
-	public List<Role> getRoles() {
-		return this.roles;
-	}
-
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
+	public void setRoleList(List<Role> roleList) {
+		this.roleList = roleList;
 	}
 
 }

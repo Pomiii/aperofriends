@@ -9,7 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 /**
@@ -26,11 +29,16 @@ public class AccountFriend implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idAF;
 
-	private String nameAccount;
-	
 	private String addressAccount;
 
+	private String nameAccount;
+
 	private String phoneAccount;
+
+	//bi-directional many-to-one association to Bucket
+	@JsonBackReference
+	@OneToMany(mappedBy="accountFriend")
+	private List<Bucket> buckets;
 
 	//bi-directional many-to-many association to Friend
 	@ManyToMany(mappedBy="accountFriends")
@@ -39,7 +47,7 @@ public class AccountFriend implements Serializable {
 	public AccountFriend() {
 	}
 
-	public AccountFriend(String nameAccount, String addressAccount, String phoneAccount) {
+	public AccountFriend(String addressAccount, String nameAccount, String phoneAccount) {
 		this.addressAccount = addressAccount;
 		this.nameAccount = nameAccount;
 		this.phoneAccount = phoneAccount;
@@ -75,6 +83,28 @@ public class AccountFriend implements Serializable {
 
 	public void setPhoneAccount(String phoneAccount) {
 		this.phoneAccount = phoneAccount;
+	}
+
+	public List<Bucket> getBuckets() {
+		return this.buckets;
+	}
+
+	public void setBuckets(List<Bucket> buckets) {
+		this.buckets = buckets;
+	}
+
+	public Bucket addBucket(Bucket bucket) {
+		getBuckets().add(bucket);
+		bucket.setAccountFriend(this);
+
+		return bucket;
+	}
+
+	public Bucket removeBucket(Bucket bucket) {
+		getBuckets().remove(bucket);
+		bucket.setAccountFriend(null);
+
+		return bucket;
 	}
 
 	public List<Friend> getFriends() {

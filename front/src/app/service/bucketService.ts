@@ -9,22 +9,29 @@ import {Bucket} from '../model/bucket';
 })
 
 export class BucketService {
-
   // la liste des buckets
   availableBuckets: Bucket[];
 
   // la liste observable que l'on rend visible partout dans l'appli
-  availableBuckets$: BehaviorSubject<Bucket[]>= new BehaviorSubject(this.availableBuckets);
+  availableBuckets$: BehaviorSubject<Bucket[]> = new BehaviorSubject(this.availableBuckets);
 
   constructor(private httpClient: HttpClient) {
 
   }
+  public bucketListSubject: BehaviorSubject<Bucket[]> = new BehaviorSubject(null);
 
+  public setBucketListSubject(value: Bucket[]) {
+    if (value) {
+      this.bucketListSubject.next(value);
+    } else {
+      this.bucketListSubject.next(null);
+    }
+  }
   /**
    * La fonction getAllBucket() est privée car elle n'a besoin d'être appellée que dans le service.
    */
   public getAllBucket(): Observable<Bucket[]> {
-    console.log('getAllBuckets' + this.availableBuckets)
+    console.log('getAllBuckets' + this.availableBuckets);
     return this.httpClient.get<Bucket[]>('http://localhost:8080/aperofriends/Buckets');
   }
 
@@ -34,9 +41,10 @@ export class BucketService {
    */
   public publishBuckets() {
     this.getAllBucket().subscribe(
-      BucketList => {
-        this.availableBuckets = BucketList;
+      bucketList => {
+        this.availableBuckets = bucketList;
         this.availableBuckets$.next(this.availableBuckets);
+        this.setBucketListSubject(this.availableBuckets);
       });
   }
 
@@ -50,7 +58,7 @@ export class BucketService {
       }
       return of(this.availableBuckets.find(bucket => bucket.idBucket === bucketId));
     } else {
-      return of(new Bucket(0))
+      return of(new Bucket(0, '', 0));
     }
   }
 
