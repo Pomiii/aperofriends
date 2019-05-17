@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import pco.aperofriends.model.Item;
+import pco.aperofriends.model.TypeItem;
 import pco.aperofriends.repository.ItemRepository;
 import pco.aperofriends.repository.TypeItemRepository;
 
@@ -34,19 +35,17 @@ public class ItemServiceImpl implements ItemService {
 	
 	@Override
     public Item createItem(Item newItem) {
-        return itemRepository.save(newItem);
+        return itemRepository.save(new Item("Pom",
+        									"Pom",
+        									this.typeItemRepository.findByType("alccol"),
+        									1));
+    
     }
 	
 	@Override
-    public Item saveItem(String nameItem,
-						 int priceItem,
-						 String picItem,
-						 String typeItem) {
-		String itemType = this.typeItemRepository.findByType(typeItem).getNameTypeItem();
-		if (itemType != null) {
-		Item item = new Item(nameItem, priceItem, picItem, this.typeItemRepository.findByType(typeItem));
-		return this.itemRepository.save(item);
-		} else return null;
-		
-    }
+	public Item saveItem(Item item, TypeItem typeItem) {		
+		Item newItem = this.itemRepository.save(new Item(item.getNameItem(), item.getPicItem(), item.getPriceItem()));
+		newItem.setTypeItem(typeItem);
+		return this.itemRepository.save(newItem);
+	}
 }

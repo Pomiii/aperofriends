@@ -21,12 +21,12 @@
         <div class="tab-pane fade show active" id="list-all" role="tabpanel" aria-labelledby="list-all-list">
           <div class="row">
             <div class="col-sm" *ngFor="let item of availableItems" >
-              <div class="card" style="width: 12rem;">
+              <div class="card " style="width: 12rem;">
                 <h5 class="card-title font-weight-bold">{{ item.nameItem }}</h5>
-                <img class="card-img-top" src="{{ item.picItem }}" alt="Card image cap">
+                <img class="card-img-top" src="{{ julo1(item.picItem) }}" alt="Card image cap">
                 <div class="card-body">
                   <h5 class="card-text">{{ item.typeItem.nameTypeItem }}</h5>
-                  <h5 class="card-text">Prix : {{ item.priceItem }} €</h5>
+                  <h5 class="card-text mb-3">Prix : {{ item.priceItem }} €</h5>
                   <button class="btn btn-primary" (click)="onAdd()">Ajouter Article</button>
                 </div>
               </div>

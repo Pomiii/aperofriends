@@ -48,8 +48,8 @@ public class Friend implements Serializable {
 	private List<AccountFriend> accountFriends;
 
 	//bi-directional many-to-many association to Role
-	@ManyToMany(mappedBy="friends")
-	private List<Role> roles;
+	//@ManyToMany(mappedBy="friends")
+	//private List<Role> roles;
 
 	public Friend() {
 	}
@@ -131,12 +131,12 @@ public class Friend implements Serializable {
 		return bucket;
 	}
 
-	public List<Role> getRoles() {
+/*	public List<Role> getRoles() {
 		return this.roles;
 	}
 
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
-
+*/
 }

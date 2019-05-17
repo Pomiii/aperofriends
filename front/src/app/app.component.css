@@ -1,1 +1,7 @@
+app-footer{
 
+}
+
+router-outlet {
+  padding-bottom: 5em;
+}

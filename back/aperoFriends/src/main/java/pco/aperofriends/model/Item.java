@@ -1,7 +1,6 @@
 package pco.aperofriends.model;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,10 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /**
@@ -36,12 +33,12 @@ public class Item implements Serializable {
 	private int priceItem;
 
 	//bi-directional many-to-one association to Bucket
-	@JsonBackReference
-	@OneToMany(mappedBy="item")
-	private List<Bucket> buckets;
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="Bucket", insertable=false, updatable=false)
+	private Bucket bucket;
 
 	//bi-directional many-to-one association to TypeItem
-	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name="idTypeItem")
 	private TypeItem typeItem;
@@ -49,11 +46,17 @@ public class Item implements Serializable {
 	public Item() {
 	}
 
-	public Item(String nameItem, int priceItem, String picItem, TypeItem typeItem) {
+	public Item(String nameItem, String picItem, TypeItem typeItem, int priceItem) {
 		this.nameItem = nameItem;
 		this.priceItem = priceItem;
 		this.picItem = picItem;
 		this.typeItem = typeItem;
+	}
+	
+	public Item(String nameItem, String picItem, int priceItem) {
+		this.nameItem = nameItem;
+		this.priceItem = priceItem;
+		this.picItem = picItem;
 	}
 
 	public int getIdItem() {
@@ -80,26 +83,12 @@ public class Item implements Serializable {
 		this.priceItem = priceItem;
 	}
 
-	public List<Bucket> getBuckets() {
-		return this.buckets;
+	public Bucket getBucket() {
+		return this.bucket;
 	}
 
-	public void setBuckets(List<Bucket> buckets) {
-		this.buckets = buckets;
-	}
-
-	public Bucket addBucket(Bucket bucket) {
-		getBuckets().add(bucket);
-		bucket.setItem(this);
-
-		return bucket;
-	}
-
-	public Bucket removeBucket(Bucket bucket) {
-		getBuckets().remove(bucket);
-		bucket.setItem(null);
-
-		return bucket;
+	public void setBucket(Bucket bucket) {
+		this.bucket = bucket;
 	}
 
 	public TypeItem getTypeItem() {

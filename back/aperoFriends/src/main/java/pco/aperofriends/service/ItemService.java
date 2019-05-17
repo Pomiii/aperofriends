@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import pco.aperofriends.model.Item;
+import pco.aperofriends.model.TypeItem;
 
 @Service
 public interface ItemService {
@@ -15,9 +16,6 @@ public interface ItemService {
 	Optional<Item> findFriendByIdItem(Integer idItem);
 	
 	Item createItem(Item newItem);
-	
-	Item saveItem(String nameItem,
-				  int priceItem,
-				  String picItem,
-				  String typeItem);
+		
+	Item saveItem(Item item, TypeItem typeItem);
 }

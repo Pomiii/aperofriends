@@ -56,7 +56,6 @@ export class ItemFormComponent implements OnInit {
       (res) => {
         this.availableTypeItems = res;
         if (res !== null) {
-          console.log('res ????' , res[2].nameTypeItem);
         }
       }
     );
@@ -68,33 +67,22 @@ export class ItemFormComponent implements OnInit {
 
     if (!this.id) {
       this.editItem = true;
-      this.editedItem = new Item(this.id, '', '', new TypeItem(0, ''), 0);
+      this.editedItem = new Item('', '', new TypeItem(0, ''), 0);
     } else {
       this.editedItem = this.itemService.availableItems.find((it => it.idItem === this.id));
       this.editItem = false;
-      this.itemList = this.editedItem.itemTab;
     }
+
+    this.editedItem.typeItem.nameTypeItem = 'alcool';
   }
 
   // Vérifie si on est en édition ou en création
-  onSave(){
-    if (!this.id) {
-      this.itemService.createItem(this.editedItem);
-      console.log('this.editedFriend ' , this.editedItem.nameItem);
+  onSave() {
+    const newItem = new Item(this.editedItem.nameItem, this.editedItem.picItem, this.editedItem.typeItem, this.editedItem.priceItem)
+    this.itemService.createItem(newItem, this.editedItem.typeItem.nameTypeItem);
+    return;
 
-    } else {
-      this.itemService.updateItem(this.editedItem);
-    }
-    // Pour laisser le temps de charger les données
-    setTimeout(() => this.router.navigate(['/item-detail']), 300);
-  }
-
-  // Partie UploadFile
-  selectFile(event) {
-    this.selectedFiles = event.target.files;
-  }
-
-  upload() {
+    // charge le fichier
     this.progress.percentage = 0;
 
     this.currentFileUpload = this.selectedFiles.item(0);
@@ -107,6 +95,15 @@ export class ItemFormComponent implements OnInit {
     });
 
     this.selectedFiles = undefined;
+
+    // Pour laisser le temps de charger les données
+    setTimeout(() => this.router.navigate(['/item-detail']), 300);
+
+  }
+
+  // Partie UploadFile
+  selectFile(event) {
+    this.selectedFiles = event.target.files;
   }
 
 }

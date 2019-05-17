@@ -37,15 +37,29 @@ export class ItemDetailComponent implements OnInit {
 
     this.idItem = +this.route.snapshot.params.idItem;
 
-    this.itemService.findItem(this.idItem).subscribe(item => {this.editedItem = item; });
+    //this.itemService.findItem(this.idItem).subscribe(item => {this.editedItem = item; });
 
   }
 
   onDelete(idItem: number) {
     console.log('availableFriends ???? ' + this.availableItems[0].idItem)
-    this.availableItems.splice(this.availableItems.findIndex((ItId) => ItId.idItem === idItem), 1);
+    this.availableItems.splice(this.availableItems.findIndex((itId) => itId.idItem === idItem), 1);
     this.itemService.deleteItem(idItem);
     this.router.navigate(['/item-detail']);
+  }
+
+  julo(pathImage: string) {
+    let bananaSplit;
+    if (pathImage.indexOf('/') > -1) {
+      bananaSplit = pathImage.split('/');
+    } else {
+      bananaSplit = pathImage.split('\\');
+    }
+    return bananaSplit[bananaSplit.length - 1];
+  }
+
+  julo1(pathImage: string) {
+    return 'assets/images/' + this.julo(pathImage);
   }
 
 }

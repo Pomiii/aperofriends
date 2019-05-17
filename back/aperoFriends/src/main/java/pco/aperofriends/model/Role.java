@@ -2,7 +2,6 @@ package pco.aperofriends.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
 
 /**
@@ -21,7 +20,7 @@ public class Role implements Serializable {
 	private String nomRole;
 
 	//bi-directional many-to-many association to Friend
-	@ManyToMany
+/*	@ManyToMany
 	@JoinTable(
 		name="roleFriend"
 		, joinColumns={
@@ -30,9 +29,9 @@ public class Role implements Serializable {
 		, inverseJoinColumns={
 			@JoinColumn(name="idFriend")
 			}
-		)
+		}
 	private List<Friend> friends;
-
+*/	
 	public Role() {
 	}
 
@@ -52,12 +51,12 @@ public class Role implements Serializable {
 		this.nomRole = nomRole;
 	}
 
-	public List<Friend> getFriends() {
+/*	public List<Friend> getFriends() {
 		return this.friends;
 	}
 
 	public void setFriends(List<Friend> friends) {
 		this.friends = friends;
 	}
-
+*/
 }

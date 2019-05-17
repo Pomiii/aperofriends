@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /**
@@ -29,7 +29,7 @@ public class TypeItem implements Serializable {
 	private String nameTypeItem;
 
 	//bi-directional many-to-one association to Item
-	@JsonBackReference
+	@JsonIgnore
 	@OneToMany(mappedBy="typeItem")
 	private List<Item> items;
 

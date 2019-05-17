@@ -34,7 +34,6 @@ import { ItemFormComponent } from './item/item-form/item-form.component';
 import { FriendFormComponent } from './friend/friend-form/friend-form.component';
 import { FormsModule } from '@angular/forms';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +48,7 @@ import { FormsModule } from '@angular/forms';
     AccountFriendsComponent,
     NavComponent,
     ItemFormComponent,
-    FriendFormComponent
+    FriendFormComponent,
   ],
   imports: [
     HttpClientModule,

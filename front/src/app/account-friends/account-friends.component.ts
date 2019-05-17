@@ -33,7 +33,6 @@ export class AccountFriendsComponent implements OnInit {
       (res) => {
         this.availableAccountFriends = res;
         if (res !== null) {
-          console.log('AF ????? ' + res[0].addressAccount );
         }
       }
     );

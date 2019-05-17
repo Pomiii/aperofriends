@@ -16,7 +16,7 @@ const routes: Routes = [
   {path: 'friend', component: FriendComponent},
   {path: 'bucket', component: BucketComponent},
   {path: 'accountFriend', component: AccountFriendsComponent},
-  {path: 'login', component: LoginComponent}
+  {path: 'login', component: LoginComponent},
 ];
 
 @NgModule({

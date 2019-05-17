@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import pco.aperofriends.model.Item;
+import pco.aperofriends.model.TypeItem;
 import pco.aperofriends.repository.BucketRepository;
 import pco.aperofriends.repository.ItemRepository;
 import pco.aperofriends.repository.TypeItemRepository;
@@ -25,7 +26,6 @@ import pco.aperofriends.service.ItemService;
 @CrossOrigin("http://localhost:4200")
 public class ItemController {
 	
-		
 	@Autowired
 	ItemRepository itemRepository;
 	
@@ -64,19 +64,16 @@ public class ItemController {
 	 * @param request
 	 * @return createItem
 	 */
-	@PostMapping("/createItem")
+	@PostMapping("/createItem/{typeItemString}")
 	// @PreAuthorize("hasRole('ADMIN') OR hasRole('GESTIONNAIRE')")
-	public ResponseEntity<?> createItem(@PathVariable String nameItem,
-			@PathVariable int priceItem,
-			@PathVariable String picItem,
-			@PathVariable String typeItem
-			) {
+	public ResponseEntity<?> createItem(@RequestBody Item item, @PathVariable String typeItemString) {
 		try {
+			TypeItem typeItem = this.typeItemRepository.findByType(typeItemString);
 			return ResponseEntity.status(HttpStatus.OK)
-                .body(this.itemService.saveItem(nameItem, priceItem, picItem, typeItem));
+               .body(this.itemService.saveItem(item, typeItem));
 		} catch (Exception e) {
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-	    }
+	    }	
 	}
 	
 	/**

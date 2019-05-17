@@ -62,21 +62,19 @@ export class ItemService {
       }
       return of(this.availableItems.find(item => item.idItem === itemId));
     } else {
-      return of(new Item(0, '', '', new TypeItem(0, '' ) , 0));
+      return of(new Item('', '', new TypeItem(0, '' ) , 0));
     }
   }
 
   /**
    * @param newItem
    */
-  public createItem(newItem: Item) {
-    this.httpClient.post<Item>('http://localhost:8080//aperofriends/createItem/'
-      + newItem.nameItem + '/'
-      + newItem.picItem + '/'
-      + newItem.typeItem + '/'
-      + newItem.priceItem, null).subscribe(newItem => {
-        console.log('newItem ---', newItem);
-        this.availableItems.push(newItem);
+  public createItem(newItem: Item, typeItemString: string) {
+    console.log('newItem ++++++ ' + newItem);
+    this.httpClient.post<Item>('http://localhost:8080//aperofriends/createItem/' + typeItemString, newItem).subscribe(
+      bite => {
+        console.log('newItem ---', bite);
+        this.availableItems.push(bite);
         this.availableItems$.next(this.availableItems);
       }
     );
