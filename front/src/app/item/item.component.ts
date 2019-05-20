@@ -13,9 +13,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class ItemComponent implements OnInit {
 
   availableItems: Item[] = [];
-  editedItem = Item;
   itemList: BehaviorSubject<Item[]>;
 
+  //bucketItem = Item[this.itemToAdd] = [];
   itemToAdd = Item;
 
   idItem: number;
@@ -43,12 +43,12 @@ export class ItemComponent implements OnInit {
     this.idItem = +this.route.snapshot.params.idItem;
 
     // Partie d'ajout d'item dans un bucket
-    // this.itemService.findItem(this.idItem).subscribe(item => {this.itemToAdd = item;});
+    this.itemService.findItem(+this.route.snapshot.params.idItem).subscribe(itemList => {
+      console.log('Init ajout panier ', this.itemList);
+    });
   }
 
-  onAdd() {
-
-
+  onAdd(id: number) {
     this.router.navigate(['/item']);
   }
 

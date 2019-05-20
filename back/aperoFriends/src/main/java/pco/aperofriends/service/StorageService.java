@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class StorageService {
 	
-	private final Path rootLocation = Paths.get("/Users/macpomiii/Documents/Eclipse/AperoFriends/aperofriends/front/src/assets/images");
+	private final Path rootLocation = Paths.get("/Users/macpomiii/Documents/Eclipse/AperoFriends/aperofriends/front/src/assets/images/");
 
     public void store(MultipartFile file) {
         try {

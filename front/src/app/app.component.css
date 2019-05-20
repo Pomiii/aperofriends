@@ -1,7 +1,11 @@
-app-footer{
-
+.foot{
+  position: absolute;
+  bottom: 0;
+  left:0;
+  right: 0;
 }
 
-router-outlet {
-  padding-bottom: 5em;
+.body {
+  height: 750px;
+  overflow: auto;
 }
