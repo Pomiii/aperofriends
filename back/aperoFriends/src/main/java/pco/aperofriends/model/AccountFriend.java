@@ -4,15 +4,22 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+<<<<<<< HEAD
 import com.fasterxml.jackson.annotation.JsonBackReference;
+=======
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+>>>>>>> origin
 
 
 /**
@@ -41,9 +48,19 @@ public class AccountFriend implements Serializable {
 	private List<Bucket> buckets;
 
 	//bi-directional many-to-many association to Friend
-	@ManyToMany(mappedBy="accountFriends")
+	@JsonManagedReference
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name="friend_has_account_friend"
+        , joinColumns={
+            @JoinColumn(name="friend_id_friend")
+            }
+        , inverseJoinColumns={
+            @JoinColumn(name="account_friend_idaf")
+            }
+        )
 	private List<Friend> friends;
-
+	
 	public AccountFriend() {
 	}
 
@@ -85,6 +102,7 @@ public class AccountFriend implements Serializable {
 		this.phoneAccount = phoneAccount;
 	}
 
+<<<<<<< HEAD
 	public List<Bucket> getBuckets() {
 		return this.buckets;
 	}
@@ -108,11 +126,22 @@ public class AccountFriend implements Serializable {
 	}
 
 	public List<Friend> getFriends() {
+=======
+	public List<Friend> getFriend() {
+>>>>>>> origin
 		return this.friends;
 	}
 
-	public void setFriends(List<Friend> friends) {
-		this.friends = friends;
+	public void setFriend(List<Friend> friend) {
+		this.friends = friend;
 	}
+	
+	public List<Friend> getFriends() {
+        return this.friends;
+    }
 
+    public void setFriends(List<Friend> friends) {
+        this.friends = friends;
+    }
+	
 }

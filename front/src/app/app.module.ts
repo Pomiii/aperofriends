@@ -39,7 +39,6 @@ import {AdminGuard} from './guards/admin.guard';
 import {JwtInterceptor} from './http-interceptor/jwt.interceptor';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +53,7 @@ import {JwtInterceptor} from './http-interceptor/jwt.interceptor';
     AccountFriendsComponent,
     NavComponent,
     ItemFormComponent,
-    FriendFormComponent
+    FriendFormComponent,
   ],
   imports: [
     HttpClientModule,

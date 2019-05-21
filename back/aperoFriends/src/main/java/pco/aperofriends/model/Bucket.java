@@ -2,15 +2,20 @@ package pco.aperofriends.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
@@ -23,8 +28,9 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Bucket implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private BucketPK id;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idBucket;
 
 	@Temporal(TemporalType.DATE)
 	private Date date;
@@ -37,21 +43,20 @@ public class Bucket implements Serializable {
 	@JoinColumn(name="idAF", insertable=false, updatable=false)
 	private AccountFriend accountFriend;
 
-	//bi-directional many-to-one association to Item
-	@JsonManagedReference
-	@ManyToOne
-	@JoinColumn(name="idItem", insertable=false, updatable=false)
-	private Item item;
+	//bi-directional many-to-one association to Item	
+	@JsonIgnore
+	@OneToMany(mappedBy="bucket")
+	private List<Item> items;
 
 	public Bucket() {
 	}
 
-	public BucketPK getId() {
-		return this.id;
+	public int getIdBucket() {
+		return idBucket;
 	}
 
-	public void setId(BucketPK id) {
-		this.id = id;
+	public void setIdBucket(int idBucket) {
+		this.idBucket = idBucket;
 	}
 
 	public Date getDate() {
@@ -78,12 +83,26 @@ public class Bucket implements Serializable {
 		this.accountFriend = accountFriend;
 	}
 
-	public Item getItem() {
-		return this.item;
-	}
+	public List<Item> getItems() {
+        return this.items;
+    }
 
-	public void setItem(Item item) {
-		this.item = item;
-	}
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+
+    public Item addItem(Item item) {
+        getItems().add(item);
+        item.setBucket(this);
+
+        return item;
+    }
+
+    public Item removeItem(Item item) {
+        getItems().remove(item);
+        item.setBucket(null);
+
+        return item;
+    }
 
 }

@@ -16,8 +16,14 @@ const routes: Routes = [
   {path: 'friend-form', component: FriendFormComponent},
   {path: 'friend', component: FriendComponent},
   {path: 'bucket', component: BucketComponent},
+<<<<<<< HEAD
   {path: 'accountFriend', component: AccountFriendsComponent}
   ];
+=======
+  {path: 'accountFriend', component: AccountFriendsComponent},
+  {path: 'login', component: LoginComponent},
+];
+>>>>>>> origin
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

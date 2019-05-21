@@ -13,9 +13,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class ItemComponent implements OnInit {
 
   availableItems: Item[] = [];
-  editedItem = Item;
   itemList: BehaviorSubject<Item[]>;
 
+<<<<<<< HEAD
   itemToAdd: Item;
   itemBucket: Item[] = [];
   bucket: Item[] = [];
@@ -23,6 +23,10 @@ export class ItemComponent implements OnInit {
   /*cardToFind: Card;
   cardToFindList: Card[] = [];
   cardFoundList: Card[] = [];*/
+=======
+  bucketItem: Item[] = [];
+  itemToAdd: Item;
+>>>>>>> origin
 
   idItem: number;
 
@@ -49,6 +53,7 @@ export class ItemComponent implements OnInit {
     this.idItem = +this.route.snapshot.params.idItem;
 
     // Partie d'ajout d'item dans un bucket
+<<<<<<< HEAD
     this.itemService.findItem(this.idItem).subscribe(item => {
       this.itemToAdd = this.itemBucket.pop();
       console.log('init this.itemToAdd ' , this.itemToAdd);
@@ -59,6 +64,29 @@ export class ItemComponent implements OnInit {
     this.bucket.push(this.itemToAdd);
     console.log('this.itemToAdd ', this.itemToAdd)
     this.router.navigate(['/item']);
+=======
+    this.itemService.findItem(+this.route.snapshot.params.idItem).subscribe(itemList => {
+      console.log('Init ajout panier ', this.itemList);
+    });
+  }
+
+  onAdd(id: number) {
+    this.router.navigate(['/item']);
+  }
+
+  julo(pathImage: string) {
+    let bananaSplit;
+    if (pathImage.indexOf('/') > -1) {
+      bananaSplit = pathImage.split('/');
+    } else {
+      bananaSplit = pathImage.split('\\');
+    }
+    return bananaSplit[bananaSplit.length - 1];
+  }
+
+  julo1(pathImage: string) {
+    return 'assets/images/' + this.julo(pathImage);
+>>>>>>> origin
   }
 
 }

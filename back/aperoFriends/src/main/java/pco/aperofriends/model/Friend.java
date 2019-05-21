@@ -42,9 +42,15 @@ public class Friend implements Serializable {
 		)
 	private List<AccountFriend> accountFriends;
 
+<<<<<<< HEAD
 	@ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     private List<Role> roleList;
+=======
+	//bi-directional many-to-many association to Role
+	//@ManyToMany(mappedBy="friends")
+	//private List<Role> roles;
+>>>>>>> origin
 
 	public Friend() {
 	}
@@ -116,12 +122,17 @@ public class Friend implements Serializable {
 		this.accountFriends = accountFriends;
 	}
 
+<<<<<<< HEAD
 	public List<Role> getRoleList() {
 		return this.roleList;
+=======
+/*	public List<Role> getRoles() {
+		return this.roles;
+>>>>>>> origin
 	}
 
 	public void setRoleList(List<Role> roleList) {
 		this.roleList = roleList;
 	}
-
+*/
 }

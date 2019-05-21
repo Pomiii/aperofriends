@@ -1,1 +1,16 @@
+.container-fluid {
+  height: 75rem;
+}
 
+.head {
+  height: 25%;
+}
+
+.body {
+  height: 65%;
+  overflow: auto;
+}
+
+.foot{
+  height: 10%;
+}

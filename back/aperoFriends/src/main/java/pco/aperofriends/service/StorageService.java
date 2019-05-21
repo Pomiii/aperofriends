@@ -1,24 +1,46 @@
 package pco.aperofriends.service;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
- 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
+
 import org.springframework.stereotype.Service;
-import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
  
 @Service
 public class StorageService {
- 
+	
+	private final Path rootLocation = Paths.get("/Users/macpomiii/Documents/Eclipse/AperoFriends/aperofriends/front/src/assets/images");
+
+    public void store(MultipartFile file) {
+        try {
+            System.out.println(file.getOriginalFilename());
+            System.out.println(rootLocation.toUri());
+
+            String image = rootLocation.toUri() +file.getOriginalFilename();
+            System.out.println(image);
+            Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
+        } catch (Exception e) {
+            throw new RuntimeException("FAIL!");
+        }
+    }
+    public String photoString(MultipartFile file) {
+        try {
+            System.out.println(file.getOriginalFilename());
+            System.out.println(rootLocation.toUri());
+
+            String image = rootLocation.toUri() +file.getOriginalFilename();
+            System.out.println(image);
+            return image;
+
+        } catch (Exception e) {
+            throw new RuntimeException("FAIL!");
+        }
+
+    }
+/* 
   Logger log = LoggerFactory.getLogger(this.getClass().getName());
-  private final Path rootLocation = Paths.get("upload-dir");
+  private final Path rootLocation = Paths.get("/Users/macpomiii/Documents/Eclipse/AperoFriends/aperofriends/front/src/assets/images");
  
   public void store(MultipartFile file) {
     try {
@@ -41,16 +63,11 @@ public class StorageService {
       throw new RuntimeException("FAIL!");
     }
   }
- 
-  public void deleteAll() {
+  
+   public void deleteAll() {
     FileSystemUtils.deleteRecursively(rootLocation.toFile());
   }
+*/ 
  
-  public void init() {
-    try {
-      Files.createDirectory(rootLocation);
-    } catch (IOException e) {
-      throw new RuntimeException("Could not initialize storage!");
-    }
-  }
+
 }

@@ -6,35 +6,32 @@
       <input type="text" class="form-control-sm" id="nameItem" [(ngModel)]="editedItem.nameItem" name="nameItem" required>
     </div>
 
-    <div *ngIf="currentFileUpload" class="progress">
-      <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
-           aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:progress.percentage+'%'}">
-        {{progress.percentage}}%</div>
-    </div>
-
-    <div class="form-group">
-      <label for="picItem">Image Item : </label>
-      <input type="file" (change)="selectFile($event)">
-      <button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">Upload</button>
-    </div>
-
     <div class="form-group">
       <label for="picItem">Image Item : </label>
       <input type="file" class="form-control-sm" id="picItem" (change)="selectFile($event)" [(ngModel)]="editedItem.picItem" name="picItem" required>
+      <small id="fileHelp" class="form-text text-muted"> 500 ko max</small>
     </div>
 
     <div class="form-group">
       <label for="typeItem">Type Item : </label>
       <select class="form-control-sm" id="typeItem" [(ngModel)]="editedItem.typeItem.nameTypeItem" name="typeItem" required>
-        <option *ngFor="let typeItem of availableTypeItems">{{typeItem.nameTypeItem}}</option>
+        <option *ngFor="let typeItem of availableTypeItems ">{{typeItem.nameTypeItem}}</option>
       </select>
     </div>
+
     <div class="form-group">
       <label for="priceItem">Price Item : </label>
       <input type="number" class="form-control-sm" id="priceItem" [(ngModel)]="editedItem.priceItem" name="priceItem" required>
     </div>
   </form>
-  <button type="submit" class="btn btn-primary" (click)="onSave()" >Sauver</button>
+
+  <div *ngIf="currentFileUpload" class="progress">
+    <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+         aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:progress.percentage+'%'}">
+      {{progress.percentage}}%</div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="!selectedFiles" (click)="onSave()" >Sauver</button>
 </div>
 
 

@@ -58,7 +58,11 @@ export class BucketService {
       }
       return of(this.availableBuckets.find(bucket => bucket.idBucket === bucketId));
     } else {
+<<<<<<< HEAD
       return of(new Bucket(0, '', 0));
+=======
+      return of(new Bucket(0,  new Date(), 0));
+>>>>>>> origin
     }
   }
 
