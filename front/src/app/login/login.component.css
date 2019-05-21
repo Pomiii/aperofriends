@@ -1,7 +1,6 @@
 .container {
   font-size: 0.8rem;
   width: 14rem;
-  height: auto;
   overflow: auto;
   border: 2px solid;
   border-radius: 10px;
@@ -9,6 +8,8 @@
   padding-left: 0rem;
   padding-right: 0rem;
   box-shadow: -5px 5px 5px #333;
+  margin-bottom: 350px;
+  margin-top: 200px;
 }
 
 .form-control-sm {

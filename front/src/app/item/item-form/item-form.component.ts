@@ -80,7 +80,6 @@ export class ItemFormComponent implements OnInit {
   onSave() {
     const newItem = new Item(this.editedItem.nameItem, this.editedItem.picItem, this.editedItem.typeItem, this.editedItem.priceItem)
     this.itemService.createItem(newItem, this.editedItem.typeItem.nameTypeItem);
-    return;
 
     // charge le fichier
     this.progress.percentage = 0;

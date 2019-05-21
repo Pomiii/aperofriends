@@ -12,9 +12,9 @@ public interface BucketService {
 	
 	List<Bucket> findAllBuckets();
 		
-		Optional<Bucket> findBucketByIdBucket(Integer idBucket);
+	Optional<Bucket> findBucketByIdBucket(Integer idBucket);
 		
-		Bucket createBucket(Bucket newBucket);
+	Bucket createBucket(Bucket newBucket);
 		
-		Bucket saveBucket();
+	Bucket saveBucket();
 }

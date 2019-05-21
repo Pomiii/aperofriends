@@ -15,8 +15,8 @@ export class ItemComponent implements OnInit {
   availableItems: Item[] = [];
   itemList: BehaviorSubject<Item[]>;
 
-  //bucketItem = Item[this.itemToAdd] = [];
-  itemToAdd = Item;
+  bucketItem: Item[] = [];
+  itemToAdd: Item;
 
   idItem: number;
 

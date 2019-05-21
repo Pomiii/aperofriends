@@ -1,11 +1,16 @@
-.foot{
-  position: absolute;
-  bottom: 0;
-  left:0;
-  right: 0;
+.container-fluid {
+  height: 75rem;
+}
+
+.head {
+  height: 25%;
 }
 
 .body {
-  height: 750px;
+  height: 65%;
   overflow: auto;
+}
+
+.foot{
+  height: 10%;
 }
