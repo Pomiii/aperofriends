@@ -1,7 +1,16 @@
 package pco.aperofriends.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /**
@@ -17,21 +26,13 @@ public class Role implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idRole;
 
-	private String nomRole;
+	private String role;
 
 	//bi-directional many-to-many association to Friend
-/*	@ManyToMany
-	@JoinTable(
-		name="roleFriend"
-		, joinColumns={
-			@JoinColumn(name="idRole")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="idFriend")
-			}
-		}
+	@JsonIgnore
+	@OneToMany(mappedBy="role")
 	private List<Friend> friends;
-*/	
+
 	public Role() {
 	}
 
@@ -43,20 +44,34 @@ public class Role implements Serializable {
 		this.idRole = idRole;
 	}
 
-	public String getNomRole() {
-		return this.nomRole;
+	public String getRole() {
+		return this.role;
 	}
 
-	public void setNomRole(String nomRole) {
-		this.nomRole = nomRole;
+	public void setRole(String role) {
+		this.role = role;
 	}
 
-/*	public List<Friend> getFriends() {
+	public List<Friend> getFriends() {
 		return this.friends;
 	}
 
-	public void setFriends(List<Friend> friends) {
+	public void setFriend(List<Friend> friends) {
 		this.friends = friends;
 	}
-*/
+	
+	public Friend addFriend(Friend friend) {
+		getFriends().add(friend);
+		friend.setRole(this);
+
+		return friend;
+	}
+
+	public Friend removeFriend(Friend friend) {
+		getFriends().remove(friend);
+		friend.setRole(null);
+
+		return friend;
+	}
+
 }

@@ -1,11 +1,21 @@
 package pco.aperofriends.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 /**
@@ -34,27 +44,47 @@ public class Friend implements Serializable {
 	@OneToMany(mappedBy="friend")
 	private List<Bucket> buckets;
 	
+	//bi-directional many-to-one association to TypeItem
+	@ManyToOne
+	@JoinColumn(name="id_role")
+	private Role role;
+	
 	//bi-directional many-to-many association to AccountFriend
+	@JsonManagedReference
 	@ManyToMany
 	@JoinTable(
 		name="FriendList"
 		, joinColumns={
-			@JoinColumn(name="idFriend")
+			@JoinColumn(name="id_friend")
 			}
 		, inverseJoinColumns={
-			@JoinColumn(name="idAF")
+			@JoinColumn(name="idaf")
 			}
 		)
 	private List<AccountFriend> accountFriends;
-
-	//bi-directional many-to-many association to Role
-	//@ManyToMany(mappedBy="friends")
-	//private List<Role> roles;
-
+	
 	public Friend() {
+		
 	}
 
-	public Friend(String firstnameFriend, String lastnameFriend, String mailFriend, String passFriend) {
+	public Friend(String mailFriend, String passFriend) {
+        this.mailFriend = mailFriend;
+        this.passFriend = passFriend;
+    }
+
+    public Friend(String mailFriend, String passFriend, Role role) {
+        this.mailFriend = mailFriend;
+        this.passFriend = passFriend;
+    }
+    
+    public Friend(String firstnameFriend, String lastnameFriend, String mailFriend, String passFriend) {
+		this.firstnameFriend = firstnameFriend;
+		this.lastnameFriend = lastnameFriend;
+		this.mailFriend = mailFriend;
+		this.passFriend = passFriend;
+	}
+
+	public Friend(String firstnameFriend, String lastnameFriend, String mailFriend, String passFriend, Role role) {
 		this.firstnameFriend = firstnameFriend;
 		this.lastnameFriend = lastnameFriend;
 		this.mailFriend = mailFriend;
@@ -131,12 +161,13 @@ public class Friend implements Serializable {
 		return bucket;
 	}
 
-/*	public List<Role> getRoles() {
-		return this.roles;
+	public Role getRole() {
+		return this.role;
 	}
 
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
+	public void setRole(Role role) {
+		this.role = role;
 	}
-*/
+	
+
 }
