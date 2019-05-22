@@ -16,6 +16,7 @@ public interface FriendRepository extends JpaRepository<Friend, Integer>{
 
     void deleteByMailFriend(String mailFriend);
     
+	@Query("SELECT f FROM Friend f WHERE f.mailFriend LIKE ?1")
 	Friend findByMailFriend(String mailFriend);
 
 }

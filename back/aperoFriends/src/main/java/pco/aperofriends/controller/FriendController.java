@@ -116,6 +116,7 @@ public class FriendController {
     @PostMapping("/sign-up")
     public ResponseEntity<JsonWebToken> signUp(@RequestBody Friend friend) {
         try {
+        	System.out.println("-------- SignUp --------");
             return ResponseEntity.ok(new JsonWebToken(friendService.signUp(friend)));
         } catch (ExistingUsernameException ex) {
             return ResponseEntity.badRequest().build();
@@ -141,8 +142,8 @@ public class FriendController {
      * This method is restricted to Admin users.
      * @return the list of all users registered in the database.
      */
-    @GetMapping
-    //@PreAuthorize("hasRole('admin')")
+    @GetMapping("/testpost")
+    @PreAuthorize("hasAuthority('friend')")
     public List<FriendDto> getAllFriends() {
         return friendService.findAllFriends().stream().map(friend -> new FriendDto(friend.getMailFriend(), friend.getRole())).collect(Collectors.toList());
     }

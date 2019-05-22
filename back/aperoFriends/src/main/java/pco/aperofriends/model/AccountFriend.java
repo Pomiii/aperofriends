@@ -14,7 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /**
@@ -38,7 +38,7 @@ public class AccountFriend implements Serializable {
 	private String phoneAccount;
 
 	//bi-directional many-to-many association to Friend
-	@JsonBackReference
+	@JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
         name="friend_has_account_friend"
@@ -92,14 +92,6 @@ public class AccountFriend implements Serializable {
 		this.phoneAccount = phoneAccount;
 	}
 
-	public List<Friend> getFriend() {
-		return this.friends;
-	}
-
-	public void setFriend(List<Friend> friend) {
-		this.friends = friend;
-	}
-	
 	public List<Friend> getFriends() {
         return this.friends;
     }

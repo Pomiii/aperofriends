@@ -73,7 +73,7 @@ public class JwtTokenProvider {
      * @return the authentication object if username is found.
      */
     public Authentication getAuthentication(String token) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(getMailFriend(token));
+        UserDetails userDetails = userDetailsService.loadUserByUsername(getUsername(token));
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
@@ -82,7 +82,7 @@ public class JwtTokenProvider {
      * @param token the token to analyse.
      * @return the user mailFriend as String.
      */
-    public String getMailFriend(String token) {
+    public String getUsername(String token) {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
     }
 

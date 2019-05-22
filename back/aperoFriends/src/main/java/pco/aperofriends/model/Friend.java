@@ -18,10 +18,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
-/**
- * The persistent class for the Friend database table.
- * 
- */
 @Entity
 @NamedQuery(name="Friend.findAll", query="SELECT f FROM Friend f")
 public class Friend implements Serializable {
@@ -40,17 +36,17 @@ public class Friend implements Serializable {
 	private String passFriend;
 
 	//bi-directional many-to-one association to Bucket
-	@JsonBackReference
+	@JsonManagedReference
 	@OneToMany(mappedBy="friend")
 	private List<Bucket> buckets;
 	
 	//bi-directional many-to-one association to TypeItem
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="id_role")
 	private Role role;
 	
 	//bi-directional many-to-many association to AccountFriend
-	@JsonManagedReference
 	@ManyToMany
 	@JoinTable(
 		name="FriendList"
@@ -65,6 +61,10 @@ public class Friend implements Serializable {
 	
 	public Friend() {
 		
+	}
+	
+	public Friend(String mailFriend) {
+        this.mailFriend = mailFriend;
 	}
 
 	public Friend(String mailFriend, String passFriend) {
@@ -89,6 +89,7 @@ public class Friend implements Serializable {
 		this.lastnameFriend = lastnameFriend;
 		this.mailFriend = mailFriend;
 		this.passFriend = passFriend;
+		this.role = role;
 	}
 
 	public int getIdFriend() {

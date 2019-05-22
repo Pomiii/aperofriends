@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 /**
@@ -29,7 +29,7 @@ public class Role implements Serializable {
 	private String role;
 
 	//bi-directional many-to-many association to Friend
-	@JsonIgnore
+	@JsonManagedReference
 	@OneToMany(mappedBy="role")
 	private List<Friend> friends;
 

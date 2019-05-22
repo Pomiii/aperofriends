@@ -15,8 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 /**
@@ -38,7 +38,7 @@ public class Bucket implements Serializable {
 	private int total;
 
 	//bi-directional many-to-one association to AccountFriend
-	@JsonManagedReference
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="idFriend", insertable=false, updatable=false)
 	private Friend friend;

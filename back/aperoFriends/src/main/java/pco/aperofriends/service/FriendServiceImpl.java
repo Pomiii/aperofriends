@@ -3,6 +3,7 @@ package pco.aperofriends.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
@@ -18,9 +19,13 @@ import pco.aperofriends.security.JwtTokenProvider;
 
 @Service
 public class FriendServiceImpl implements FriendService {
-
+	
+	@Autowired
 	private FriendRepository friendRepository;
+	
+	@Autowired
 	private RoleRepository roleRepository;
+	
 	private BCryptPasswordEncoder passwordEncoder;
     private JwtTokenProvider jwtTokenProvider;
     private AuthenticationManager authenticationManager;
@@ -31,6 +36,7 @@ public class FriendServiceImpl implements FriendService {
 							 JwtTokenProvider jwtTokenProvider, 
 							 AuthenticationManager authenticationManager) {
 		this.friendRepository = friendRepository;
+		this.roleRepository = roleRepository;
 		this.passwordEncoder = passwordEncoder;
         this.jwtTokenProvider = jwtTokenProvider;
         this.authenticationManager = authenticationManager;
@@ -79,14 +85,17 @@ public class FriendServiceImpl implements FriendService {
     @Override
     public String signUp(Friend friend) throws ExistingUsernameException {
         if (!friendRepository.existsByMailFriend(friend.getMailFriend())) {
+        	System.out.println("---------------SignUp Service ------------" + friendRepository.existsByMailFriend(friend.getMailFriend()));
             Friend friendToSave = new Friend(friend.getFirstnameFriend(), 
             								 friend.getLastnameFriend(), 
             								 friend.getMailFriend(), 
             								 passwordEncoder.encode(friend.getPassFriend()));
+            
             Friend newFriend = friendRepository.save(friendToSave);
-            friendRepository.save(friendToSave);
+            
             newFriend.setRole(roleRepository.findByRole("friend"));
             friendRepository.save(newFriend);
+            
             return jwtTokenProvider.createToken(friend.getMailFriend(), friend.getRole());
         } else {
             throw new ExistingUsernameException();

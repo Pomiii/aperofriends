@@ -18,7 +18,7 @@ import pco.aperofriends.service.StorageService;
 public class AperoFriendsApplication implements CommandLineRunner {
 	
 	@Resource
-	  StorageService storageService;
+	StorageService storageService;
 	
 	@Autowired
     FriendService friendService;

@@ -8,7 +8,7 @@ public class FriendDto {
 
     private Role role;
 
-    private FriendDto() {
+    public FriendDto() {
 
     }
 
@@ -20,5 +20,21 @@ public class FriendDto {
         this.mailFriend = mailFriend;
         this.role = role;
     }
+
+	public String getMailFriend() {
+		return mailFriend;
+	}
+
+	public void setMailFriend(String mailFriend) {
+		this.mailFriend = mailFriend;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
 
 }
