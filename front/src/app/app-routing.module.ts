@@ -9,14 +9,14 @@ import {LoginComponent} from './login/login.component';
 import {FriendFormComponent} from './friend/friend-form/friend-form.component';
 
 const routes: Routes = [
+  {path: 'login', component: LoginComponent},
   {path: '', component: ItemComponent},
   {path: 'item', component: ItemComponent},
   {path: 'item-detail', component: ItemDetailComponent},
   {path: 'friend-form', component: FriendFormComponent},
   {path: 'friend', component: FriendComponent},
   {path: 'bucket', component: BucketComponent},
-  {path: 'accountFriend', component: AccountFriendsComponent},
-  {path: 'login', component: LoginComponent},
+  {path: 'accountFriend', component: AccountFriendsComponent}
 ];
 
 @NgModule({

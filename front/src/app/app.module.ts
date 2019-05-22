@@ -23,7 +23,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { FooterComponent } from './footer/footer.component';
 import { ItemComponent } from './item/item.component';
 import { LoginComponent } from './login/login.component';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FriendComponent } from './friend/friend.component';
 import { ItemDetailComponent } from './item/item-detail/item-detail.component';
 import { BucketComponent } from './bucket/bucket.component';
@@ -32,7 +32,10 @@ import { AccountFriendsComponent } from './account-friends/account-friends.compo
 import { NavComponent } from './nav/nav.component';
 import { ItemFormComponent } from './item/item-form/item-form.component';
 import { FriendFormComponent } from './friend/friend-form/friend-form.component';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { JwtInterceptor } from './http-interceptor/jwt.interceptor';
+import { FriendGuard } from './guards/friend.guard';
+import { AdminGuard } from './guards/admin.guard';
 
 @NgModule({
   declarations: [
@@ -53,6 +56,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     AlertModule.forRoot(),
@@ -72,7 +76,10 @@ import { FormsModule } from '@angular/forms';
     TimepickerModule.forRoot(),
     TooltipModule.forRoot()
   ],
-  providers: [],
+  providers: [FriendGuard, AdminGuard, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: JwtInterceptor,
+    multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

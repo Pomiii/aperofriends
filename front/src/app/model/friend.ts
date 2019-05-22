@@ -6,10 +6,11 @@ export class Friend {
   bucketList: Bucket[] = [];
   friendTab: BehaviorSubject<Friend[]>;
 
-  constructor(public idFriend: number,
-              public firstnameFriend: string,
-              public lastnameFriend: string,
-              public mailFriend: string,
-              public passFriend: string) {
+  constructor(public idFriend?: number,
+              public firstnameFriend?: string,
+              public lastnameFriend?: string,
+              public mailFriend?: string,
+              public passFriend?: string,
+              public roleList?: string[]) {
   }
 }

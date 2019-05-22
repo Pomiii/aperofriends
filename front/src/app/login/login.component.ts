@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {FormBuilder, Validators} from '@angular/forms';
+import {LoginService} from '../service/login.service';
+import {Friend} from '../model/friend';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  loginForm = this.fb.group({
+    mailFriend: [null, Validators.required],
+    passFriend: [null, Validators.compose([
+      Validators.required, Validators.minLength(5), Validators.maxLength(255)])
+    ]
+  });
 
-  ngOnInit() {
+  constructor(private fb: FormBuilder,
+              private loginService: LoginService,
+  ) {}
+
+  ngOnInit(): void {
+  }
+
+  onSubmit() {
+    const friend = new Friend();
+    friend.mailFriend = this.loginForm.value.mailFriend;
+    friend.passFriend = this.loginForm.value.passFriend;
+    this.loginService.signIn(friend);
   }
 
 }
