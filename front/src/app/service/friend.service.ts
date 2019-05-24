@@ -34,7 +34,7 @@ export class FriendService {
    * La fonction getAllFriend() est privée car elle n'a besoin d'être appellée que dans le service.
    */
   public getAllFriend(): Observable<Friend[]> {
-    console.log('getAllItems' + this.availableFriends)
+    console.log('getAllItems' + this.availableFriends);
     return this.httpClient.get<Friend[]>(environment.apiUrl + '/friends');
   }
 
@@ -66,18 +66,13 @@ export class FriendService {
   }
 
   /**
-   * @param newFriend le nouveau friend à créer
+   * @param newPhotographe le nouveau friend à créere
    */
-  public createFriend(newfriend: Friend) {
-    this.httpClient.post<Friend>(environment.apiUrl + '/createFriend/'
-      + newfriend.firstnameFriend + '/'
-      + newfriend.lastnameFriend + '/'
-      + newfriend.mailFriend + '/'
-      + newfriend.passFriend, null).subscribe(
-        newfriend => {
-        console.log('newfriend ---', newfriend);
-        this.availableFriends.push(newfriend);
-        this.availableFriends$.next(this.availableFriends);
+  public addFriend(newFriend: Friend) {
+    this.httpClient.post<Friend>('POST', environment.apiUrl + '/sign-up' + newFriend).subscribe(
+      newFriend => {
+        this.availableFriends.push(newFriend);
+        console.log(newFriend);
       }
     );
   }
@@ -96,7 +91,7 @@ export class FriendService {
 
   /**
    * Fonction de suppression
-   * @param friend
+   * @param idFriend
    */
   public deleteFriend(idFriend: number) {
     this.httpClient.delete<Friend>(environment.apiUrl + '/deleteFriend/' + idFriend).subscribe(

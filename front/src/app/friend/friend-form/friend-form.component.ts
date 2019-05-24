@@ -3,6 +3,9 @@ import {Friend} from '../../model/friend';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FriendService} from '../../service/friend.service';
 import {BehaviorSubject} from 'rxjs';
+import {FormBuilder, Validators} from '@angular/forms';
+import {Bucket} from '../../model/bucket';
+import {LoginService} from '../../service/login.service';
 
 @Component({
   selector: 'app-friend-form',
@@ -16,13 +19,29 @@ export class FriendFormComponent implements OnInit {
   availableFriends: Friend[] = [];
   editedFriend: Friend;
 
+  signUpForm = this.fb.group({
+    firstnameFriend: [null, Validators.required],
+    lastnameFriend: [null, Validators.required],
+    mailFriend: [null, Validators.required],
+    passFriend: [null, Validators.compose([
+      Validators.required, Validators.minLength(5), Validators.maxLength(255)])
+    ]
+  });
+  signUp = false;
+
+  newFriend: Friend;
+
   id: number;
 
   constructor(private friendService: FriendService,
+              private loginService: LoginService,
+              private fb: FormBuilder,
               private route: ActivatedRoute,
               private router: Router) { }
 
   ngOnInit() {
+    this.newFriend = new Friend(0, '' , '', '', '', null, null);
+
     this.friendList = this.friendService.availableFriends$;
 
     this.availableFriends = this.friendService.availableFriends;
@@ -45,15 +64,24 @@ export class FriendFormComponent implements OnInit {
     this.router.navigate(['/friend']);
   }
 
-  onSave(){
+  onSubmit(){
     if (!this.id) {
-      this.friendService.createFriend(this.editedFriend);
-      console.log('this.editedFriend ' , this.editedFriend.firstnameFriend);
+      const friend = new Friend(0, '' , '', '', '', null, null);
+      friend.firstnameFriend = this.signUpForm.value.firstnameFriend;
+      friend.lastnameFriend = this.signUpForm.value.lastnameFriend;
+      friend.mailFriend = this.signUpForm.value.mailFriend;
+      friend.passFriend = this.signUpForm.value.passFriend;
+      this.loginService.signUp(friend);
+      console.log('Sign Up new Friend = ', friend.mailFriend);
 
     } else {
       this.friendService.updateFriend(this.editedFriend);
     }
     // Pour laisser le temps de charger les données
     setTimeout(() => this.router.navigate(['/friend']), 300);
+  }
+
+  addFriend() {
+    this.friendService.addFriend(this.newFriend);
   }
 }

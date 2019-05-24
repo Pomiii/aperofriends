@@ -1,12 +1,10 @@
 <div class="container mb-3 text-center">
-  <h4 class="h4 mb-2 font-weight-bold text-white text-center" *ngIf="SignUp">Inscription</h4>
-  <h4 class="h4 mb-2 font-weight-bold text-white text-center" *ngIf="!SignUp">Ajouter/Modifier un compte</h4>
-  <form>
+  <h4 class="h4 mb-2 font-weight-bold text-white text-center" *ngIf="signUp">Inscription</h4>
+  <h4 class="h4 mb-2 font-weight-bold text-white text-center" *ngIf="!signUp">Ajouter/Modifier un compte</h4>
+  <for [formGroup]="signUpForm" novalidate (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="firstnameFriend">Nom : </label>
-      <input type="text" class="form-control-sm" id="firstnameFriend" placeholder="" [(ngModel)]="editedFriend.firstnameFriend" name="firstnameFriend"
-      >
-      <span>{{editedFriend.firstnameFriend}}</span>
+      <input type="text" class="form-control-sm" id="firstnameFriend" placeholder="" [(ngModel)]="editedFriend.firstnameFriend" name="firstnameFriend">
     </div>
     <div class="form-group">
       <label for="lastnameFriend">Prénom : </label>
@@ -21,6 +19,6 @@
       <input type="select" class="form-control-sm" id="passFriend" placeholder="" [(ngModel)]="editedFriend.passFriend" name="passFriend" required>
     </div>
   </form>
-  <button type="submit" class="btn btn-primary" (click)="onSignuUp()" *ngIf="SignUp">Envoyer</button>
-  <button type="submit" class="btn btn-primary" (click)="onSave()">Sauver</button>
+  <button type="submit" class="btn btn-primary" (click)="addFriend()" *ngIf="signUp">Envoyer</button>
+  <button type="submit" class="btn btn-primary" (click)="onSave()" *ngIf="signUp">Sauver</button>
 </div>

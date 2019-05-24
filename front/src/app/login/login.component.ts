@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     friend.mailFriend = this.loginForm.value.mailFriend;
     friend.passFriend = this.loginForm.value.passFriend;
     this.loginService.signIn(friend);
-    this.router.navigate(['/item']);
+    //this.router.navigate(['/item']);
   }
 
 }

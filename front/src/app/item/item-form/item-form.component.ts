@@ -78,7 +78,7 @@ export class ItemFormComponent implements OnInit {
 
   // Vérifie si on est en édition ou en création
   onSave() {
-    const newItem = new Item(this.editedItem.nameItem, this.editedItem.picItem, this.editedItem.typeItem, this.editedItem.priceItem)
+    const newItem = new Item(this.editedItem.nameItem, this.editedItem.picItem, this.editedItem.typeItem, this.editedItem.priceItem);
     this.itemService.createItem(newItem, this.editedItem.typeItem.nameTypeItem);
 
     // charge le fichier

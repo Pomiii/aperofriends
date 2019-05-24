@@ -41,7 +41,7 @@ export class LoginService {
       error => console.log('Error while Sign Up'));
   }
 
-  signOut() {
+   signOut() {
     sessionStorage.removeItem(environment.accessToken);
   }
 

@@ -1,9 +1,9 @@
 import {Bucket} from './bucket';
+import {Item} from './item';
 import {BehaviorSubject} from 'rxjs';
 
 export class Friend {
 
-  bucketList: Bucket[] = [];
   friendTab: BehaviorSubject<Friend[]>;
 
   constructor(public idFriend?: number,
@@ -11,6 +11,7 @@ export class Friend {
               public lastnameFriend?: string,
               public mailFriend?: string,
               public passFriend?: string,
+              public bucket?: Item[],
               public role?: string[]) {
   }
 }
