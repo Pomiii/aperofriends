@@ -12,7 +12,7 @@ export class FriendGuard implements CanActivate {
     if (!this.loginService.loggedIn) {
       this.router.navigate(['login']);
       return false;
-    } else if (this.loginService.friendRoles.getValue().includes('friend')) {
+    } else if (this.loginService.userRoles.getValue().includes('friend')) {
       return true;
     }
 

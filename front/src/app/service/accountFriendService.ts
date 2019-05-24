@@ -5,6 +5,7 @@ import {map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {AccountFriend} from '../model/accountFriend';
 import {Bucket} from '../model/bucket';
+import {environment} from '../../environments/environment';
 
 @Injectable ({
   providedIn: 'root'
@@ -36,7 +37,7 @@ export class AccountFriendService {
    */
   public getAllAccountFriend(): Observable<AccountFriend[]> {
     console.log('getAllAccountFriends' + this.availableAccountFriends);
-    return this.httpClient.get<AccountFriend[]>('http://localhost:8080/aperofriends/accountFriends');
+    return this.httpClient.get<AccountFriend[]>(environment.apiUrl + '/accountFriends');
   }
 
   /**
@@ -70,7 +71,7 @@ export class AccountFriendService {
    * @param newAccountFriend le nouveau friend à créer
    */
   public createAccountFriend(newAccountFriend: AccountFriend) {
-    this.httpClient.post<AccountFriend>('http://localhost:8080//aperofriends/createAccountFriend/'
+    this.httpClient.post<AccountFriend>(environment.apiUrl + '/createAccountFriend/'
       + newAccountFriend.nameAccount + '/'
       + newAccountFriend.addressAccount + '/'
       + newAccountFriend.phoneAccount, null).subscribe(
@@ -86,7 +87,7 @@ export class AccountFriendService {
    * @param accountFriend
    */
   public updateAccountFriend(accountFriend: AccountFriend) {
-    this.httpClient.put<AccountFriend>('http://localhost:8080//aperofriends/updateAccountFriend/', accountFriend).subscribe(
+    this.httpClient.put<AccountFriend>(environment.apiUrl + '/updateAccountFriend/', accountFriend).subscribe(
       updatedAccountFriend => {
         this.availableAccountFriends$.next(this.availableAccountFriends);
       }
@@ -98,7 +99,7 @@ export class AccountFriendService {
    * @param idAF
    */
   public deleteAccountFriend(idAF: number) {
-    this.httpClient.delete('http://localhost:8080/aperofriends/deleteAccountFriend/' + idAF).subscribe(
+    this.httpClient.delete(environment.apiUrl + '/deleteAccountFriend/' + idAF).subscribe(
 
     );
   }

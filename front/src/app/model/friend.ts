@@ -11,6 +11,6 @@ export class Friend {
               public lastnameFriend?: string,
               public mailFriend?: string,
               public passFriend?: string,
-              public roleList?: string[]) {
+              public role?: string[]) {
   }
 }

@@ -4,6 +4,7 @@ import {BehaviorSubject, Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {Item} from '../model/item';
+import {environment} from '../../environments/environment';
 
 @Injectable ({
   providedIn: 'root'
@@ -68,7 +69,7 @@ export class TypeItemService {
    * @param newTypeItem
    */
   public createTypeItem(newTypeItem: TypeItem) {
-    this.httpClient.post<TypeItem>('http://localhost:8080/aperofriends/createTypeItem', newTypeItem).subscribe(
+    this.httpClient.post<TypeItem>(environment.apiUrl + '/createTypeItem', newTypeItem).subscribe(
       newTypeItem => {
         this.availableTypeItems.push(newTypeItem);
         this.availableTypeItems$.next(this.availableTypeItems);
@@ -81,7 +82,7 @@ export class TypeItemService {
    * @param typeItem
    */
   public updateTypeItem(typeItem: TypeItem) {
-    this.httpClient.put<TypeItem>('http://localhost:8080/aperofriends/updateTypeItem', typeItem).subscribe(
+    this.httpClient.put<TypeItem>(environment.apiUrl + '/updateTypeItem', typeItem).subscribe(
       updatedItem => {
         this.availableTypeItems$.next(this.availableTypeItems);
       }

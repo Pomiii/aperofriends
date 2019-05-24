@@ -12,7 +12,7 @@ export class AdminGuard implements CanActivate {
     if (!this.loginService.loggedIn) {
       this.router.navigate(['login']);
       return false;
-    } else if (this.loginService.friendRoles.getValue().includes('admin')) {
+    } else if (this.loginService.userRoles.getValue().includes('admin')) {
       return true;
     }
 

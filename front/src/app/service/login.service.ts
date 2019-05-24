@@ -12,10 +12,10 @@ import {BehaviorSubject} from 'rxjs';
 })
 export class LoginService {
 
-  friendRoles: BehaviorSubject<string[]> = new BehaviorSubject([]);
+  userRoles: BehaviorSubject<string> = new BehaviorSubject('');
 
   constructor(private httpClient: HttpClient, private router: Router) {
-    this.getFriendRoles();
+    this.getUserRoles();
   }
 
   public get loggedIn(): boolean {
@@ -23,28 +23,33 @@ export class LoginService {
   }
 
   signIn(friend: Friend) {
-    this.httpClient.post<JsonWebToken>(environment.apiUrl + 'friend/sign-in', friend).subscribe(
+    this.httpClient.post<JsonWebToken>(environment.apiUrl + '/sign-in', friend).subscribe(
       token => {
         sessionStorage.setItem(environment.accessToken, token.token);
 
-        this.getFriendRoles();
+        this.getUserRoles();
 
         this.router.navigate(['']);
       },
-      error => console.log('Error while login'));
+      error => console.log('Error while Sign In'));
   }
 
+  signUp(friend: Friend) {
+    this.httpClient.post<Friend>( environment.apiUrl + '/sign-up', friend).subscribe(
+      newFriend => {
+      },
+      error => console.log('Error while Sign Up'));
+  }
 
   signOut() {
     sessionStorage.removeItem(environment.accessToken);
   }
 
-  private getFriendRoles() {
+  private getUserRoles() {
     if (sessionStorage.getItem(environment.accessToken)) {
       const decodedToken = jwt_decode(sessionStorage.getItem(environment.accessToken));
-      // @ts-ignore
-      const authorities: Array<any> = decodedToken.auth;
-      this.friendRoles.next(authorities.map(authority => authority.authority));
+      const authorities: string = decodedToken.auth;
+      this.userRoles.next(authorities);
     }
   }
 }

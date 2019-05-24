@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {Bucket} from '../model/bucket';
+import {environment} from '../../environments/environment';
 
 @Injectable ({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class BucketService {
   availableBuckets: Bucket[];
 
   // la liste observable que l'on rend visible partout dans l'appli
-  availableBuckets$: BehaviorSubject<Bucket[]>= new BehaviorSubject(this.availableBuckets);
+  availableBuckets$: BehaviorSubject<Bucket[]> = new BehaviorSubject(this.availableBuckets);
 
   constructor(private httpClient: HttpClient) {
 
@@ -25,7 +26,7 @@ export class BucketService {
    */
   public getAllBucket(): Observable<Bucket[]> {
     console.log('getAllBuckets' + this.availableBuckets)
-    return this.httpClient.get<Bucket[]>('http://localhost:8080/aperofriends/Buckets');
+    return this.httpClient.get<Bucket[]>(environment.apiUrl + '/Buckets');
   }
 
   /**
@@ -58,7 +59,7 @@ export class BucketService {
    * @param newBucket
    */
   public createBucket(newBucket: Bucket) {
-    this.httpClient.post<Bucket>('http://localhost:8080/aperofriends/createBucket', newBucket).subscribe(
+    this.httpClient.post<Bucket>(environment.apiUrl + '/createBucket', newBucket).subscribe(
       newBucket => {
         this.availableBuckets.push(newBucket);
         this.availableBuckets$.next(this.availableBuckets);
@@ -71,7 +72,7 @@ export class BucketService {
    * @param bucket
    */
   public updateBucket(bucket: Bucket) {
-    this.httpClient.put<Bucket>('http://localhost:8080/aperofriends/updateBucket', bucket).subscribe(
+    this.httpClient.put<Bucket>(environment.apiUrl + '/updateBucket', bucket).subscribe(
       updatedBucket => {
         this.availableBuckets$.next(this.availableBuckets);
       }

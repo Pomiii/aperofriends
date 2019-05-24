@@ -3,6 +3,7 @@ import {Friend} from '../model/friend';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
+import {environment} from '../../environments/environment';
 
 @Injectable ({
   providedIn: 'root'
@@ -34,7 +35,7 @@ export class FriendService {
    */
   public getAllFriend(): Observable<Friend[]> {
     console.log('getAllItems' + this.availableFriends)
-    return this.httpClient.get<Friend[]>('http://localhost:8080/aperofriends/friends');
+    return this.httpClient.get<Friend[]>(environment.apiUrl + '/friends');
   }
 
   /**
@@ -68,7 +69,7 @@ export class FriendService {
    * @param newFriend le nouveau friend à créer
    */
   public createFriend(newfriend: Friend) {
-    this.httpClient.post<Friend>('http://localhost:8080//aperofriends/createFriend/'
+    this.httpClient.post<Friend>(environment.apiUrl + '/createFriend/'
       + newfriend.firstnameFriend + '/'
       + newfriend.lastnameFriend + '/'
       + newfriend.mailFriend + '/'
@@ -86,7 +87,7 @@ export class FriendService {
    * @param friend
    */
   public updateFriend(friend: Friend) {
-    this.httpClient.put<Friend>('http://localhost:8080//aperofriends/updateFriend/', friend).subscribe(
+    this.httpClient.put<Friend>(environment.apiUrl + '/updateFriend/', friend).subscribe(
       updatedFriend => {
         this.availableFriends$.next(this.availableFriends);
       }
@@ -98,7 +99,7 @@ export class FriendService {
    * @param friend
    */
   public deleteFriend(idFriend: number) {
-    this.httpClient.delete<Friend>('http://localhost:8080/aperofriends/deleteFriend/' + idFriend).subscribe(
+    this.httpClient.delete<Friend>(environment.apiUrl + '/deleteFriend/' + idFriend).subscribe(
     );
   }
 

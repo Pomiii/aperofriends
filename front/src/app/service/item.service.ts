@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {TypeItem} from '../model/typeItem';
+import {environment} from '../../environments/environment';
 
 @Injectable ({
   providedIn: 'root'
@@ -71,7 +72,7 @@ export class ItemService {
    */
   public createItem(newItem: Item, typeItemString: string) {
     console.log('newItem ++++++ ' + newItem);
-    this.httpClient.post<Item>('http://localhost:8080//aperofriends/createItem/' + typeItemString, newItem).subscribe(
+    this.httpClient.post<Item>(environment.apiUrl + '/createItem/' + typeItemString, newItem).subscribe(
       bite => {
         console.log('newItem ---', bite);
         this.availableItems.push(bite);
@@ -85,7 +86,7 @@ export class ItemService {
    * @param item
    */
   public updateItem(item: Item) {
-    this.httpClient.put<Item>('http://localhost:8080/aperofriends/updateItem', item).subscribe(
+    this.httpClient.put<Item>(environment.apiUrl + '/updateItem', item).subscribe(
       updatedItem => {
         this.availableItems$.next(this.availableItems);
       }
@@ -97,7 +98,7 @@ export class ItemService {
    * @param friend
    */
   public deleteItem(idItem: number) {
-    this.httpClient.delete<Item>('http://localhost:8080/aperofriends/deleteItem/' + idItem).subscribe(
+    this.httpClient.delete<Item>(environment.apiUrl + '/deleteItem/' + idItem).subscribe(
     );
   }
 }

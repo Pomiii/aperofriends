@@ -142,7 +142,7 @@ public class FriendController {
      * This method is restricted to Admin users.
      * @return the list of all users registered in the database.
      */
-    @GetMapping("/testpost")
+	@GetMapping("/dtoFriends")
     @PreAuthorize("hasAuthority('friend')")
     public List<FriendDto> getAllFriends() {
         return friendService.findAllFriends().stream().map(friend -> new FriendDto(friend.getMailFriend(), friend.getRole())).collect(Collectors.toList());

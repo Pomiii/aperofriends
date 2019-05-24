@@ -36,6 +36,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { JwtInterceptor } from './http-interceptor/jwt.interceptor';
 import { FriendGuard } from './guards/friend.guard';
 import { AdminGuard } from './guards/admin.guard';
+import { FriendDetailComponent } from './friend/friend-detail/friend-detail.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { AdminGuard } from './guards/admin.guard';
     NavComponent,
     ItemFormComponent,
     FriendFormComponent,
+    FriendDetailComponent,
   ],
   imports: [
     HttpClientModule,

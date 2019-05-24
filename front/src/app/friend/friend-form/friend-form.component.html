@@ -1,6 +1,6 @@
 <div class="container mb-3 text-center">
   <h4 class="h4 mb-2 font-weight-bold text-white text-center" *ngIf="SignUp">Inscription</h4>
-  <h4 class="h4 mb-2 font-weight-bold text-white text-center">Ajouter/Modifier un compte</h4>
+  <h4 class="h4 mb-2 font-weight-bold text-white text-center" *ngIf="!SignUp">Ajouter/Modifier un compte</h4>
   <form>
     <div class="form-group">
       <label for="firstnameFriend">Nom : </label>
