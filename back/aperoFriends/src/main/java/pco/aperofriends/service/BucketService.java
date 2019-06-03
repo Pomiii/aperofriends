@@ -16,5 +16,5 @@ public interface BucketService {
 		
 	Bucket createBucket(Bucket newBucket);
 		
-	Bucket saveBucket();
+	Bucket saveBucket(Bucket bucket);
 }

@@ -51,6 +51,11 @@ public class Bucket implements Serializable {
 	public Bucket() {
 	}
 
+	public Bucket(Friend friend, Date date) {
+		this.friend = friend;
+		this.date = date;
+	}
+
 	public int getIdBucket() {
 		return idBucket;
 	}

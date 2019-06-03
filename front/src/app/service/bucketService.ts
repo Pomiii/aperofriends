@@ -4,12 +4,15 @@ import {map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {Bucket} from '../model/bucket';
 import {environment} from '../../environments/environment';
+import {Item} from '../model/item';
 
 @Injectable ({
   providedIn: 'root'
 })
 
 export class BucketService {
+
+  bucketFriend: Bucket;
 
   // la liste des buckets
   availableBuckets: Bucket[];
@@ -19,6 +22,16 @@ export class BucketService {
 
   constructor(private httpClient: HttpClient) {
 
+  }
+
+  public bucketListSubject: BehaviorSubject<Bucket[]> = new BehaviorSubject(null);
+
+  public setBucketListSubject(value: Bucket[]) {
+    if (value) {
+      this.bucketListSubject.next(value);
+    } else {
+      this.bucketListSubject.next(null);
+    }
   }
 
   /**
@@ -76,6 +89,22 @@ export class BucketService {
       updatedBucket => {
         this.availableBuckets$.next(this.availableBuckets);
       }
+    );
+  }
+
+  public initBucket(mailFriend: string) {
+    this.httpClient.post<Bucket>( environment.apiUrl + '/addBucket/' + mailFriend, null /*{
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      }
+    }*/).subscribe((bucket) => {
+        this.bucketFriend = bucket;
+        console.log('bucketFriend ' + bucket.idBucket);
+      }
+      //(error) => {
+      //  console.log('init bucket pb:', error);
+      //}
     );
   }
 }

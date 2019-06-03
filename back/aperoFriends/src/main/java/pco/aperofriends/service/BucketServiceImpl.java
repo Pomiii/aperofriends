@@ -33,8 +33,7 @@ public class BucketServiceImpl implements BucketService{
     }
 	
 	@Override
-    public Bucket saveBucket() {
-		Bucket bucket = new Bucket();
+    public Bucket saveBucket(Bucket bucket) {
 		return this.bucketRepository.save(bucket);
     }
 }

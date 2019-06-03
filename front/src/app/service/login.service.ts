@@ -6,6 +6,8 @@ import {Router} from '@angular/router';
 import {environment} from '../../environments/environment';
 import * as jwt_decode from 'jwt-decode';
 import {BehaviorSubject} from 'rxjs';
+import {Bucket} from '../model/bucket';
+import {BucketService} from './bucketService';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +19,9 @@ export class LoginService {
 
   userRoles: BehaviorSubject<string> = new BehaviorSubject('');
 
-  constructor(private httpClient: HttpClient, private router: Router) {
+  constructor(private httpClient: HttpClient,
+              private router: Router,
+              private bucketService: BucketService) {
     this.getUserRoles();
   }
 
@@ -32,11 +36,12 @@ export class LoginService {
         sessionStorage.setItem(environment.accessToken, token.token);
 
         this.getUserRoles();
+        this.bucketService.initBucket("pom@test.com");
 
         this.router.navigate(['']);
       },
       error => {console.log('Error while Sign In');
-                this.signInError = true;
+      this.signInError = true;
       });
   }
 
