@@ -5,6 +5,8 @@ import {LoginService} from '../service/login.service';
 @Injectable()
 export class FriendGuard implements CanActivate {
 
+  friendLog = false;
+
   constructor(private router: Router, private loginService: LoginService) {
   }
 

@@ -66,7 +66,7 @@ export class FriendService {
   }
 
   /**
-   * @param newPhotographe le nouveau friend à créere
+   * @param newFriend le nouveau friend à créere
    */
   public addFriend(newFriend: Friend) {
     this.httpClient.post<Friend>('POST', environment.apiUrl + '/sign-up' + newFriend).subscribe(

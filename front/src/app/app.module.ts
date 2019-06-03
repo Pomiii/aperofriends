@@ -32,7 +32,7 @@ import { AccountFriendsComponent } from './account-friends/account-friends.compo
 import { NavComponent } from './nav/nav.component';
 import { ItemFormComponent } from './item/item-form/item-form.component';
 import { FriendFormComponent } from './friend/friend-form/friend-form.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtInterceptor } from './http-interceptor/jwt.interceptor';
 import { FriendGuard } from './guards/friend.guard';
 import { AdminGuard } from './guards/admin.guard';

@@ -57,11 +57,11 @@ public class FriendServiceImpl implements FriendService {
         return friendRepository.findByMailFriend(mailFriend);
     }
 	
-	@Override
+	/*@Override
     public Friend createFriend(Friend newfriend) {
 		System.out.println("newFriend -- " + newfriend.getFirstnameFriend());
         return friendRepository.save(newfriend);
-    }
+    }*/
 	
 	@Override
     public Friend saveFriend(String firstnameFriend,

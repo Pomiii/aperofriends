@@ -18,7 +18,7 @@ public interface FriendService {
 	
     Friend findFriendByMailFriend(String mailFriend);
 	
-	Friend createFriend(Friend newfriend);
+	//Friend createFriend(Friend newfriend);
 	
 	Friend saveFriend(String firstnameFriend,
 					  String lastnameFriend,

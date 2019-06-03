@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {LoginService} from '../service/login.service';
+import {AdminGuard} from '../guards/admin.guard';
+import {FriendGuard} from '../guards/friend.guard';
 
 @Component({
   selector: 'app-nav',
@@ -7,7 +10,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
-  constructor() { }
+  constructor(private loginService: LoginService,
+              private adminGuard: AdminGuard,
+              private friendGuard: FriendGuard
+              ) { }
 
   ngOnInit() {
   }

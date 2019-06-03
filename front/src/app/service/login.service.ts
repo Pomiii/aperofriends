@@ -11,6 +11,9 @@ import {BehaviorSubject} from 'rxjs';
   providedIn: 'root'
 })
 export class LoginService {
+  signInError = false;
+
+  signUpError = false;
 
   userRoles: BehaviorSubject<string> = new BehaviorSubject('');
 
@@ -23,6 +26,7 @@ export class LoginService {
   }
 
   signIn(friend: Friend) {
+    sessionStorage.removeItem(environment.accessToken);
     this.httpClient.post<JsonWebToken>(environment.apiUrl + '/sign-in', friend).subscribe(
       token => {
         sessionStorage.setItem(environment.accessToken, token.token);
@@ -31,25 +35,33 @@ export class LoginService {
 
         this.router.navigate(['']);
       },
-      error => console.log('Error while Sign In'));
+      error => {console.log('Error while Sign In');
+                this.signInError = true;
+      });
   }
 
   signUp(friend: Friend) {
     this.httpClient.post<Friend>( environment.apiUrl + '/sign-up', friend).subscribe(
       newFriend => {
       },
-      error => console.log('Error while Sign Up'));
+      error => {
+        console.log('Error while Sign Up');
+        this.signUpError = true;
+      });
   }
 
    signOut() {
     sessionStorage.removeItem(environment.accessToken);
-  }
+    this.signInError = true;
+    this.router.navigate(['']);
+   }
 
   private getUserRoles() {
     if (sessionStorage.getItem(environment.accessToken)) {
-      const decodedToken = jwt_decode(sessionStorage.getItem(environment.accessToken));
+      const decodedToken: any = jwt_decode(sessionStorage.getItem(environment.accessToken));
       const authorities: string = decodedToken.auth;
       this.userRoles.next(authorities);
     }
   }
+
 }

@@ -1,6 +1,6 @@
 <div class="container text-center ">
   <h4 class="h3 mb-2 pt-2 pb-2 font-weight-bold text-white">Connexion</h4>
-  <form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()">
+  <form [formGroup]="loginForm" novalidate>
     <div class="form-group">
       <label for="mailFriend">Email address : </label>
       <input type="email" formControlName="mailFriend" class="form-control ml-2 mr-2" id="mailFriend" aria-describedby="emailHelp" placeholder="email">
@@ -16,7 +16,14 @@
       </label>
     </div>
   </form>
-  <button class="btn btn-primary mb-4 ml-3" type="submit" (click)="onSubmit()">Connexion</button>
-  <button class="btn btn-primary mb-4 ml-3" routerLink="/friend-form">S'inscrire</button>
+  <div class="row">
+    <div class="col">
+      <button class="btn btn-primary mb-4 ml-3" type="submit" (click)="onSubmit()">Connexion</button>
+    </div>
+    <div class="col">
+      <button class="btn btn-primary mb-4 ml-3" routerLink="/friend-form">S'inscrire</button>
+    </div>
+  </div>
+  <span *ngIf="loginService.signInError">Votre mail ou mot de passe est <strong>incorrect</strong></span>
 </div>
 

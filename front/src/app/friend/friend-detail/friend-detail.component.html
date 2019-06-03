@@ -1,3 +1,31 @@
-<p>
-  friend-detail works!
-</p>
+<div class="container-fluid">
+  <h3>List Friend</h3>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>ID Friend</th>
+      <th>Nom Friend</th>
+      <th>Prénom Friend</th>
+      <th>Mail Friend</th>
+      <th>Editer</th>
+      <th>Supprimer</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let friend of availableFriends">
+      <td>{{ friend.idFriend }}</td>
+      <td>{{ friend.firstnameFriend }}</td>
+      <td>{{ friend.lastnameFriend }}</td>
+      <td>{{ friend.mailFriend }}</td>
+      <td>
+        <button type="submit" class="btn btn-primary" (click)="onSave()" >éditer</button>
+      </td>
+      <td>
+        <button type="submit" class="btn btn-primary" (click)="onDelete(friend.idFriend)" >supprimer</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

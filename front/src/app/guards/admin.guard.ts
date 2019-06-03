@@ -5,6 +5,7 @@ import {LoginService} from '../service/login.service';
 @Injectable()
 export class AdminGuard implements CanActivate {
 
+
   constructor(private router: Router, private loginService: LoginService) {
   }
 

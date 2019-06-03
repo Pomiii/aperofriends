@@ -14,9 +14,6 @@ import {LoginService} from '../../service/login.service';
 })
 export class FriendFormComponent implements OnInit {
 
-  friendList: BehaviorSubject<Friend[]>;
-  editFriend: boolean;
-  availableFriends: Friend[] = [];
   editedFriend: Friend;
 
   signUpForm = this.fb.group({
@@ -27,6 +24,7 @@ export class FriendFormComponent implements OnInit {
       Validators.required, Validators.minLength(5), Validators.maxLength(255)])
     ]
   });
+
   signUp = false;
 
   newFriend: Friend;
@@ -42,29 +40,14 @@ export class FriendFormComponent implements OnInit {
   ngOnInit() {
     this.newFriend = new Friend(0, '' , '', '', '', null, null);
 
-    this.friendList = this.friendService.availableFriends$;
-
-    this.availableFriends = this.friendService.availableFriends;
-
-    this.id = +this.route.snapshot.params.id;
-
-    this.friendService.findFriend(this.id).subscribe(friend => {
-      this.editedFriend = friend;
-    });
-
-    if (!this.id) {
-      this.editFriend = true;
-      this.editedFriend = new Friend(this.id, '', '', '', '');
-
-    } else {
-      this.editedFriend = this.friendService.availableFriends.find((fri => fri.idFriend === this.id));
-      this.editFriend = false;
-      this.friendList = this.editedFriend.friendTab;
-    }
-    this.router.navigate(['/friend']);
+    this.router.navigate(['/friend-form']);
   }
 
-  onSubmit(){
+  addFriend() {
+    this.friendService.addFriend(this.newFriend);
+  }
+
+  onSubmit() {
     if (!this.id) {
       const friend = new Friend(0, '' , '', '', '', null, null);
       friend.firstnameFriend = this.signUpForm.value.firstnameFriend;
@@ -78,10 +61,8 @@ export class FriendFormComponent implements OnInit {
       this.friendService.updateFriend(this.editedFriend);
     }
     // Pour laisser le temps de charger les données
-    setTimeout(() => this.router.navigate(['/friend']), 300);
+    setTimeout(() => this.router.navigate(['/friend-form']), 300);
   }
 
-  addFriend() {
-    this.friendService.addFriend(this.newFriend);
-  }
+
 }
