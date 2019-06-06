@@ -4,8 +4,6 @@ import {BehaviorSubject} from 'rxjs';
 
 export class Friend {
 
-  friendTab: BehaviorSubject<Friend[]>;
-
   constructor(public idFriend?: number,
               public firstnameFriend?: string,
               public lastnameFriend?: string,

@@ -15,7 +15,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -36,7 +36,7 @@ public class Friend implements Serializable {
 	private String passFriend;
 
 	//bi-directional many-to-one association to Bucket
-	@JsonManagedReference
+	@JsonIgnore
 	@OneToMany(mappedBy="friend")
 	private List<Bucket> buckets;
 	

@@ -37,7 +37,7 @@ export class ItemDetailComponent implements OnInit {
 
     this.idItem = +this.route.snapshot.params.idItem;
 
-    //this.itemService.findItem(this.idItem).subscribe(item => {this.editedItem = item; });
+    // this.itemService.findItem(this.idItem).subscribe(item => {this.editedItem = item; });
 
   }
 

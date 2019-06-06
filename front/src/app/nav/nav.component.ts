@@ -10,9 +10,7 @@ import {FriendGuard} from '../guards/friend.guard';
 })
 export class NavComponent implements OnInit {
 
-  constructor(private loginService: LoginService,
-              private adminGuard: AdminGuard,
-              private friendGuard: FriendGuard
+  constructor(private loginService: LoginService
               ) { }
 
   ngOnInit() {

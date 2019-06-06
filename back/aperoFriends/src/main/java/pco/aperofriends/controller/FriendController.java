@@ -57,27 +57,6 @@ public class FriendController {
 		return ResponseEntity.status(HttpStatus.OK).body(friendId);
 	}
 	
-	/*
-	 * Methode qui permet d'ajouter un friend dans la table friend
-	 * @param request
-	 * @return createfriend
-	 
-	@PostMapping("/createFriend/{firstnameFriend}/{lastnameFriend}/{mailFriend}/{passFriend}")
-	// @PreAuthorize("hasRole('admin')")
-	public ResponseEntity<?> createFriend(
-			@PathVariable String firstnameFriend,
-			@PathVariable String lastnameFriend,
-			@PathVariable String mailFriend,
-			@PathVariable String passFriend
-			) {
-		try {
-			return ResponseEntity.status(HttpStatus.OK)
-                .body(this.friendService.saveFriend(firstnameFriend, lastnameFriend, mailFriend, passFriend));
-		} catch (Exception e) {
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-	    }
-	}*/
-	
 	/**
 	 * Methode qui renvoie l'ensemble des éléments de la table friend
 	 * @param request
@@ -97,7 +76,7 @@ public class FriendController {
 	 * @return friend
 	 */
 	@DeleteMapping("/deleteFriend/{idFriend}")
-	@PreAuthorize("hasRole('admin')")
+	//@PreAuthorize("hasRole('admin')")
 	public ResponseEntity<?> deleteFriend(@PathVariable Integer idFriend) {
 		try {
 			friendRepository.deleteById(idFriend);
@@ -116,7 +95,7 @@ public class FriendController {
     @PostMapping("/sign-up")
     public ResponseEntity<JsonWebToken> signUp(@RequestBody Friend friend) {
         try {
-        	System.out.println("-------- SignUp --------");
+        	System.out.println("---------- Sign Up Controller ---------");
             return ResponseEntity.ok(new JsonWebToken(friendService.signUp(friend)));
         } catch (ExistingUsernameException ex) {
             return ResponseEntity.badRequest().build();
@@ -131,7 +110,9 @@ public class FriendController {
     @PostMapping("/sign-in")
     public ResponseEntity<JsonWebToken> signIn(@RequestBody Friend friend) {
         try {
+            System.out.println("----------- Sign In Controller ----------- idFriend: " + friend.getIdFriend());
             return ResponseEntity.ok(new JsonWebToken(friendService.signIn(friend.getMailFriend(), friend.getPassFriend())));
+
         } catch (InvalidCredentialsException ex) {
             return ResponseEntity.badRequest().build();
         }
@@ -143,19 +124,23 @@ public class FriendController {
      * @return the list of all users registered in the database.
      */
 	@GetMapping("/dtoFriends")
-    @PreAuthorize("hasAuthority('friend')")
+    //@PreAuthorize("hasAuthority('friend')")
     public List<FriendDto> getAllFriends() {
-        return friendService.findAllFriends().stream().map(friend -> new FriendDto(friend.getMailFriend(), friend.getRole())).collect(Collectors.toList());
+        return friendService.findAllFriends().stream().map(friend -> new FriendDto(friend.getIdFriend(), 
+        																		   friend.getFirstnameFriend(),
+        																		   friend.getLastnameFriend(),
+        																		   friend.getMailFriend(), 
+        																		   friend.getRole())).collect(Collectors.toList());
     }
 
     /*
      * Method to get one user from database based on its user name.
      * This method is restricted to Admin users.
      * @param mailFriend the user name to look for.
-     * @return a User object if found, a not found response code otherwise.
+     * @return a Friend object if found, a not found response code otherwise.
      
     @GetMapping("/{mailFriend}")
-    @PreAuthorize("hasRole('admin')")
+    //@PreAuthorize("hasRole('admin')")
     public ResponseEntity<FriendDto> getOneUser(@PathVariable String mailFriend) {
         Friend friend = friendService.findFriendByMailFriend(mailFriend);
         if (friend == null) {
@@ -163,6 +148,5 @@ public class FriendController {
         } else {
             return ResponseEntity.notFound().build();
         }
-	
     }*/
 }

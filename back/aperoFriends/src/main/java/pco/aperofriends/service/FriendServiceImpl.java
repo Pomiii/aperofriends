@@ -57,12 +57,6 @@ public class FriendServiceImpl implements FriendService {
         return friendRepository.findByMailFriend(mailFriend);
     }
 	
-	/*@Override
-    public Friend createFriend(Friend newfriend) {
-		System.out.println("newFriend -- " + newfriend.getFirstnameFriend());
-        return friendRepository.save(newfriend);
-    }*/
-	
 	@Override
     public Friend saveFriend(String firstnameFriend,
     						 String lastnameFriend,
@@ -85,7 +79,7 @@ public class FriendServiceImpl implements FriendService {
     @Override
     public String signUp(Friend friend) throws ExistingUsernameException {
         if (!friendRepository.existsByMailFriend(friend.getMailFriend())) {
-        	System.out.println("---------------SignUp Service ------------" + friendRepository.existsByMailFriend(friend.getMailFriend()));
+        	System.out.println("---------------SignUp Service --------------" + friendRepository.existsByMailFriend(friend.getMailFriend()));
             Friend friendToSave = new Friend(friend.getFirstnameFriend(), 
             								 friend.getLastnameFriend(), 
             								 friend.getMailFriend(), 

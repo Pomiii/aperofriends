@@ -5,7 +5,8 @@ export class Bucket {
 
   itemList: Item[] = [];
 
-  constructor(public idBucket: number,
-              public date : Date,
-              public total : number) {}
+  constructor(public idBucket?: number,
+              public date?: Date,
+              public total?: number,
+              public friend?: Friend) {}
 }

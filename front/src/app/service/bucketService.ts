@@ -5,6 +5,7 @@ import {Injectable} from '@angular/core';
 import {Bucket} from '../model/bucket';
 import {environment} from '../../environments/environment';
 import {Item} from '../model/item';
+import {Friend} from '../model/friend';
 
 @Injectable ({
   providedIn: 'root'
@@ -34,12 +35,21 @@ export class BucketService {
     }
   }
 
+  public bucketItemsSubject: BehaviorSubject<Item[]> = new BehaviorSubject(null);
+
+  public setbucketItemsSubject(value: Item[]){
+    if (value) {
+      this.bucketItemsSubject.next(value);
+    } else {
+      this.bucketItemsSubject.next(null);
+    }
+  }
+
   /**
    * La fonction getAllBucket() est privée car elle n'a besoin d'être appellée que dans le service.
    */
   public getAllBucket(): Observable<Bucket[]> {
-    console.log('getAllBuckets' + this.availableBuckets)
-    return this.httpClient.get<Bucket[]>(environment.apiUrl + '/Buckets');
+    return this.httpClient.get<Bucket[]>(environment.apiUrl + '/buckets');
   }
 
   /**
@@ -51,6 +61,8 @@ export class BucketService {
       BucketList => {
         this.availableBuckets = BucketList;
         this.availableBuckets$.next(this.availableBuckets);
+        this.setBucketListSubject(this.availableBuckets);
+
       });
   }
 
@@ -64,7 +76,7 @@ export class BucketService {
       }
       return of(this.availableBuckets.find(bucket => bucket.idBucket === bucketId));
     } else {
-      return of(new Bucket(0,  new Date(), 0));
+      return of(new Bucket(0,  new Date(), 0, new Friend()));
     }
   }
 
@@ -93,18 +105,24 @@ export class BucketService {
   }
 
   public initBucket(mailFriend: string) {
-    this.httpClient.post<Bucket>( environment.apiUrl + '/addBucket/' + mailFriend, null /*{
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      }
-    }*/).subscribe((bucket) => {
+    this.httpClient.post<Bucket>( environment.apiUrl + '/addBucket/' + mailFriend, null ).subscribe(
+      (bucket) => {
         this.bucketFriend = bucket;
-        console.log('bucketFriend ' + bucket.idBucket);
+        console.log('bucketFriend idBucket: ' + bucket.friend.mailFriend);
       }
-      //(error) => {
-      //  console.log('init bucket pb:', error);
-      //}
     );
+  }
+
+  /**
+   * Fonction de suppression
+   * @param idBucket
+   */
+  public deleteBucket(idBucket: number) {
+    this.httpClient.delete<Bucket>(environment.apiUrl + '/deleteBucket/' + idBucket).subscribe(
+    );
+  }
+
+  public addItemToBucket(idItem: number, idBucket: Number) {
+
   }
 }

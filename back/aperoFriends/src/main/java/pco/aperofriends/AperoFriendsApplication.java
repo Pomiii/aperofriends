@@ -37,19 +37,4 @@ public class AperoFriendsApplication implements CommandLineRunner {
 		
 	}
 	 
-	 /*
-	 * Init method that loads some data in database.
-	 * @param params
-	 * @throws Exception
-	 
-	 @Override
-	 public void run(String... params) throws Exception {
-	        Friend admin = new Friend("pom@test.fr", "123456", new ArrayList<>(Arrays.asList(Role.ROLE_ADMIN, Role.ROLE_FRIEND)));
-	        friendService.signup(admin);
-
-	        Friend user = new Friend("lmf@test.com", "azerty", new ArrayList<>(Arrays.asList(Role.ROLE_FRIEND)));
-	        friendService.signup(user);
-
-	    }
-*/
 }

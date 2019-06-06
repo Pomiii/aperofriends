@@ -53,7 +53,6 @@ export class AccountFriendsComponent implements OnInit {
     } else {
       this.editedAccountFriend = this.accountFriendService.availableAccountFriends.find((af => af.idAF === this.idAF));
       this.editAccountFriend = false;
-      this.accountFriendList = this.editedAccountFriend.accountFriendTab;
     }
     this.router.navigate(['/accountFriend']);
 

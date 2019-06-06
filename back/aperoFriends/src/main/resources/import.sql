@@ -14,6 +14,3 @@ INSERT INTO `aperofriends`.`item` (`id_item`, `name_item`, `pic_item`,`price_ite
 
 INSERT INTO `aperofriends`.`role` (`id_role`, `role`) VALUES ('1', 'admin');
 INSERT INTO `aperofriends`.`role` (`id_role`, `role`) VALUES ('2', 'friend');
-
-INSERT INTO `aperofriends`.`friend` (`id_friend`, `firstname_friend`, `lastname_friend`, `mail_friend`, `pass_friend`, `id_role`) VALUES ('1', 'KHAM', 'Pom', 'pom@test.fr', '123456', '1');
-INSERT INTO `aperofriends`.`friend` (`id_friend`, `firstname_friend`, `lastname_friend`, `mail_friend`, `pass_friend`, `id_role`) VALUES ('2', 'FRAP', 'Mel', 'lmf@test.com', 'azerty', '2');

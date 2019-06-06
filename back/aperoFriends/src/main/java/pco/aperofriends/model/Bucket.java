@@ -1,21 +1,24 @@
 package pco.aperofriends.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -37,23 +40,40 @@ public class Bucket implements Serializable {
 
 	private int total;
 
-	//bi-directional many-to-one association to AccountFriend
-	@JsonBackReference
+	//bi-directional many-to-one association to Friend
 	@ManyToOne
-	@JoinColumn(name="idFriend", insertable=false, updatable=false)
+	@JoinColumn(name="id_friend")
 	private Friend friend;
 
 	//bi-directional many-to-one association to Item	
-	@JsonIgnore
-	@OneToMany(mappedBy="bucket")
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name="bucket_has_items"
+        , joinColumns={
+            @JoinColumn(name="bucket_id_bucket")
+            }
+        , inverseJoinColumns={
+            @JoinColumn(name="item_id_item")
+            }
+        )
 	private List<Item> items;
 
 	public Bucket() {
+	}
+	
+	public Bucket(Friend friend) {
+		this.friend = friend;
+		this.items = new ArrayList<Item>();
+	}
+	
+	public Bucket(List<Item> items) {
+		this.items = items;
 	}
 
 	public Bucket(Friend friend, Date date) {
 		this.friend = friend;
 		this.date = date;
+		this.items = new ArrayList<Item>();
 	}
 
 	public int getIdBucket() {
@@ -99,14 +119,12 @@ public class Bucket implements Serializable {
     public Item addItem(Item item) {
         getItems().add(item);
         item.setBucket(this);
-
         return item;
     }
 
     public Item removeItem(Item item) {
         getItems().remove(item);
         item.setBucket(null);
-
         return item;
     }
 

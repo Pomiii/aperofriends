@@ -1,3 +1,33 @@
-<p>
-  bucket-account works!
-</p>
+<div class="container-fluid">
+  <h3>List Bucket</h3>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>ID Bucket</th>
+      <th>Date</th>
+      <th>Total</th>
+      <th>Friend</th>
+      <th>Item List</th>
+      <th>Editer</th>
+      <th>Supprimer</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let bucket of availableBuckets">
+      <td>{{ bucket.idBucket }}</td>
+      <td>{{ bucket.date }}</td>
+      <td>{{ bucket.total }}</td>
+      <td>{{ bucket.friend.firstnameFriend }} {{bucket.friend.lastnameFriend}}</td>
+      <td></td>
+      <td>
+        <button type="submit" class="btn btn-primary" (click)="onSave()" >éditer</button>
+      </td>
+      <td>
+        <button type="submit" class="btn btn-primary" (click)="onDelete(bucket.idBucket)" >supprimer</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

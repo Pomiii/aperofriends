@@ -33,7 +33,7 @@ export class ItemService {
   }
 
   /**
-   * La fonction getAllItem() est privée car elle n'a besoin d'être appellée que dans le service.
+   * La fonction getAllItem() est privée car elle n'a pas besoin d'être appellée que dans le service.
    */
   public getAllItem(): Observable<Item[]> {
     console.log('getAllItems' + this.availableItems$);

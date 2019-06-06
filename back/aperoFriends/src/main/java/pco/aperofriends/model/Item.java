@@ -1,12 +1,15 @@
 package pco.aperofriends.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 
@@ -34,9 +37,17 @@ public class Item implements Serializable {
 
 	//bi-directional many-to-one association to Bucket
 	@JsonIgnore
-	@ManyToOne
-	@JoinColumn(name="Bucket", insertable=false, updatable=false)
-	private Bucket bucket;
+	@ManyToMany
+	@JoinTable(
+		name="itemList"
+		, joinColumns={
+			@JoinColumn(name="id_bucket")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="id_item")
+			}
+		)
+	private List<Bucket> buckets;
 
 	//bi-directional many-to-one association to TypeItem
 	@ManyToOne
@@ -82,7 +93,7 @@ public class Item implements Serializable {
 	public void setPriceItem(int priceItem) {
 		this.priceItem = priceItem;
 	}
-
+/*
 	public Bucket getBucket() {
 		return this.bucket;
 	}
@@ -90,6 +101,15 @@ public class Item implements Serializable {
 	public void setBucket(Bucket bucket) {
 		this.bucket = bucket;
 	}
+*/	
+	public List<Bucket> getBuckets() {
+		return buckets;
+	}
+
+	public void setBuckets(List<Bucket> buckets) {
+		this.buckets = buckets;
+	}
+
 
 	public TypeItem getTypeItem() {
 		return this.typeItem;

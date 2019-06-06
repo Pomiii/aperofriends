@@ -1,8 +1,9 @@
 <div class="my-items mt-2 mb-4">
   <h6>Mon Panier <img src="/assets/images/panier.png" style="width: 2rem;"/></h6>
+  <span>Id Bucket TODO</span>
 
   <table class="table table-striped" style="height: 35rem">
-        <thead>
+    <thead>
         <tr>
           <th>Article</th>
           <th>Prix </th>
@@ -11,7 +12,7 @@
         </thead>
 
         <tbody>
-        <tr *ngFor="let item of itemList">
+        <tr *ngFor="let item of friendBucket">
           <td>{{ item.nameItem }}</td>
           <td>{{ item.priceItem }} €</td>
           <td>

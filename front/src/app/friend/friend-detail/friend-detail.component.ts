@@ -56,7 +56,6 @@ export class FriendDetailComponent implements OnInit {
     } else {
       this.editedFriend = this.friendService.availableFriends.find((fri => fri.idFriend === this.idFriend));
       this.editFriend = false;
-      this.friendList = this.editedFriend.friendTab;
     }
   }
 
@@ -68,6 +67,6 @@ export class FriendDetailComponent implements OnInit {
     console.log('availableFriends ???? ' + this.availableFriends[0].idFriend);
     this.availableFriends.splice(this.availableFriends.findIndex((FriId) => FriId.idFriend === idFriend), 1);
     this.friendService.deleteFriend(idFriend);
-    this.router.navigate(['/friend-forms']);
+    this.router.navigate(['/friend']);
   }
 }

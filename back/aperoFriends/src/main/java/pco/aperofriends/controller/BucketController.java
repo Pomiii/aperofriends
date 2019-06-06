@@ -22,6 +22,7 @@ import pco.aperofriends.model.Bucket;
 import pco.aperofriends.model.Friend;
 import pco.aperofriends.repository.BucketRepository;
 import pco.aperofriends.repository.FriendRepository;
+import pco.aperofriends.repository.ItemRepository;
 import pco.aperofriends.service.BucketService;
 import pco.aperofriends.service.FriendService;
 
@@ -33,6 +34,9 @@ public class BucketController {
 	
 	@Autowired
 	FriendRepository friendRepository;
+	
+	@Autowired
+	ItemRepository itemRepository;
 	
 	private BucketService bucketService;
 	private FriendService friendService;
@@ -62,28 +66,12 @@ public class BucketController {
 		return ResponseEntity.status(HttpStatus.OK).body(bucketId);
 	}
 	
-	/*
-	 * Methode qui permet d'ajouter un friend dans la table friend
-	 * @param request
-	 * @return createfriend
-	 
-	@PostMapping("/createBucket")
-	// @PreAuthorize("hasRole('ADMIN') OR hasRole('GESTIONNAIRE')")
-	public ResponseEntity<?> createBucket() {
-		try {
-			return ResponseEntity.status(HttpStatus.OK)
-                .body(this.bucketService.saveBucket());
-		} catch (Exception e) {
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-	    }
-	}*/
-	
 	@PostMapping("/addBucket/{mailFriend}")
 	public ResponseEntity<Bucket> addBucket(@PathVariable String mailFriend) {
-		Logger logger = Logger.getLogger("addBucket Try-Catch Erreur");
-		
+		Logger logger = Logger.getLogger("addBucket Try-Catch Erreur");	
 		try {
 			Friend friend = this.friendService.findFriendByMailFriend(mailFriend);
+			System.out.println("---------- BUCKET idFriend --------- " + friend.getIdFriend());
 			return ResponseEntity.status(HttpStatus.OK).body(this.bucketService.saveBucket(new Bucket(friend, new Date())));
 		} catch(Exception e) {
 			logger.log(Level.SEVERE,e.toString());
@@ -106,10 +94,11 @@ public class BucketController {
 
 	/**
 	 * 
-	 * @param idFriend
-	 * @return friend
+	 * @param idBucket
+	 * @return bucket
 	 */
 	@DeleteMapping("/deleteBucket/{idBucket}")
+	//@PreAuthorize("hasRole('admin')")
 	public ResponseEntity<?> deleteBucket(@PathVariable Integer idBucket) {
 		try {
 			bucketRepository.deleteById(idBucket);
@@ -120,5 +109,17 @@ public class BucketController {
 		}
 	}
 	
+	@PostMapping("/addItemToBucket/{idItem}")
+	public ResponseEntity<?> addItemToBucket(@PathVariable Integer idBucket,
+											 @PathVariable Integer idItem){
+		try {
+			itemRepository.findById(idItem);
+			bucketRepository.findById(idBucket);
+			return ResponseEntity.status(HttpStatus.OK)
+	                .body(null);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
+	}
 }
 

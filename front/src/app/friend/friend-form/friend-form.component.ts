@@ -39,8 +39,6 @@ export class FriendFormComponent implements OnInit {
 
   ngOnInit() {
     this.newFriend = new Friend(0, '' , '', '', '', null, null);
-
-    this.router.navigate(['/friend-form']);
   }
 
   addFriend() {

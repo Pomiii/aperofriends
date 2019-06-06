@@ -1,0 +1,16 @@
+.col-sm {
+  height: 700px;
+  padding-bottom: 1rem;
+}
+
+.row {
+  font-size: 0.8rem;
+}
+
+.btn {
+  background: linear-gradient(135deg,#264785 -10%,#1f3460 46%,#7db9e8);
+  font-size: 0.8rem;
+  height: 1.5rem;
+  box-shadow: -5px 5px 5px black;
+  margin: 1rem;
+}

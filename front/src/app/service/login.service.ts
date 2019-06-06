@@ -35,19 +35,21 @@ export class LoginService {
       token => {
         sessionStorage.setItem(environment.accessToken, token.token);
 
-        this.getUserRoles();
-        this.bucketService.initBucket("pom@test.com");
+        this.bucketService.initBucket(friend.mailFriend);
+        console.log('SignIn: ' + friend.mailFriend);
 
         this.router.navigate(['']);
       },
-      error => {console.log('Error while Sign In');
-      this.signInError = true;
+      error => {
+        console.log('Error while Sign In');
+        this.signInError = true;
       });
   }
 
   signUp(friend: Friend) {
     this.httpClient.post<Friend>( environment.apiUrl + '/sign-up', friend).subscribe(
       newFriend => {
+        console.log('SignUp: ' + friend.mailFriend + ' ' + friend.idFriend  + ' ' + friend.firstnameFriend);
       },
       error => {
         console.log('Error while Sign Up');
@@ -57,7 +59,6 @@ export class LoginService {
 
    signOut() {
     sessionStorage.removeItem(environment.accessToken);
-    this.signInError = true;
     this.router.navigate(['']);
    }
 
