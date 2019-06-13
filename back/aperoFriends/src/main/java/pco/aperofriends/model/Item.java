@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
@@ -37,16 +36,7 @@ public class Item implements Serializable {
 
 	//bi-directional many-to-one association to Bucket
 	@JsonIgnore
-	@ManyToMany
-	@JoinTable(
-		name="itemList"
-		, joinColumns={
-			@JoinColumn(name="id_bucket")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="id_item")
-			}
-		)
+	@ManyToMany(mappedBy="items")
 	private List<Bucket> buckets;
 
 	//bi-directional many-to-one association to TypeItem

@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
@@ -47,16 +46,7 @@ public class Friend implements Serializable {
 	private Role role;
 	
 	//bi-directional many-to-many association to AccountFriend
-	@ManyToMany
-	@JoinTable(
-		name="FriendList"
-		, joinColumns={
-			@JoinColumn(name="id_friend")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="idaf")
-			}
-		)
+	@ManyToMany(mappedBy="friends")
 	private List<AccountFriend> accountFriends;
 	
 	public Friend() {

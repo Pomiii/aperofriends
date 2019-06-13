@@ -63,7 +63,6 @@ export class ItemFormComponent implements OnInit {
     this.typeItemList = this.typeItemService.availableTypeItems$;
 
     this.availableTypeItems = this.typeItemService.availableTypeItems;
-    console.log('Item Form availableTypeItems ' + this.availableTypeItems);
 
     if (!this.id) {
       this.editItem = true;

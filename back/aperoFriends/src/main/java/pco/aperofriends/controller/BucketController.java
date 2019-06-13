@@ -115,11 +115,19 @@ public class BucketController {
 		try {
 			itemRepository.findById(idItem);
 			bucketRepository.findById(idBucket);
-			return ResponseEntity.status(HttpStatus.OK)
-	                .body(null);
+			return ResponseEntity.status(HttpStatus.OK).body(this.bucketService.saveBucket(new Bucket(new Friend(), new Date())));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 		}
 	}
+	
+/*	@GetMapping("/friendFromId/{idFriend}")
+    public String getfriendFromId(@PathVariable int idFriend) {
+    
+        String nameFriend = this.friendRepository.findById(idFriend).get().;
+        System.out.println("----------- getfriendFromId ------------ " + );
+        return nameFriend;
+        
+    }*/
 }
 

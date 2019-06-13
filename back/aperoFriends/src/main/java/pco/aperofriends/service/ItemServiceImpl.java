@@ -39,7 +39,6 @@ public class ItemServiceImpl implements ItemService {
         									"Pom",
         									this.typeItemRepository.findByType("alccol"),
         									1));
-    
     }
 	
 	@Override

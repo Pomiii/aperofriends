@@ -36,7 +36,6 @@ export class ItemComponent implements OnInit {
     );
 
     this.itemList = this.itemService.availableItems$;
-    console.log('this.itemList : ' + this.itemList)
 
     this.availableItems = this.itemService.availableItems;
 

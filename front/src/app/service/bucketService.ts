@@ -35,7 +35,7 @@ export class BucketService {
     }
   }
 
-  public bucketItemsSubject: BehaviorSubject<Item[]> = new BehaviorSubject(null);
+/*  public bucketItemsSubject: BehaviorSubject<Item[]> = new BehaviorSubject(null);
 
   public setbucketItemsSubject(value: Item[]){
     if (value) {
@@ -43,7 +43,7 @@ export class BucketService {
     } else {
       this.bucketItemsSubject.next(null);
     }
-  }
+  }*/
 
   /**
    * La fonction getAllBucket() est privée car elle n'a besoin d'être appellée que dans le service.
@@ -125,4 +125,16 @@ export class BucketService {
   public addItemToBucket(idItem: number, idBucket: Number) {
 
   }
+
+ /* public friendFromId(friendId){
+
+    this.httpClient.get<Friend>(environment.apiUrl + 'friendFromId/' + friendId).subscribe(
+      (resultat) => {
+        this.friendName = resultat.firstnameFriend;
+        console.log(this.friendName);
+      }
+    );
+    return this.friendName;
+
+  }*/
 }

@@ -15,11 +15,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /**
@@ -50,10 +47,10 @@ public class Bucket implements Serializable {
     @JoinTable(
         name="bucket_has_items"
         , joinColumns={
-            @JoinColumn(name="bucket_id_bucket")
+            @JoinColumn(name="id_bucket")
             }
         , inverseJoinColumns={
-            @JoinColumn(name="item_id_item")
+            @JoinColumn(name="id_item")
             }
         )
 	private List<Item> items;
@@ -117,15 +114,15 @@ public class Bucket implements Serializable {
     }
 
     public Item addItem(Item item) {
-        getItems().add(item);
-        item.setBucket(this);
-        return item;
-    }
-
+		getItems().add(item);
+		item.setBuckets(null);
+		return item;
+	}
+    
     public Item removeItem(Item item) {
         getItems().remove(item);
-        item.setBucket(null);
+        item.setBuckets(null);
         return item;
     }
-
+    
 }

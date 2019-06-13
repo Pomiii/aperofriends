@@ -6,19 +6,19 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-item nav-link" routerLink="/item-detail" >Gestion des Produits </a>
-        <a class="nav-item nav-link" routerLink="/friend" > Gestion des Amis </a>
+        <a class="nav-item nav-link" routerLink="/friend-detail" > Gestion des Amis </a>
         <a class="nav-item nav-link" routerLink="/accountFriend" >Compte des Amis </a>
         <a class="nav-item nav-link" routerLink="/bucket-account" >Panier des Amis </a>
-        <a class="nav-item nav-link" routerLink="/login" > Login </a>
-        <a class="nav-item nav-link" routerLink="/friend-form" >Inscription </a>
-        <a class="nav-item nav-link" routerLink="" (click)="loginService.signOut()">Déconnexion</a>
       </div>
     </div>
     <div class="float-right">
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control-sm mr-sm-2" type="search" placeholder="rechercher" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
-      </form>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" routerLink="/login" > Login </a>
+          <a class="nav-item nav-link" routerLink="/friend-form" >Inscription </a>
+          <a class="nav-item nav-link" routerLink="" (click)="loginService.signOut()">Déconnexion</a>
+        </div>
+      </div>
     </div>
   </nav>
 

@@ -1,7 +1,6 @@
 .container {
   font-size: 0.8rem;
   width: 30rem;
-  height: auto;
   overflow: auto;
   border: 2px solid;
   border-radius: 10px;

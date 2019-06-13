@@ -34,7 +34,6 @@ export class FriendService {
    * La fonction getAllFriend() est privée car elle n'a besoin d'être appellée que dans le service.
    */
   public getAllFriend(): Observable<Friend[]> {
-    console.log('getAllItems' + this.availableFriends);
     return this.httpClient.get<Friend[]>(environment.apiUrl + '/friends');
   }
 

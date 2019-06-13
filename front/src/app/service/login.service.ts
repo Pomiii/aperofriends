@@ -59,6 +59,7 @@ export class LoginService {
 
    signOut() {
     sessionStorage.removeItem(environment.accessToken);
+    console.log('Sign Out ')
     this.router.navigate(['']);
    }
 

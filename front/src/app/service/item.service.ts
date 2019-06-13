@@ -36,7 +36,6 @@ export class ItemService {
    * La fonction getAllItem() est privée car elle n'a pas besoin d'être appellée que dans le service.
    */
   public getAllItem(): Observable<Item[]> {
-    console.log('getAllItems' + this.availableItems$);
     return this.httpClient.get<Item[]>('http://localhost:8080/aperofriends/items');
   }
 
@@ -73,9 +72,9 @@ export class ItemService {
   public createItem(newItem: Item, typeItemString: string) {
     console.log('newItem ++++++ ' + newItem);
     this.httpClient.post<Item>(environment.apiUrl + '/createItem/' + typeItemString, newItem).subscribe(
-      bite => {
-        console.log('newItem ---', bite);
-        this.availableItems.push(bite);
+      item => {
+        console.log('newItem ---', item);
+        this.availableItems.push(item);
         this.availableItems$.next(this.availableItems);
       }
     );

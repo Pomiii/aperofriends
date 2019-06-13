@@ -43,10 +43,10 @@ public class AccountFriend implements Serializable {
     @JoinTable(
         name="friend_has_account_friend"
         , joinColumns={
-            @JoinColumn(name="friend_id_friend")
+            @JoinColumn(name="idFriend")
             }
         , inverseJoinColumns={
-            @JoinColumn(name="account_friend_idaf")
+            @JoinColumn(name="idAf")
             }
         )
 	private List<Friend> friends;

@@ -50,7 +50,7 @@ public class FriendController {
 	}
 	
 
-	@PreAuthorize("hasRole('admin')")
+	//@PreAuthorize("hasRole('admin')")
 	@GetMapping("/friend/{idFriend}")
 	public ResponseEntity<?> getOnefriend(@PathVariable Integer idFriend) {
 		Optional<Friend> friendId = friendRepository.findById(idFriend);
