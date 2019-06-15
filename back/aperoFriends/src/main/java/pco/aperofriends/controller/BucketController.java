@@ -1,5 +1,6 @@
 package pco.aperofriends.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import pco.aperofriends.model.Bucket;
 import pco.aperofriends.model.Friend;
+import pco.aperofriends.model.Item;
 import pco.aperofriends.repository.BucketRepository;
 import pco.aperofriends.repository.FriendRepository;
 import pco.aperofriends.repository.ItemRepository;
@@ -85,11 +87,19 @@ public class BucketController {
 	 * @param model
 	 * @return updateFriend
 	 */
-	@PutMapping("/updateBucket")
+	@PutMapping("/updateBucket/{idFriend}")
 	// @PreAuthorize("hasRole('ADMIN') OR hasRole('GESTIONNAIRE')")
-	public ResponseEntity<?> updateBucket(@RequestBody Bucket bucket) {
-		Bucket updateBucket = bucketRepository.save(bucket);
-		return ResponseEntity.status(HttpStatus.CREATED).body(updateBucket);
+	public ResponseEntity<?> updateBucket(@RequestBody Item[] items,
+										  @PathVariable int idFriend) {
+		Friend friend = this.friendRepository.findById(idFriend).get();
+		List<Item> addItem = new ArrayList<Item>();
+		System.out.println("-------------------- friend Name ----------------" + friend.getFirstnameFriend());
+		System.out.println("-------------------- item.length ----------------" + items.length);
+		for (Item i : items) { 
+			addItem.add(i);
+		}
+		Bucket bucket = new Bucket(friend, addItem);
+		return ResponseEntity.status(HttpStatus.OK).body(this.bucketRepository.save(bucket));
 	}
 
 	/**
@@ -121,13 +131,5 @@ public class BucketController {
 		}
 	}
 	
-/*	@GetMapping("/friendFromId/{idFriend}")
-    public String getfriendFromId(@PathVariable int idFriend) {
-    
-        String nameFriend = this.friendRepository.findById(idFriend).get().;
-        System.out.println("----------- getfriendFromId ------------ " + );
-        return nameFriend;
-        
-    }*/
 }
 

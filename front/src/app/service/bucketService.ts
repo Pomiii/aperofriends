@@ -86,7 +86,7 @@ export class BucketService {
    * @param newBucket
    */
   public createBucket(newBucket: Bucket) {
-    this.httpClient.post<Bucket>(environment.apiUrl + '/createBucket', newBucket).subscribe(
+    this.httpClient.post<Bucket>(environment.apiUrl + '/addBucket', newBucket).subscribe(
       newBucket => {
         this.availableBuckets.push(newBucket);
         this.availableBuckets$.next(this.availableBuckets);

@@ -38,7 +38,6 @@ export class LoginService {
       token => {
         sessionStorage.setItem(environment.accessToken, token.token);
 
-        this.bucketService.initBucket(friend.mailFriend);
         console.log('SignIn: ' + friend.mailFriend);
         this.bucketService.setBucketItemsSubject(this.bucketService.listItemValues);
         this.router.navigate(['']);

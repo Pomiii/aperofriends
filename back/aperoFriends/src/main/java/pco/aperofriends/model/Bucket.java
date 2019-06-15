@@ -31,11 +31,27 @@ public class Bucket implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idBucket;
+	
+	private String nameBucket;
+
+	public String getNameBucket() {
+		return nameBucket;
+	}
+
+	public void setNameBucket(String nameBucket) {
+		this.nameBucket = nameBucket;
+	}
 
 	@Temporal(TemporalType.DATE)
 	private Date date;
 
 	private int total;
+	
+	private String event;
+	
+	private String address;
+	
+	private String phone;
 
 	//bi-directional many-to-one association to Friend
 	@ManyToOne
@@ -63,6 +79,11 @@ public class Bucket implements Serializable {
 		this.items = new ArrayList<Item>();
 	}
 	
+	public Bucket(Friend friend, List<Item> items) {
+		this.friend = friend;
+		this.items = items;
+	}
+		
 	public Bucket(List<Item> items) {
 		this.items = items;
 	}
@@ -71,6 +92,30 @@ public class Bucket implements Serializable {
 		this.friend = friend;
 		this.date = date;
 		this.items = new ArrayList<Item>();
+	}
+
+	public String getEvent() {
+		return event;
+	}
+
+	public void setEvent(String event) {
+		this.event = event;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	public int getIdBucket() {

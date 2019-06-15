@@ -58,11 +58,16 @@ export class BucketFormComponent implements OnInit {
       bucket.phone = this.bucketForm.value.phone;
       this.bucketService.createBucket(bucket);
       this.bucketCreated = true;
-      console.log('Sign Up new Friend = ', bucket.event);
+      console.log('Create new Bucket = ', bucket.nameBucket);
 
     // Pour laisser le temps de charger les données
-    setTimeout(() => this.router.navigate(['/friend-form']), 300);
+    setTimeout(() => this.router.navigate(['']), 300);
 
+  }
+
+  onSelect(idBucket : number) {
+    this.bucketService.findBucket(idBucket);
+    console.log('Select Bucket id Bucket : ' + idBucket);
   }
 
 }

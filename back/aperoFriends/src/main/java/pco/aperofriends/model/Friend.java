@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -44,10 +43,6 @@ public class Friend implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="id_role")
 	private Role role;
-	
-	//bi-directional many-to-many association to AccountFriend
-	@ManyToMany(mappedBy="friends")
-	private List<AccountFriend> accountFriends;
 	
 	public Friend() {
 		
@@ -120,14 +115,6 @@ public class Friend implements Serializable {
 
 	public void setPassFriend(String passFriend) {
 		this.passFriend = passFriend;
-	}
-
-	public List<AccountFriend> getAccountFriends() {
-		return this.accountFriends;
-	}
-
-	public void setAccountFriends(List<AccountFriend> accountFriends) {
-		this.accountFriends = accountFriends;
 	}
 	
 	public List<Bucket> getBuckets() {
