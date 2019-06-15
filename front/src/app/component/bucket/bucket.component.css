@@ -1,0 +1,15 @@
+.table {
+  padding: 1rem;
+  height: 35rem
+}
+
+.btn {
+  font-size: 0.7rem;
+  background: linear-gradient(135deg,#264785 -10%,#1f3460 46%,#7db9e8);
+  box-shadow: -5px 5px 5px #333;
+}
+
+
+tr {
+  height: 2rem;
+}

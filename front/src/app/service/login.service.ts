@@ -8,11 +8,14 @@ import * as jwt_decode from 'jwt-decode';
 import {BehaviorSubject} from 'rxjs';
 import {Bucket} from '../model/bucket';
 import {BucketService} from './bucketService';
+import {Item} from '../model/item';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
+  itemList : Item[] = [];
+
   signInError = false;
 
   signUpError = false;
@@ -37,7 +40,7 @@ export class LoginService {
 
         this.bucketService.initBucket(friend.mailFriend);
         console.log('SignIn: ' + friend.mailFriend);
-
+        this.bucketService.setBucketItemsSubject(this.bucketService.listItemValues);
         this.router.navigate(['']);
       },
       error => {

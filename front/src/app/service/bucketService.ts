@@ -35,15 +35,17 @@ export class BucketService {
     }
   }
 
-/*  public bucketItemsSubject: BehaviorSubject<Item[]> = new BehaviorSubject(null);
+  public bucketItemsSubject: BehaviorSubject<Item[]> = new BehaviorSubject(null);
 
-  public setbucketItemsSubject(value: Item[]){
+  public listItemValues: Item[] = [];
+
+  public setBucketItemsSubject(value: Item[]) {
     if (value) {
       this.bucketItemsSubject.next(value);
     } else {
       this.bucketItemsSubject.next(null);
     }
-  }*/
+  }
 
   /**
    * La fonction getAllBucket() est privée car elle n'a besoin d'être appellée que dans le service.
@@ -76,7 +78,7 @@ export class BucketService {
       }
       return of(this.availableBuckets.find(bucket => bucket.idBucket === bucketId));
     } else {
-      return of(new Bucket(0,  new Date(), 0, new Friend()));
+      return of(new Bucket(0, '', new Date(), 0, new Friend()));
     }
   }
 
@@ -96,10 +98,20 @@ export class BucketService {
    * Fonction de mise à jour d'un Bucket
    * @param bucket
    */
-  public updateBucket(bucket: Bucket) {
-    this.httpClient.put<Bucket>(environment.apiUrl + '/updateBucket', bucket).subscribe(
-      updatedBucket => {
-        this.availableBuckets$.next(this.availableBuckets);
+  public updateBucket() {
+    const bucket: Bucket = new Bucket(0, '', new Date(), 0, new Friend(), '', '', '');
+    const friend: Friend = new Friend();
+    friend.firstnameFriend = 'Pom';
+    this.bucketItemsSubject.subscribe(
+      (res) => {
+        bucket.friend = friend;
+        bucket.itemList = res;
+        this.httpClient.put<Bucket>(environment.apiUrl + '/updateBucket/' + friend.idFriend, res).subscribe(
+          updatedBucket => {
+            console.log('idBucket: ' + updatedBucket.idBucket);
+            this.availableBuckets$.next(this.availableBuckets);
+          }
+        );
       }
     );
   }
@@ -122,19 +134,4 @@ export class BucketService {
     );
   }
 
-  public addItemToBucket(idItem: number, idBucket: Number) {
-
-  }
-
- /* public friendFromId(friendId){
-
-    this.httpClient.get<Friend>(environment.apiUrl + 'friendFromId/' + friendId).subscribe(
-      (resultat) => {
-        this.friendName = resultat.firstnameFriend;
-        console.log(this.friendName);
-      }
-    );
-    return this.friendName;
-
-  }*/
 }

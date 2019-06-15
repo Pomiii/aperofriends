@@ -1,16 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {ItemComponent} from './item/item.component';
-import {ItemDetailComponent} from './item/item-detail/item-detail.component';
-import {FriendComponent} from './friend/friend.component';
-import {BucketComponent} from './bucket/bucket.component';
-import {AccountFriendsComponent} from './account-friends/account-friends.component';
-import {LoginComponent} from './login/login.component';
-import {FriendFormComponent} from './friend/friend-form/friend-form.component';
-import {AdminGuard} from './guards/admin.guard';
-import {FriendDetailComponent} from './friend/friend-detail/friend-detail.component';
-import {ItemFormComponent} from './item/item-form/item-form.component';
-import {BucketAccountComponent} from './bucket/bucket-account/bucket-account.component';
+import {ItemComponent} from './component/item/item.component';
+import {ItemDetailComponent} from './component/item/item-detail/item-detail.component';
+import {FriendComponent} from './component/friend/friend.component';
+import {BucketComponent} from './component/bucket/bucket.component';
+import {LoginComponent} from './component/login/login.component';
+import {FriendFormComponent} from './component/friend/friend-form/friend-form.component';
+import {AdminGuard} from './security/guards/admin.guard';
+import {FriendDetailComponent} from './component/friend/friend-detail/friend-detail.component';
+import {ItemFormComponent} from './component/item/item-form/item-form.component';
+import {BucketAccountComponent} from './component/bucket/bucket-account/bucket-account.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -21,7 +20,6 @@ const routes: Routes = [
   {path: 'friend-detail', component: FriendDetailComponent},
   {path: 'friend-form', component: FriendFormComponent},
   {path: 'bucket', component: BucketComponent},
-  {path: 'accountFriend', component: AccountFriendsComponent},
   {path: 'bucket-account', component: BucketAccountComponent}
 ];
 

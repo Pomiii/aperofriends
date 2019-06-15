@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AlertModule } from 'ngx-bootstrap';
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent } from './body/header/header.component';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
@@ -20,23 +20,23 @@ import { SortableModule } from 'ngx-bootstrap/sortable';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { FooterComponent } from './footer/footer.component';
-import { ItemComponent } from './item/item.component';
-import { LoginComponent } from './login/login.component';
+import { FooterComponent } from './body/footer/footer.component';
+import { ItemComponent } from './component/item/item.component';
+import { LoginComponent } from './component/login/login.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FriendComponent } from './friend/friend.component';
-import { ItemDetailComponent } from './item/item-detail/item-detail.component';
-import { BucketComponent } from './bucket/bucket.component';
-import { BucketAccountComponent } from './bucket/bucket-account/bucket-account.component';
-import { AccountFriendsComponent } from './account-friends/account-friends.component';
-import { NavComponent } from './nav/nav.component';
-import { ItemFormComponent } from './item/item-form/item-form.component';
-import { FriendFormComponent } from './friend/friend-form/friend-form.component';
+import { FriendComponent } from './component/friend/friend.component';
+import { ItemDetailComponent } from './component/item/item-detail/item-detail.component';
+import { BucketComponent } from './component/bucket/bucket.component';
+import { BucketAccountComponent } from './component/bucket/bucket-account/bucket-account.component';
+import { NavComponent } from './body/nav/nav.component';
+import { ItemFormComponent } from './component/item/item-form/item-form.component';
+import { FriendFormComponent } from './component/friend/friend-form/friend-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { JwtInterceptor } from './http-interceptor/jwt.interceptor';
-import { FriendGuard } from './guards/friend.guard';
-import { AdminGuard } from './guards/admin.guard';
-import { FriendDetailComponent } from './friend/friend-detail/friend-detail.component';
+import { JwtInterceptor } from './security/http-interceptor/jwt.interceptor';
+import { FriendGuard } from './security/guards/friend.guard';
+import { AdminGuard } from './security/guards/admin.guard';
+import { FriendDetailComponent } from './component/friend/friend-detail/friend-detail.component';
+import { BucketFormComponent } from './component/bucket/bucket-form/bucket-form.component';
 
 @NgModule({
   declarations: [
@@ -49,11 +49,11 @@ import { FriendDetailComponent } from './friend/friend-detail/friend-detail.comp
     ItemDetailComponent,
     BucketComponent,
     BucketAccountComponent,
-    AccountFriendsComponent,
     NavComponent,
     ItemFormComponent,
     FriendFormComponent,
     FriendDetailComponent,
+    BucketFormComponent,
   ],
   imports: [
     HttpClientModule,

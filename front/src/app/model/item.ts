@@ -7,6 +7,7 @@ export class Item {
   constructor(public nameItem?: string,
               public picItem?: string,
               public typeItem?: TypeItem,
-              public priceItem?: number) {}
+              public priceItem?: number
+  ) {}
 
 }

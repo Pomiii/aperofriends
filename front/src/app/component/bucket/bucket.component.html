@@ -1,0 +1,33 @@
+<div class="my-items mt-2 mb-4">
+  <h5>Panier de <img src="/assets/images/panier.png" style="width: 2rem;"/> </h5>
+  <span>Evènement : </span>
+
+  <table class="table table-striped">
+    <thead>
+        <tr>
+          <th>Article</th>
+          <th>Prix </th>
+          <th>X</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngFor="let item of bucketItemsSubject | async " style="height: 2rem;">
+          <td>{{ item.nameItem }}</td>
+          <td>{{ item.priceItem }} €</td>
+          <td>
+            <a (click)="onDelete()">X</a>
+          </td>
+        </tr>
+        </tbody>
+
+        <tfoot>
+        <tr>
+          <th>Total :</th>
+          <th>Somme des Prix TODO</th>
+        </tr>
+        </tfoot>
+  </table>
+
+  <button type="submit" class="btn btn-primary align-items-end" (click)="onPay()" >payer</button>
+</div>

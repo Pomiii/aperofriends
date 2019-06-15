@@ -1,0 +1,39 @@
+<div class="container-fluid">
+  <h3>List Bucket</h3>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>ID Bucket</th>
+      <th>Date</th>
+      <th>Total</th>
+      <th>Panier Apéro créé par :</th>
+      <th>Item List</th>
+      <th>Evènement</th>
+      <th>Adresse</th>
+      <th>Téléphone</th>
+      <th>Editer</th>
+      <th>Supprimer</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let bucket of availableBuckets">
+      <td>{{ bucket.idBucket }}</td>
+      <td>{{ bucket.date }}</td>
+      <td>{{ bucket.total }}</td>
+      <td>{{ bucket.friend.firstnameFriend }} {{bucket.friend.lastnameFriend}}</td>
+      <td>{{ bucket.itemList}}</td>
+      <td>{{ bucket.event }}</td>
+      <td>{{ bucket.address }}</td>
+      <td>{{ bucket.phone }}</td>
+      <td>
+        <button type="submit" class="btn btn-primary" (click)="onSave()" >éditer</button>
+      </td>
+      <td>
+        <button type="submit" class="btn btn-primary" (click)="onDelete(bucket.idBucket)" >supprimer</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

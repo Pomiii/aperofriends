@@ -1,0 +1,53 @@
+<div class="container text-center" >
+  <h4 class="h4 mb-2 pt-2 pb-2 font-weight-bold text-center">Sélectionnez votre évènement :</h4>
+  <form>
+    <div class="form-group">
+      <label for="bucket">Choisissez votre panier : </label>
+      <select class="form-control" id="bucket">
+        <option *ngFor="let bucket of availableBuckets"> {{bucket.friend.firstnameFriend}}</option>
+      </select>
+    </div>
+  </form>
+
+  <h4 class="h4 mb-2 pt-2 pb-2 font-weight-bold text-center"> Ou </h4>
+
+
+  <h4 class="h4 mb-2 pt-2 pb-2 font-weight-bold text-center">Saisissez votre évènement :</h4>
+  <form [formGroup]="bucketForm" noValidate>
+    <div class="form-group">
+      <label for="nameBucket">Panier : </label>
+      <input type="text" class="form-control-sm" id="nameBucket"
+             formControlName="nameBucket"
+             placeholder=""
+             name="nameBucket" required><!--[(ngModel)]="editedFriend.mailFriend"-->
+      <!--span *ngIf="loginService.signUpError"> Cet Email est déjà utilisé</-->
+    </div>
+    <div class="form-group">
+      <label for="event">Descritption : </label>
+      <textarea class="form-control" id="event" rows="2" required></textarea>
+
+      <!--input type="text" class="form-control-sm" id="event"
+             formControlName="event"
+             placeholder=""
+             name="event" rows="3" required><[(ngModel)]="editedFriend.firstnameFriend"-->
+    </div>
+    <div class="form-group">
+      <label for="address">Adresse : </label>
+      <textarea class="form-control" id="address" rows="2" required></textarea>
+      <!--input type="text" class="form-control-sm" id="address"
+             formControlName="address"
+             placeholder=""
+             name="address" required><[(ngModel)]="editedFriend.lastnameFriend"-->
+
+    </div>
+    <div class="form-group">
+      <label for="phone">Téléphone : </label>
+      <input type="text" class="form-control-sm" id="phone"
+             formControlName="phone"
+             placeholder=""
+             name="phone" required><!--[(ngModel)]="editedFriend.mailFriend"-->
+      <!--span *ngIf="loginService.signUpError"> Cet Email est déjà utilisé</-->
+    </div>
+  </form>
+  <button type="submit" class="btn btn-primary" (click)="onSubmit()" >Enregistrer</button>
+</div>
